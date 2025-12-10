@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #E0E0E0;
+            --primary-color: #BB86FC;
+            --primary-color-rgb: 187, 134, 252;
+            --card-bg: #1E1E1E;
+            --border-color: #333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .portfolio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .portfolio-header h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .subsection-title {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            grid-auto-rows: minmax(200px, auto);
+        }
+
+        .personal-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-auto-rows: minmax(200px, auto);
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            resize: both;
+            min-width: 200px;
+            min-height: 200px;
+            position: relative; /* For the ::after element */
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        .project-card-media {
+            resize: none;
+            width: 100%;
+            flex-grow: 1;
+            min-height: 10px;
+            object-fit: cover;
+            display: block;
+        }
+        /* Custom resize handle for project cards */
+        .project-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 15px;
+            height: 15px;
+            background: linear-gradient(135deg, transparent 50%, var(--primary-color) 50%);
+            cursor: se-resize;
+            opacity: 0.5;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 1;
+        }
+        .project-card:hover::after {
+            opacity: 1;
+        }
+        .project-card-wide {
+            grid-column: span 2;
+        }
+
+        .project-card-tall {
+            grid-row: span 2;
+        }
+
+        .project-card-content {
+            padding: 1rem;
+            flex-shrink: 0;
+        }
+
+        .project-card-content h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+
+        .timeline-item {
+            padding: 1rem 3rem;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--bg-color);
+            border: 4px solid var(--primary-color);
+            top: 1.5rem;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 1rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .timeline-content-inner {
+            cursor: pointer;
+        }
+
+        .timeline-hidden-content {
+            display: none;
+            margin-top: 1rem;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        .timeline-cta {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-style: normal;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none; /* Prevents text selection on click */
+        }
+        .timeline-content-inner:hover .timeline-cta {
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+        }
+        .timeline-cta .cta-arrow {
+            display: inline-block;
+        }
+        .gallery-prompt {
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+        .timeline-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .timeline-gallery img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: zoom-in;
+            transition: transform 0.3s ease, z-index 0s;
+            position: relative;
+        }
+        .timeline-gallery img:hover {
+            transform: scale(1.5);
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            animation: zoomIn 0.3s ease;
+            transition: transform 0.2s ease-out;
+            transform-origin: center center;
+            cursor: grab;
+        }
+        .lightbox-content.grabbing {
+            cursor: grabbing;
+            transition: none;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .lightbox-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1001;
+            background-color: rgba(30, 30, 30, 0.7);
+            border-radius: 25px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+        }
+        .lightbox-controls button {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+        }
+        .lightbox-controls button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .awarded-project-showcase {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 3rem;
+    
+}
+#awarded-project {
+    position: relative;
+    overflow: hidden; 
+    border-radius: 8px;
+    
+}
+
+
+
+        .awarded-project-showcase p {
+            max-width: 800px;
+            margin: 1rem auto;
+            font-size: 1.1rem;
+        }
+
+        .awarded-project-showcase-media {
+            margin-top: 2rem;
+            border-radius: 8px;
+            width: 100%;
+            
+        }
+
+        .awards-list {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+
+        .award-item {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        /* GOLD gradient */
+.award-item.gold {
+    background: linear-gradient(135deg, #cea55c, #f1cd89, #cea55c);
+    color: #000;
+    box-shadow: 0 0 10px rgba(255, 200, 0, 0.4);
+}
+
+/* BRONZE gradient */
+.award-item.bronze {
+    background: linear-gradient(135deg, #8C4A1F, #C67A43, #7B3F18);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(150, 75, 0, 0.4);
+}
+
+        /* Vibecoding Project Drawer Gallery */
+        .vibecoding-project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .vibecoding-project {
+            position: relative;
+            /* Override default card overflow to allow drawer to be visible */
+            overflow: visible; 
+            transition: box-shadow 0.3s ease;
+            /* We don't want the resize handle on these */
+            resize: none;
+        }
+         .vibecoding-project::after {
+            display: none;
+        }
+        .vibecoding-project .project-card-main-content {
+            position: relative;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .vibecoding-project .project-card-main-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+        .gallery-drawer {
+            position: absolute;
+            top: 0;
+            left: calc(100% + 1rem); /* Position to the right with a gap */
+            width: 450px;
+            height: 100%;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+        .vibecoding-project.gallery-open {
+            box-shadow: 0 8px 32px rgba(var(--primary-color-rgb), 0.2);
+        }
+        .vibecoding-project.gallery-open .gallery-drawer {
+            transform: scaleX(1);
+        }
+        .gallery-close-btn {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 2.5rem;
+            font-weight: 300;
+            cursor: pointer;
+            z-index: 22;
+            line-height: 1;
+            padding: 0;
+            transition: color 0.2s;
+        }
+        .gallery-close-btn:hover {
+            color: white;
+        }
+        .gallery-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .gallery-slides {
+            display: flex;
+            height: 100%;
+            transition: transform 0.4s ease-in-out;
+        }
+        .gallery-slides img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(30, 30, 30, 0.7);
+            color: white;
+            border: none;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 21;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-slider:hover .gallery-nav {
+            opacity: 1;
+        }
+        .gallery-nav.prev {
+            left: 10px;
+        }
+        .gallery-nav.next {
+            right: 10px;
+        }
+        .gallery-nav:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .open-gallery-indicator {
+            position: absolute;
+            top: 30rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            background-color: #BB86FC;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 1;
+            opacity: 100;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            z-index: 5;
+            pointer-events: none; /* Don't interfere with card clicks */
+        }
+        .vibecoding-project .project-card-main-content:hover .open-gallery-indicator {
+            opacity: 1;
+            transform: scale(1);
+            background-color: rgba(243, 22, 243, 0.842);
+        }
+        /* Responsive Drawer: turns into a modal on smaller screens */
+        @media (max-width: 1200px) {
+            .gallery-drawer {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                width: 90vw;
+                height: 70vh;
+                transform: translate(-50%, -50%) scale(0.9);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+            .vibecoding-project.gallery-open .gallery-drawer {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
+        .timeline-item-date {
+           font-weight: bold;
+           color: var(--primary-color);
+           margin-bottom: 0.5rem;
+        }
+        /* Background video styling */
+.award-video-background {
+    position: absolute;
+    top: 510px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    border-radius: 8px;
+    opacity: 0.15; /* možeš povećati ili smanjiti intenzitet videa */
+}
+
+.award-video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-header h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .portfolio-container { padding: 1rem; }
+        }
+        
+        @media (max-width: 992px) {
+            .timeline::after { left: 20px; }
+            .timeline-item { width: 100%; padding-left: 50px; padding-right: 0; }
+            .timeline-item:nth-child(odd) { left: 0; }
+            .timeline-item:nth-child(even) { left: 0; }
+            .timeline-item::after { left: 10px; }
+        }
+    </style>
+</head>
+
+<body>
+<div class="portfolio-container">
+
+    <header class="portfolio-header">
+        <h1>Ime Prezime</h1>
+        <p>A curated collection of my work in design and development. From graphic illustrations and race day assets to award-winning games and UI/UX mockups.</p>
+    </header>
+
+
+    <!-- GRAPHIC DESIGN -->
+    <section class="section" id="graphic-design">
+        <h2 class="section-title">Graphic Design</h2>
+
+        <h3 class="subsection-title">Personal Projects</h3>
+        <div class="personal-projects-grid">
+            <div class="project-card project-card-wide">
+                <img class="project-card-media" src="">
+                <div class="project-card-content">
+                    <h3>Asymmetrical Gallery Item</h3>
+                    <p>This is a wider card in the asymmetrical grid.</p>
+                </div>
+            </div>
+            <div class="project-card project-card-tall">
+                <img class="project-card-media" src="" style="height: 100%;">
+                <div class="project-card-content">
+                    <h3>Tall Gallery Item</h3>
+                    <p>This card is taller and spans two rows.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img class="project-card-media" src="">
+                <div class="project-card-content">
+                    <h3>Standard Item</h3>
+                    <p>A standard-sized project card.</p>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <img class="project-card-media" src="">
+                <div class="project-card-content">
+                    <h3>Another Item</h3>
+                    <p>Another project to fill the grid.</p>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <img class="project-card-media" src="">
+                <div class="project-card-content">
+                    <h3>Personal Project 2</h3>
+                    <p>A brief description of this personal project.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img class="project-card-media" src="">
+                <div class="project-card-content">
+                    <h3>Standard Item</h3>
+                    <p>A standard-sized project card.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img class="project-card-media" src="">
+                <div class="project-card-content">
+                    <h3>Standard Item</h3>
+                    <p>A standard-sized project card.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="section-title">Race Graphics Evolution</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-content-inner">
+                        <p class="timeline-item-date">2021 - Early Design</p>
+                        <h3>Sezona 1 - pocetne grafike</h3>
+                        <img class="project-card-media" src="" style="margin-top: 1rem; border-radius: 4px;">
+                        <br><br><br>
+                        <p>My first attempts at creating engaging thumbnails for race highlights.</p>
+                        <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
+                    </div>
+                    <div class="timeline-hidden-content">
+                        <p class="gallery-prompt">Gallery (Click to expand):</p>
+                        <div class="timeline-gallery">
+                            
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-content-inner">
+                        <p class="timeline-item-date">Sezona 2</p>
+                        <h3>Developing a Brand</h3>
+                        <img class="project-card-media" src="" style="margin-top: 1rem; border-radius: 4px;">
+                        <p>Evolved the style to be more consistent and professional.</p>
+                        <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
+                    </div>
+                    <div class="timeline-hidden-content">
+                         <p class="gallery-prompt">Gallery (Click to expand):</p>
+                         <div class="timeline-gallery">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-content-inner">
+                        <p class="timeline-item-date">Sezona 3</p>
+                        <h3>Driver Points & Calendar</h3>
+                        <img class="project-card-media" src="" style="margin-top: 1rem; border-radius: 4px;">
+                        <p>Began creating data-driven graphics.</p>
+                        <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
+                    </div>
+                    <div class="timeline-hidden-content">
+                        <p class="gallery-prompt">Gallery (Click to expand):</p>
+                         <div class="timeline-gallery">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-content-inner">
+                        <p class="timeline-item-date">Sezona 4</p>
+                        <h3>Latest Work</h3>
+                        <img class="project-card-media" src="" style="margin-top: 1rem; border-radius: 4px;">
+                        <p>My current style, focusing on high-quality visuals.</p>
+                        <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
+                    </div>
+                    <div class="timeline-hidden-content">
+                        <p class="gallery-prompt">Gallery (Click to expand):</p>
+                         <div class="timeline-gallery">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-content-inner">
+                        <p class="timeline-item-date">Sezona 5 i 6</p>
+                        <h3>Driver Points & Calendar</h3>
+                        <img class="project-card-media" src="" style="margin-top: 1rem; border-radius: 4px;">
+                        <p>Began creating data-driven graphics.</p>
+                        <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
+                    </div>
+                    <div class="timeline-hidden-content">
+                        <p class="gallery-prompt">Sezona 5 galerija (Click to expand):</p>
+                         <div class="timeline-gallery">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+
+                        </div>
+                        
+                        <p class="gallery-prompt">Sezona 6 galerija (Click to expand):</p>
+                         <div class="timeline-gallery">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                            <img src="" alt="Gallery Image">
+                    </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- AWARDED PROJECT -->
+    <section class="section" id="awarded-project">
+        <div class="award-video-background">
+    <video autoplay muted loop playsinline>
+        <source src="platformarshowcase.mp4" type="video/mp4" />
+    </video>
+</div>
+
+        <h2 class="section-title">Awarded Project</h2>
+
+        <div class="awarded-project-showcase">
+            <h3>Award-Winning Game Project</h3>
+            <p>Opis projekta u barem 4-5 recenica.</p>
+
+            <img class="awarded-project-showcase-media"
+                 src=""
+            />
+
+            <ul class="awards-list">
+                <li class="award-item gold">Best Indie Game 2023</li>
+                <li class="award-item bronze">Excellence in Design Award</li>
+            </ul>
+
+            <h3 class="subsection-title">Gallery</h3>
+            <div class="project-grid">
+                <div class="project-card">
+                    <img class="project-card-media" src="">
+                    <div class="project-card-content">
+                        <h3>Gameplay Screenshot</h3>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img class="project-card-media" src="">
+                    <div class="project-card-content">
+                        <h3>Concept Art</h3>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img class="project-card-media" src="">
+                    <div class="project-card-content">
+                        <h3>Concept Art</h3>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img class="project-card-media" src="">
+                    <div class="project-card-content">
+                        <h3>Concept Art</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- VIBECODING -->
+    <section class="section" id="vibecoding">
+        <h2 class="section-title">Vibecoding Projects</h2>
+        <div class="vibecoding-project-list">
+            <div class="project-card vibecoding-project">
+                <div class="project-card-main-content">
+                    <span class="open-gallery-indicator">&rarr;</span>
+                    <video class="project-card-media" muted playsinline controls src=""></video>
+                    <div class="project-card-content">
+                        <h3>Chess Flag Counter</h3>
+                        <p>An interactive chart displaying complex data sets.</p>
+                    </div>
+                </div>
+                <div class="gallery-drawer">
+                    <button class="gallery-close-btn">&times;</button>
+                    <div class="gallery-slider">
+                        <div class="gallery-slides">
+                            <img src="" alt="Data Visualization Screenshot 1" />
+                            <img src="" alt="Data Visualization Screenshot 2" />
+                            <img src="" alt="Data Visualization Screenshot 3" />
+                        </div>
+                        <button class="gallery-nav prev">&lt;</button>
+                        <button class="gallery-nav next">&gt;</button>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card vibecoding-project">
+                <div class="project-card-main-content">
+                    <span class="open-gallery-indicator">&rarr;</span>
+                    <video class="project-card-media" muted playsinline controls src=""></video>
+                    <div class="project-card-content">
+                        <h3>Chess Flag Counter</h3>
+                        <p>An interactive chart displaying complex data sets.</p>
+                    </div>
+                </div>
+                <div class="gallery-drawer">
+                    <button class="gallery-close-btn">&times;</button>
+                    <div class="gallery-slider">
+                        <div class="gallery-slides">
+                            <img src="" alt="Data Visualization Screenshot 1" />
+                            <img src="" alt="Data Visualization Screenshot 2" />
+                            <img src="" alt="Data Visualization Screenshot 3" />
+                            <img src="" alt="Data Visualization Screenshot 4" />
+                        </div>
+                        <button class="gallery-nav prev">&lt;</button>
+                        <button class="gallery-nav next">&gt;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FIGMA -->
+    <section class="section" id="figma">
+        <h2 class="section-title">Figma Projects</h2>
+        <div class="project-grid">
+
+            <div class="project-card">
+                <img class="project-card-media" src="">
+                <div class="project-card-content">
+                    <h3>Mobile App Mockup</h3>
+                    <p>A high-fidelity mockup for a mobile application.</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img class="project-card-media" src="">
+                <div class="project-card-content">
+                    <h3>Website Redesign</h3>
+                    <p>Redesign concept for a university website.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+<!-- Lightbox HTML -->
+<div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="">
+    <div class="lightbox-controls">
+        <button id="zoom-in-btn" title="Zoom In">+</button>
+        <button id="zoom-out-btn" title="Zoom Out">−</button>
+        <button id="zoom-reset-btn" title="Reset Zoom">⤧</button>
+    </div>
+</div>
+<script type="module">
+    import localforage from 'https://esm.sh/localforage';
+    // Timeline Accordion
+    document.querySelectorAll('.timeline-content-inner').forEach(item => {
+        item.addEventListener('click', event => {
+            // Prevent accordion from toggling when clicking inside an already-open gallery image
+            if (event.target.closest('.timeline-gallery img')) {
+                return;
+            }
+            const hiddenContent = item.nextElementSibling;
+            const ctaButton = item.querySelector('.timeline-cta');
+            
+            if (hiddenContent && hiddenContent.classList.contains('timeline-hidden-content') && ctaButton) {
+                const isOpening = hiddenContent.style.display === 'none' || hiddenContent.style.display === '';
+                
+                hiddenContent.style.display = isOpening ? 'block' : 'none';
+                ctaButton.classList.toggle('is-open', isOpening);
+                if (isOpening) {
+                    ctaButton.innerHTML = 'Hide Gallery <span class="cta-arrow">▲</span>';
+                } else {
+                    ctaButton.innerHTML = 'Show Gallery <span class="cta-arrow">▼</span>';
+                }
+            }
+        });
+    });
+    // --- Lightbox Functionality (with Zoom/Pan) ---
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const zoomInBtn = document.getElementById('zoom-in-btn');
+    const zoomOutBtn = document.getElementById('zoom-out-btn');
+    const zoomResetBtn = document.getElementById('zoom-reset-btn');
+    let zoomLevel = 1, minZoom = 1, maxZoom = 8;
+    let isPanning = false;
+    let startPos = { x: 0, y: 0 };
+    let translatePos = { x: 0, y: 0 };
+    function updateTransform() {
+        lightboxImg.style.transform = `translate(${translatePos.x}px, ${translatePos.y}px) scale(${zoomLevel})`;
+    }
+    function resetZoomPan() {
+        zoomLevel = 1;
+        translatePos.x = 0;
+        translatePos.y = 0;
+        updateTransform();
+    }
+    function openLightbox(src) {
+        lightbox.classList.add('active');
+        lightboxImg.src = src;
+        resetZoomPan();
+    }
+    closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) lightbox.classList.remove('active');
+    });
+    zoomInBtn.addEventListener('click', (e) => { e.stopPropagation(); zoomLevel = Math.min(maxZoom, zoomLevel * 1.5); updateTransform(); });
+    zoomOutBtn.addEventListener('click', (e) => { e.stopPropagation(); zoomLevel = Math.max(minZoom, zoomLevel / 1.5); if (zoomLevel === minZoom) resetZoomPan(); else updateTransform(); });
+    zoomResetBtn.addEventListener('click', (e) => { e.stopPropagation(); resetZoomPan(); });
+    lightbox.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? 1 / 1.2 : 1.2;
+        const newZoom = Math.max(minZoom, Math.min(maxZoom, zoomLevel * delta));
+        if (newZoom === minZoom) resetZoomPan(); else zoomLevel = newZoom;
+        updateTransform();
+    });
+    lightboxImg.addEventListener('mousedown', (e) => {
+        if (zoomLevel > minZoom) {
+            e.preventDefault();
+            isPanning = true;
+            startPos.x = e.clientX - translatePos.x;
+            startPos.y = e.clientY - translatePos.y;
+            lightboxImg.classList.add('grabbing');
+        }
+    });
+    lightbox.addEventListener('mousemove', (e) => {
+        if (isPanning) {
+            e.preventDefault();
+            translatePos.x = e.clientX - startPos.x;
+            translatePos.y = e.clientY - startPos.y;
+            updateTransform();
+        }
+    });
+    const stopPanning = () => {
+        if (isPanning) {
+            isPanning = false;
+            lightboxImg.classList.remove('grabbing');
+        }
+    };
+    lightbox.addEventListener('mouseup', stopPanning);
+    lightbox.addEventListener('mouseleave', stopPanning);
+    // --- Drag & Drop + Persistence + Resizing Implementation ---
+    localforage.config({ name: 'portfolio-custom-data' });
+    const imageStore = localforage.createInstance({ storeName: 'images' });
+    const sizeStore = localforage.createInstance({ storeName: 'sizes' });
+    
+    // --- Card Resizing and Image Drag & Drop Logic ---
+    // 1. Handle Resizable Project Cards
+    const resizableCards = document.querySelectorAll('.project-card');
+    const cardResizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+            const card = entry.target;
+            // Check if the card has been resized by the user (inline styles will be present)
+            if (card.dataset.persistenceId && card.style.width && card.style.height) {
+                const size = {
+                    width: card.style.width,
+                    height: card.style.height,
+                };
+                // Save the new dimensions
+                sizeStore.setItem(card.dataset.persistenceId, size)
+                    .catch(err => console.error('Error saving card size:', err));
+            }
+        }
+    });
+    resizableCards.forEach((card, index) => {
+        const cardId = `resizable-card-${index}`;
+        card.dataset.persistenceId = cardId;
+        // Restore saved size on page load
+        sizeStore.getItem(cardId).then(size => {
+            if (size && size.width && size.height) {
+                card.style.width = size.width;
+                card.style.height = size.height;
+            }
+        });
+        // Watch for resize events
+        cardResizeObserver.observe(card);
+    });
+    // 2. Handle all editable media (for drag-and-drop and persistence)
+    const allEditableMedia = document.querySelectorAll('.project-card-media, .timeline-gallery img, .awarded-project-showcase-media');
+    allEditableMedia.forEach((mediaEl, index) => {
+        const mediaId = `editable-img-${index}`;
+        mediaEl.dataset.persistenceId = mediaId;
+        const dropTarget = mediaEl.closest('.project-card') || mediaEl;
+        
+        // Restore media from storage
+        imageStore.getItem(mediaId).then((blob) => {
+            if (blob) mediaEl.src = blob;
+        }).catch(err => console.log('Error loading media:', err));
+        
+        const isVideo = mediaEl.tagName.toLowerCase() === 'video';
+
+        // Add click listener for lightbox ONLY for images
+        if (!isVideo) {
+            mediaEl.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openLightbox(mediaEl.src);
+            });
+        }
+        
+        const setDragFeedback = (add) => {
+            dropTarget.style.outline = add ? '3px dashed var(--primary-color)' : '';
+            dropTarget.style.outlineOffset = add ? (dropTarget === mediaEl ? '2px' : '-3px') : '';
+        };
+        
+        dropTarget.addEventListener('dragover', (e) => { e.preventDefault(); e.stopPropagation(); setDragFeedback(true); });
+        dropTarget.addEventListener('dragleave', (e) => { e.preventDefault(); e.stopPropagation(); setDragFeedback(false); });
+        
+        dropTarget.addEventListener('drop', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setDragFeedback(false);
+            
+            const file = e.dataTransfer.files[0];
+            if (!file) return;
+
+            const isVideoFile = file.type.startsWith('video/');
+            const isImageFile = file.type.startsWith('image/');
+            
+            if (!((isVideo && isVideoFile) || (!isVideo && isImageFile))) {
+                alert(`Please drop a ${isVideo ? 'video' : 'image'} file here.`);
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const base64String = event.target.result;
+                mediaEl.src = base64String;
+                imageStore.setItem(mediaId, base64String).catch(err => alert('Could not save media.'));
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+    // --- Vibecoding Gallery Drawer ---
+    const vibecodingProjects = document.querySelectorAll('.vibecoding-project');
+    
+    vibecodingProjects.forEach(projectCard => {
+        const mainContent = projectCard.querySelector('.project-card-main-content');
+        const drawer = projectCard.querySelector('.gallery-drawer');
+        if (!mainContent || !drawer) return;
+        const closeBtn = drawer.querySelector('.gallery-close-btn');
+        const slidesContainer = drawer.querySelector('.gallery-slides');
+        const slides = Array.from(slidesContainer.querySelectorAll('img'));
+        const nextBtn = drawer.querySelector('.gallery-nav.next');
+        const prevBtn = drawer.querySelector('.gallery-nav.prev');
+        let currentIndex = 0;
+        // Hide navigation if there's only one slide or fewer
+        if (slides.length <= 1) {
+            if (nextBtn) nextBtn.style.display = 'none';
+            if (prevBtn) prevBtn.style.display = 'none';
+        }
+        function showSlide(index) {
+            if (!slidesContainer) return;
+            slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+            currentIndex = index;
+        }
+        mainContent.addEventListener('click', (e) => {
+            // Prevent opening if a link or button inside the card was clicked
+            if (e.target.closest('a, button, video')) return;
+            
+            const wasOpen = projectCard.classList.contains('gallery-open');
+            // First, close all other open galleries
+            document.querySelectorAll('.vibecoding-project.gallery-open').forEach(p => {
+                p.classList.remove('gallery-open');
+            });
+            
+            // If the clicked card wasn't the one that was open, open it.
+            if (!wasOpen) {
+                projectCard.classList.add('gallery-open');
+                showSlide(0); // Reset to first slide every time it opens
+            }
+        });
+        // Add event listener for the close button
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Stop click from bubbling up to other listeners
+                projectCard.classList.remove('gallery-open');
+            });
+        }
+        // Add event listeners for gallery navigation
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showSlide((currentIndex + 1) % slides.length);
+            });
+        }
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showSlide((currentIndex - 1 + slides.length) % slides.length);
+            });
+        }
+    });
+    // Add a global click listener to close an open gallery when clicking outside
+    document.addEventListener('click', (e) => {
+        const openProject = document.querySelector('.vibecoding-project.gallery-open');
+        if (openProject && !openProject.contains(e.target)) {
+            openProject.classList.remove('gallery-open');
+        }
+    });
+</script>
+
+</body>
+</html>
