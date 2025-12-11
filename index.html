@@ -8,7 +8,11 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-    <style>
+<style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px; /* Adjust if nav height changes */
+        }
         :root {
             --bg-color: #121212;
             --text-color: #E0E0E0;
@@ -36,6 +40,17 @@
             text-align: center;
             margin-bottom: 4rem;
             animation: fadeInDown 1s ease-out;
+        }
+        #profile-picture {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            display: block;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.5);
+            background-color: var(--card-bg); /* Placeholder bg */
         }
 
         .portfolio-header h1 {
@@ -403,6 +418,10 @@
     color: #fff;
     box-shadow: 0 0 10px rgba(150, 75, 0, 0.4);
 }
+.award-item a {
+    color: inherit;
+    text-decoration: none;
+}
 
         /* Vibecoding Project Drawer Gallery */
         .vibecoding-project-list {
@@ -495,6 +514,7 @@
             height: 100%;
             object-fit: contain; /* Show the whole image */
             flex-shrink: 0;
+            cursor: zoom-in;
         }
         .gallery-nav {
             position: absolute;
@@ -625,6 +645,29 @@
         .figma-gallery-drawer .project-card-content {
             display: none;
         }
+        /* Top Navigation */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background-color: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 1rem 0;
+            text-align: center;
+            z-index: 900;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .top-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .top-nav a:hover, .top-nav a.active {
+            color: var(--primary-color);
+        }
         /* Responsive Drawer: turns into a modal on smaller screens */
         @media (max-width: 1200px) {
             .gallery-drawer {
@@ -696,9 +739,16 @@
 </head>
 
 <body>
+<nav class="top-nav">
+    <a href="#graphic-design" class="nav-link">Graphic Design</a>
+    <a href="#awarded-project" class="nav-link">Awarded Project</a>
+    <a href="#vibecoding" class="nav-link">Vibecoding</a>
+    <a href="#figma" class="nav-link">Figma</a>
+</nav>
 <div class="portfolio-container">
 
     <header class="portfolio-header">
+        <img id="profile-picture" src="" alt="Profile Picture" />
         <h1>Bernard Strčić</h1>
         <p>Zovem se Bernard Strčić i bavim se grafičkim dizajnom i razvojem manjih programskih projekata u slobodno vrijeme. Primarno radim u Adobe Photoshopu i Premiereu, a slobodno vrijeme koristim za gradnju i testiranje raznovrsnih digitalnih projekata. Svoje projekte uvijek gradim s naglaskom na praktičnost i stalno usavršavanje.</p>
     </header>
@@ -1060,6 +1110,20 @@
 </div>
 <script type="module">
     import localforage from 'https://esm.sh/localforage';
+    // --- Sticky Nav Active State ---
+    const navLinks = document.querySelectorAll('.top-nav .nav-link');
+    const sections = document.querySelectorAll('.section');
+    const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                });
+            }
+        });
+    }, { rootMargin: "-50% 0px -50% 0px" });
+    sections.forEach(section => navObserver.observe(section));
     // Timeline Accordion
     document.querySelectorAll('.timeline-content-inner').forEach(item => {
         item.addEventListener('click', event => {
@@ -1178,6 +1242,17 @@
     };
     lightbox.addEventListener('mouseup', stopPanning);
     lightbox.addEventListener('mouseleave', stopPanning);
+    // --- Lightbox Keyboard Navigation ---
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'ArrowRight') {
+            lightboxNextBtn.click();
+        } else if (e.key === 'ArrowLeft') {
+            lightboxPrevBtn.click();
+        } else if (e.key === 'Escape') {
+            closeBtn.click();
+        }
+    });
     // --- Drag & Drop + Persistence + Resizing Implementation ---
     localforage.config({ name: 'portfolio-custom-data' });
     const imageStore = localforage.createInstance({ storeName: 'images' });
@@ -1261,6 +1336,14 @@
         const nextBtn = drawer.querySelector('.gallery-nav.next');
         const prevBtn = drawer.querySelector('.gallery-nav.prev');
         let currentIndex = 0;
+        // Make gallery images clickable to open in lightbox
+        const imageSources = slides.map(s => s.src);
+        slides.forEach((slide, idx) => {
+            slide.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openLightbox(slide.src, imageSources, idx);
+            });
+        });
         // Hide navigation if there's only one slide or fewer
         if (slides.length <= 1) {
             if (nextBtn) nextBtn.style.display = 'none';
