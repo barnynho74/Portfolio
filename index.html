@@ -522,6 +522,77 @@
             transform: scale(1);
             background-color: rgba(243, 22, 243, 0.842);
         }
+        .figma-project {
+            position: relative;
+            cursor: pointer;
+        }
+        .figma-project .open-gallery-indicator {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 1;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            z-index: 5;
+            pointer-events: none; /* Don't interfere with card clicks */
+        }
+        .figma-project:hover .open-gallery-indicator {
+            opacity: 1;
+            transform: scale(1);
+            background-color: rgba(243, 22, 243, 0.842);
+        }
+        .figma-gallery-drawer {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 2rem;
+            margin-top: 0;
+            transition: max-height 0.7s ease-in-out, padding 0.5s ease-out, margin-top 0.5s ease-out, border-width 0.5s ease-out;
+            position: relative;
+            border: 0px solid var(--border-color);
+        }
+        .figma-gallery-drawer.active {
+            max-height: 1500px; /* Should be enough to contain the content */
+            padding: 2rem;
+            margin-top: 2rem;
+            border-width: 1px;
+        }
+        .figma-gallery-drawer .gallery-close-btn {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 2.5rem;
+            font-weight: 300;
+            cursor: pointer;
+            z-index: 22;
+            line-height: 1;
+            padding: 0;
+            transition: color 0.2s;
+        }
+        .figma-gallery-drawer .gallery-close-btn:hover {
+            color: white;
+        }
+        .figma-gallery-drawer .project-card {
+            height: auto;
+        }
+        .figma-gallery-drawer .project-card-content {
+            display: none;
+        }
         /* Responsive Drawer: turns into a modal on smaller screens */
         @media (max-width: 1200px) {
             .gallery-drawer {
@@ -853,16 +924,16 @@
                     <button class="gallery-close-btn">&times;</button>
                     <div class="gallery-slider">
                         <div class="gallery-slides">
-                            <img src="" alt="Data Visualization Screenshot 1" />
-                            <img src="" alt="Data Visualization Screenshot 2" />
-                            <img src="" alt="Data Visualization Screenshot 3" />
+                            <img src="assets/images/ttf1_1.png" alt="Data Visualization Screenshot 1" />
+                            <img src="assets/images/ttf1_2.png" alt="Data Visualization Screenshot 2" />
+                            <img src="assets/images/ttf1_3.png" alt="Data Visualization Screenshot 3" />
                         </div>
                         <button class="gallery-nav prev">&lt;</button>
                         <button class="gallery-nav next">&gt;</button>
                     </div>
                 </div>
             </div>
-            <div class="project-card vibecoding-project" style="width: 400px; height: 530px;">
+            <div class="project-card vibecoding-project" style="width: 600px; height: 520px;">
                 <div class="project-card-main-content">
                     <span class="open-gallery-indicator">&rarr;</span>
                     <video class="project-card-media" muted playsinline controls src="assets/videos/chessflagDEMO.mp4"></video>
@@ -875,10 +946,10 @@
                     <button class="gallery-close-btn">&times;</button>
                     <div class="gallery-slider">
                         <div class="gallery-slides">
-                            <img src="" alt="Data Visualization Screenshot 1" />
-                            <img src="" alt="Data Visualization Screenshot 2" />
-                            <img src="" alt="Data Visualization Screenshot 3" />
-                            <img src="" alt="Data Visualization Screenshot 4" />
+                            <img src="assets/images/chessflag_1.png" alt="Data Visualization Screenshot 1" />
+                            <img src="assets/images/chessflag_2.png" alt="Data Visualization Screenshot 2" />
+                            <img src="assets/images/chessflag_3.png" alt="Data Visualization Screenshot 3" />
+                            <img src="assets/images/chessflag_4.png" alt="Data Visualization Screenshot 4" />
                         </div>
                         <button class="gallery-nav prev">&lt;</button>
                         <button class="gallery-nav next">&gt;</button>
@@ -894,22 +965,53 @@
         <h2 class="section-title">Figma Projects</h2>
         <div class="project-grid">
 
-            <div class="project-card">
+            <div class="project-card figma-project" data-gallery-target="mockup-master-gallery">
+                <span class="open-gallery-indicator">&darr;</span>
                 <img class="project-card-media" src="">
                 <div class="project-card-content">
-                    <h3>Mobile App Mockup</h3>
+                    <h3>Mockup Master - mockup aplikacija za uređivanje</h3>
                     <p>A high-fidelity mockup for a mobile application.</p>
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card figma-project" data-gallery-target="xiaomi-watch-gallery">
+                <span class="open-gallery-indicator">&darr;</span>
                 <img class="project-card-media" src="">
                 <div class="project-card-content">
-                    <h3>Website Redesign</h3>
+                    <h3>Xiaomi sat Showcase</h3>
                     <p>Redesign concept for a university website.</p>
                 </div>
             </div>
 
+        </div>
+        <!-- Figma Gallery Drawer -->
+        <div id="figma-gallery-drawer" class="figma-gallery-drawer">
+            <button class="gallery-close-btn">&times;</button>
+            
+            <!-- Mockup Master Gallery -->
+            <div id="mockup-master-gallery" class="figma-gallery-content" style="display: none;">
+                <h3 class="subsection-title">Mockup Master Gallery</h3>
+                <div class="project-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                    <div class="project-card"><img class="project-card-media" src=""></div>
+                    <div class="project-card"><img class="project-card-media" src=""></div>
+                    <div class="project-card"><img class="project-card-media" src=""></div>
+                    <div class="project-card"><img class="project-card-media" src=""></div>
+                    <div class="project-card"><img class="project-card-media" src=""></div>
+                    <div class="project-card"><img class="project-card-media" src=""></div>
+                    <div class="project-card"><img class="project-card-media" src=""></div>
+                    <div class="project-card"><img class="project-card-media" src=""></div>
+                </div>
+            </div>
+            <!-- Xiaomi Watch Gallery -->
+            <div id="xiaomi-watch-gallery" class="figma-gallery-content" style="display: none;">
+                <h3 class="subsection-title">Xiaomi Watch Showcase Gallery</h3>
+                <div class="project-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div class="project-card"><img class="project-card-media" src=""></div>
+                    <div class="project-card"><img class="project-card-media" src=""></div>
+                    <div class="project-card"><img class="project-card-media" src=""></div>
+                    <div class="project-card"><img class="project-card-media" src=""></div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1140,17 +1242,40 @@
             openProject.classList.remove('gallery-open');
         }
     });
+    // --- Figma Gallery Drawer ---
+    const figmaCards = document.querySelectorAll('#figma .project-card[data-gallery-target]');
+    const figmaDrawer = document.getElementById('figma-gallery-drawer');
+    if (figmaCards.length > 0 && figmaDrawer) {
+        const figmaGalleries = figmaDrawer.querySelectorAll('.figma-gallery-content');
+        const closeBtn = figmaDrawer.querySelector('.gallery-close-btn');
+        figmaCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('a, button, img')) return;
+                const galleryId = card.dataset.galleryTarget;
+                const targetGallery = document.getElementById(galleryId);
+                if (!targetGallery) return;
+                const isOpening = !figmaDrawer.classList.contains('active') || targetGallery.style.display === 'none';
+                
+                // Hide all galleries first
+                figmaGalleries.forEach(g => g.style.display = 'none');
+                // Show the target one
+                targetGallery.style.display = 'block';
+                
+                if (isOpening) {
+                    figmaDrawer.classList.add('active');
+                    setTimeout(() => {
+                        figmaDrawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 50); // Small delay to ensure drawer is visible before scrolling
+                } else {
+                     figmaDrawer.classList.remove('active');
+                }
+            });
+        });
+        closeBtn.addEventListener('click', () => {
+            figmaDrawer.classList.remove('active');
+        });
+    }
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
