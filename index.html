@@ -11,7 +11,7 @@
 <style>
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 70px; /* Adjust if nav height changes */
+            scroll-padding-top: 70px;
         }
         :root {
             --bg-color: #121212;
@@ -50,7 +50,7 @@
             display: block;
             border: 4px solid var(--primary-color);
             box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.5);
-            background-color: var(--card-bg); /* Placeholder bg */
+            background-color: var(--card-bg);
         }
 
         .portfolio-header h1 {
@@ -107,7 +107,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
-            /* Cards are no longer resizable. You can manually adjust the height here. */
             height: 340px;
         }
 
@@ -423,6 +422,29 @@
     text-decoration: none;
 }
 
+        .github-promo {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+.github-promo p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+.github-promo a {
+    color: var(--primary-color);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+.github-promo a:hover {
+    color: white;
+    text-shadow: 0 0 5px rgba(255,255,255,0.7);
+}
+
         /* Vibecoding Project Drawer Gallery */
         .vibecoding-project-list {
             display: flex;
@@ -668,7 +690,6 @@
         .top-nav a:hover, .top-nav a.active {
             color: var(--primary-color);
         }
-        /* Responsive Drawer: turns into a modal on smaller screens */
         @media (max-width: 1200px) {
             .gallery-drawer {
                 position: fixed;
@@ -702,7 +723,7 @@
     overflow: hidden;
     z-index: -1;
     border-radius: 8px;
-    opacity: 0.15; /* možeš povećati ili smanjiti intenzitet videa */
+    opacity: 0.15;
 }
 
 .award-video-background video {
@@ -741,6 +762,7 @@
 <body>
 <nav class="top-nav">
     <a href="#graphic-design" class="nav-link">Graphic Design</a>
+    <a href="#race-graphics" class="nav-link">Race Graphics</a>
     <a href="#awarded-project" class="nav-link">Awarded Project</a>
     <a href="#vibecoding" class="nav-link">Vibecoding</a>
     <a href="#figma" class="nav-link">Figma</a>
@@ -748,7 +770,7 @@
 <div class="portfolio-container">
 
     <header class="portfolio-header">
-        <img id="profile-picture" src="assets/images/pfppf.jpg" alt="Profile Picture" />
+        <img id="profile-picture" src="" alt="Profile Picture" />
         <h1>Bernard Strčić</h1>
         <p>Zovem se Bernard Strčić i bavim se grafičkim dizajnom i razvojem manjih programskih projekata u slobodno vrijeme. Primarno radim u Adobe Photoshopu i Premiereu, a slobodno vrijeme koristim za gradnju i testiranje raznovrsnih digitalnih projekata. Svoje projekte uvijek gradim s naglaskom na praktičnost i stalno usavršavanje.</p>
     </header>
@@ -813,7 +835,11 @@
             </div>
         </div>
 
-        <h3 class="section-title">Race Graphics Evolution</h3>
+        </section>
+
+    <!-- RACE GRAPHICS EVOLUTION -->
+    <section class="section" id="race-graphics">
+        <h2 class="section-title">Race Graphics Evolution</h2>
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-content">
@@ -944,7 +970,7 @@
         <h2 class="section-title">Awarded Project</h2>
 
         <div class="awarded-project-showcase">
-            <h3>PlatformAR</h3>
+            <h3>Award-Winning Game Project</h3>
             <p>Interaktivni AR projekt web igre koji povezuje detekciju objekata putem OpenCV-a s React aplikacijom kako bi se stvorilo dinamično i responzivno okruženje za igru.</p>
 
             <img class="awarded-project-showcase-media" src="assets/images/PlatformAR_logo.png"/ style="width: 100%;">
@@ -1037,6 +1063,10 @@
                 </div>
             </div>
         </div>
+
+        <div class="github-promo">
+            <p>You can check out my other projects on my <a href="https://github.com/barnynho74" target="_blank" rel="noopener noreferrer">GitHub profile</a>.</p>
+        </div>
     </section>
 
 
@@ -1109,8 +1139,7 @@
     </div>
 </div>
 <script type="module">
-    import localforage from 'https://esm.sh/localforage';
-    // --- Sticky Nav Active State ---
+    
     const navLinks = document.querySelectorAll('.top-nav .nav-link');
     const sections = document.querySelectorAll('.section');
     const navObserver = new IntersectionObserver((entries) => {
@@ -1124,10 +1153,8 @@
         });
     }, { rootMargin: "-50% 0px -50% 0px" });
     sections.forEach(section => navObserver.observe(section));
-    // Timeline Accordion
     document.querySelectorAll('.timeline-content-inner').forEach(item => {
         item.addEventListener('click', event => {
-            // Prevent accordion from toggling when clicking inside an already-open gallery image
             if (event.target.closest('.timeline-gallery img')) {
                 return;
             }
@@ -1147,7 +1174,6 @@
             }
         });
     });
-    // --- Lightbox Functionality (with Zoom/Pan and Gallery Navigation) ---
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.lightbox-close');
@@ -1156,7 +1182,6 @@
     const zoomInBtn = document.getElementById('zoom-in-btn');
     const zoomOutBtn = document.getElementById('zoom-out-btn');
     const zoomResetBtn = document.getElementById('zoom-reset-btn');
-    // Lightbox State
     let zoomLevel = 1, minZoom = 1, maxZoom = 8;
     let isPanning = false;
     let startPos = { x: 0, y: 0 };
@@ -1242,7 +1267,6 @@
     };
     lightbox.addEventListener('mouseup', stopPanning);
     lightbox.addEventListener('mouseleave', stopPanning);
-    // --- Lightbox Keyboard Navigation ---
     document.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('active')) return;
         if (e.key === 'ArrowRight') {
@@ -1253,77 +1277,35 @@
             closeBtn.click();
         }
     });
-    // --- Drag & Drop + Persistence + Resizing Implementation ---
-    localforage.config({ name: 'portfolio-custom-data' });
-    const imageStore = localforage.createInstance({ storeName: 'images' });
-    
-    // --- Card Image Drag & Drop Logic ---
-    // 2. Handle all editable media (for drag-and-drop and persistence)
-    const allEditableMedia = document.querySelectorAll('.project-card-media, .timeline-gallery img, .awarded-project-showcase-media');
-    allEditableMedia.forEach((mediaEl, index) => {
-        const mediaId = `editable-img-${index}`;
-        mediaEl.dataset.persistenceId = mediaId;
-        const dropTarget = mediaEl.closest('.project-card') || mediaEl;
-        
-        // Restore media from storage
-        imageStore.getItem(mediaId).then((blob) => {
-            if (blob) mediaEl.src = blob;
-        }).catch(err => console.log('Error loading media:', err));
-        
-        const isVideo = mediaEl.tagName.toLowerCase() === 'video';
-
-        // Add click listener for lightbox ONLY for images
-        if (!isVideo) {
-            mediaEl.addEventListener('click', (e) => {
-                e.stopPropagation();
-                // Check if image is in a gallery that supports lightbox navigation
-                const galleryContainer = mediaEl.closest('.timeline-gallery, .figma-gallery-content');
-                if (galleryContainer) {
-                    const galleryImages = Array.from(galleryContainer.querySelectorAll('img'));
-                    const imageSources = galleryImages.map(img => img.src);
-                    const currentIndex = galleryImages.indexOf(mediaEl);
+    const imageSelectors = [
+        '.project-card-media',
+        '.timeline-gallery img',
+        '.awarded-project-showcase-media',
+        '#profile-picture'
+    ];
+    const allClickableImages = document.querySelectorAll(imageSelectors.join(', '));
+    const clickableImagesArray = Array.from(allClickableImages);
+    clickableImagesArray.forEach(mediaEl => {
+        if (mediaEl.tagName.toLowerCase() === 'video') return;
+        mediaEl.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const galleryContainer = mediaEl.closest('.personal-projects-grid, .timeline-gallery, #awarded-project .project-grid, .figma-gallery-content');
+            
+            if (galleryContainer) {
+                const galleryImages = Array.from(galleryContainer.querySelectorAll('img')).filter(img => clickableImagesArray.includes(img));
+                const imageSources = galleryImages.map(img => img.src);
+                const currentIndex = galleryImages.indexOf(mediaEl);
+                
+                if (currentIndex !== -1 && imageSources.length > 1) {
                     openLightbox(mediaEl.src, imageSources, currentIndex);
                 } else {
-                    // Default behavior for other images (no navigation)
                     openLightbox(mediaEl.src);
                 }
-            });
-        }
-        
-        const setDragFeedback = (add) => {
-            dropTarget.style.outline = add ? '3px dashed var(--primary-color)' : '';
-            dropTarget.style.outlineOffset = add ? (dropTarget === mediaEl ? '2px' : '-3px') : '';
-        };
-        
-        dropTarget.addEventListener('dragover', (e) => { e.preventDefault(); e.stopPropagation(); setDragFeedback(true); });
-        dropTarget.addEventListener('dragleave', (e) => { e.preventDefault(); e.stopPropagation(); setDragFeedback(false); });
-        
-        dropTarget.addEventListener('drop', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            setDragFeedback(false);
-            
-            const file = e.dataTransfer.files[0];
-            if (!file) return;
-
-            const isVideoFile = file.type.startsWith('video/');
-            const isImageFile = file.type.startsWith('image/');
-            
-            if (!((isVideo && isVideoFile) || (!isVideo && isImageFile))) {
-                alert(`Please drop a ${isVideo ? 'video' : 'image'} file here.`);
-                return;
+            } else {
+                openLightbox(mediaEl.src);
             }
-
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                const base64String = event.target.result;
-                mediaEl.src = base64String;
-                imageStore.setItem(mediaId, base64String).catch(err => alert('Could not save media.'));
-            };
-            reader.readAsDataURL(file);
         });
     });
-    // --- Vibecoding Gallery Drawer ---
     const vibecodingProjects = document.querySelectorAll('.vibecoding-project');
     
     vibecodingProjects.forEach(projectCard => {
@@ -1336,7 +1318,6 @@
         const nextBtn = drawer.querySelector('.gallery-nav.next');
         const prevBtn = drawer.querySelector('.gallery-nav.prev');
         let currentIndex = 0;
-        // Make gallery images clickable to open in lightbox
         const imageSources = slides.map(s => s.src);
         slides.forEach((slide, idx) => {
             slide.addEventListener('click', (e) => {
@@ -1344,7 +1325,6 @@
                 openLightbox(slide.src, imageSources, idx);
             });
         });
-        // Hide navigation if there's only one slide or fewer
         if (slides.length <= 1) {
             if (nextBtn) nextBtn.style.display = 'none';
             if (prevBtn) prevBtn.style.display = 'none';
@@ -1355,29 +1335,24 @@
             currentIndex = index;
         }
         mainContent.addEventListener('click', (e) => {
-            // Prevent opening if a link or button inside the card was clicked
             if (e.target.closest('a, button, video')) return;
             
             const wasOpen = projectCard.classList.contains('gallery-open');
-            // First, close all other open galleries
             document.querySelectorAll('.vibecoding-project.gallery-open').forEach(p => {
                 p.classList.remove('gallery-open');
             });
             
-            // If the clicked card wasn't the one that was open, open it.
             if (!wasOpen) {
                 projectCard.classList.add('gallery-open');
-                showSlide(0); // Reset to first slide every time it opens
+                showSlide(0);
             }
         });
-        // Add event listener for the close button
         if (closeBtn) {
             closeBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Stop click from bubbling up to other listeners
+                e.stopPropagation();
                 projectCard.classList.remove('gallery-open');
             });
         }
-        // Add event listeners for gallery navigation
         if (nextBtn) {
             nextBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -1391,14 +1366,12 @@
             });
         }
     });
-    // Add a global click listener to close an open gallery when clicking outside
     document.addEventListener('click', (e) => {
         const openProject = document.querySelector('.vibecoding-project.gallery-open');
         if (openProject && !openProject.contains(e.target)) {
             openProject.classList.remove('gallery-open');
         }
     });
-    // --- Figma Gallery Drawer ---
     const figmaCards = document.querySelectorAll('#figma .project-card[data-gallery-target]');
     const figmaDrawer = document.getElementById('figma-gallery-drawer');
     if (figmaCards.length > 0 && figmaDrawer) {
@@ -1406,22 +1379,20 @@
         const closeBtn = figmaDrawer.querySelector('.gallery-close-btn');
         figmaCards.forEach(card => {
             card.addEventListener('click', (e) => {
-                if (e.target.closest('a, button, img')) return;
+                if (e.target.closest('a, button')) return;
                 const galleryId = card.dataset.galleryTarget;
                 const targetGallery = document.getElementById(galleryId);
                 if (!targetGallery) return;
                 const isOpening = !figmaDrawer.classList.contains('active') || targetGallery.style.display === 'none';
                 
-                // Hide all galleries first
                 figmaGalleries.forEach(g => g.style.display = 'none');
-                // Show the target one
                 targetGallery.style.display = 'block';
                 
                 if (isOpening) {
                     figmaDrawer.classList.add('active');
                     setTimeout(() => {
                         figmaDrawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }, 50); // Small delay to ensure drawer is visible before scrolling
+                    }, 50);
                 } else {
                      figmaDrawer.classList.remove('active');
                 }
@@ -1435,4 +1406,3 @@
 
 </body>
 </html>
-
