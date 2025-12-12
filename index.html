@@ -844,9 +844,9 @@
 <div class="portfolio-container">
 
     <header class="portfolio-header">
-        <img id="profile-picture" src="" alt="Profile Picture" />
+        <img id="profile-picture" src="pfppf.jpg" alt="Profile Picture" />
         <h1>Bernard Strčić</h1>
-        <p>Zovem se Bernard Strčić i bavim se grafičkim dizajnom i razvojem manjih programskih projekata u slobodno vrijeme. Primarno radim u Adobe Photoshopu i Premiereu, a slobodno vrijeme koristim za gradnju i testiranje raznovrsnih digitalnih projekata. Svoje projekte uvijek gradim s naglaskom na praktičnost i stalno usavršavanje.</p>
+        <p>Zovem se Bernard Strčić i bavim se grafičkim dizajnom i razvojem manjih programskih projekata u slobodno vrijeme. Primarno radim u Adobe Photoshopu i Premiereu, a slobodno vrijeme koristim za izradu i testiranje raznovrsnih digitalnih projekata. Svoje projekte uvijek radim s naglaskom na praktičnost i stalno usavršavanje.</p>
     </header>
 
 
@@ -856,55 +856,48 @@
 
         <h3 class="subsection-title">Osobni projekti</h3>
         <div class="personal-projects-grid">
-            <div class="project-card project-card-wide" style="width: 810px; height: 416px; object-fit: cover;">
+            <div class="project-card project-card-wide" style="width: 810px; height: 400px; object-fit: cover;">
                 <img class="project-card-media" src="assets/images/PREseason testing (1).png">
                 <div class="project-card-content">
-                    <h3>Asymmetrical Gallery Item</h3>
-                    <p>This is a wider card in the asymmetrical grid.</p>
+                    
                 </div>
             </div>
             <div class="project-card project-card-tall" style="width: 327px; height: 869px; object-fit: cover;">
                 <img class="project-card-media" src="assets/images/full lik.jpg">
                 <div class="project-card-content">
-                    <h3>Tall Gallery Item</h3>
-                    <p>This card is taller and spans two rows.</p>
+                    
                 </div>
             </div>
             <div class="project-card" style="width: 298px; height: 398px;">
                 <img class="project-card-media" src="assets/images/baxmauro.jpg">
                 <div class="project-card-content">
-                    <h3>Naljepnica</h3>
-                    <p>Izrađena u Photoshopu</p>
+                    
                 </div>
             </div>
             
             <div class="project-card" style="width: 290px; height: 402px;">
                 <img class="project-card-media" src="assets/images/TennisCat.png">
                 <div class="project-card-content">
-                    <h3>Another Item</h3>
-                    <p>Another project to fill the grid.</p>
+                    
                 </div>
             </div>
             
             <div class="project-card" style="width: 400px; height: 270px;">
                 <img class="project-card-media" src="assets/images/BarnyChikita.png">
                 <div class="project-card-content">
-                    <h3>Personal Project 2</h3>
-                    <p>A brief description of this personal project.</p>
+                    
                 </div>
             </div>
             <div class="project-card" style="width: 386px; height: 270px;">
                 <img class="project-card-media" src="assets/images/baxmauroAuto.jpg">
                 <div class="project-card-content">
-                    <h3>Standard Item</h3>
-                    <p>A standard-sized project card.</p>
+                    
                 </div>
             </div>
             <div class="project-card" style="width: 328px; height: 270px;">
                 <img class="project-card-media" src="assets/images/2-min.png">
                 <div class="project-card-content">
-                    <h3>Standard Item</h3>
-                    <p>A standard-sized project card.</p>
+                    
                 </div>
             </div>
         </div>
@@ -1501,7 +1494,7 @@
         const showcase = document.querySelector('.awarded-project-showcase');
         const state = {
             x: 0, y: 0, vx: 1.2, vy: 0,
-            gravity: 0.5,
+            gravity: 0.7,
             isJumping: false,
             isFacingRight: true,
             isRunning: false,
@@ -1554,7 +1547,7 @@
                 state.idleTimer++;
                 if (state.idleTimer > state.timeToNextAction) {
                     state.idleTimer = 0;
-                    state.timeToNextAction = 100 + Math.random() * 150; // Randomize next action time
+                    state.timeToNextAction = 100 + Math.random() * 100; // Randomize next action time
                     const action = Math.random();
                     if (action < 0.6) { // Jump
                         state.isJumping = true;
