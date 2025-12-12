@@ -680,6 +680,80 @@
             z-index: 900;
             border-bottom: 1px solid var(--border-color);
         }
+        #interactive-character {
+            position: absolute;
+            width: 40px;
+            height: 42px;
+            z-index: 10;
+            will-change: top, left;
+            /* top/left set by JS */
+        }
+        .character-sprite {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        .character-part {
+            position: absolute;
+            background-color: #f0f0f0;
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+        .character-head {
+            top: 0; left: 8px; width: 24px; height: 24px; border-radius: 40%;
+        }
+        .character-eye {
+            position: absolute; width: 4px; height: 4px; background-color: black; border-radius: 50%; top: 10px; border: none;
+        }
+        .character-eye-left { left: 9px; }
+        .character-eye-right { left: 16px; }
+        .character-body {
+            top: 24px; left: 12px; width: 12px; height: 12px; border-radius: 2px;
+        }
+        .character-leg {
+            top: 36px; width: 6px; height: 4px;
+        }
+        .character-leg-left { left: 13px; }
+        .character-leg-right { left: 21px; }
+        .character-arm {
+            top: 27px; width: 4px; height: 8px; transform-origin: top center;
+        }
+        .character-arm-left { left: 10px; }
+        .character-arm-right { left: 25px; }
+        /* Animations */
+        #interactive-character.running .character-arm-left {
+            animation: arm-swing 0.4s infinite linear alternate;
+        }
+        #interactive-character.running .character-arm-right {
+            animation: arm-swing 0.4s infinite linear alternate-reverse;
+        }
+        @keyframes arm-swing {
+            from { transform: rotate(-45deg); }
+            to { transform: rotate(45deg); }
+        }
+        #interactive-character.running .character-leg-left {
+            animation: leg-run-left 0.4s infinite ease-in-out alternate;
+        }
+        #interactive-character.running .character-leg-right {
+            animation: leg-run-right 0.4s infinite ease-in-out alternate;
+        }
+        @keyframes leg-run-left {
+            from { transform: rotate(-30deg); }
+            to { transform: rotate(30deg); }
+        }
+        @keyframes leg-run-right {
+            from { transform: rotate(30deg); }
+            to { transform: rotate(-30deg); }
+        }
+        #interactive-character.flipping .character-sprite {
+            animation: frontflip 0.5s linear 1;
+        }
+        @keyframes frontflip {
+            from { transform: inherit; }
+            to { transform: rotate(360deg); }
+        }
+        
         .top-nav a {
             color: var(--text-color);
             text-decoration: none;
@@ -770,7 +844,7 @@
 <div class="portfolio-container">
 
     <header class="portfolio-header">
-        <img id="profile-picture" src="assets/images/pfppf.jpg" alt="Profile Picture" />
+        <img id="profile-picture" src="" alt="Profile Picture" />
         <h1>Bernard Strčić</h1>
         <p>Zovem se Bernard Strčić i bavim se grafičkim dizajnom i razvojem manjih programskih projekata u slobodno vrijeme. Primarno radim u Adobe Photoshopu i Premiereu, a slobodno vrijeme koristim za gradnju i testiranje raznovrsnih digitalnih projekata. Svoje projekte uvijek gradim s naglaskom na praktičnost i stalno usavršavanje.</p>
     </header>
@@ -844,11 +918,11 @@
             <div class="timeline-item">
                 <div class="timeline-content">
                     <div class="timeline-content-inner">
-                        <p class="timeline-item-date">2021 - Early Design</p>
-                        <h3>Sezona 1 - pocetne grafike</h3>
+                        <p class="timeline-item-date">Sezona 1 - Početne grafike</p>
+                        <h3>03.2021. - 07.2021.</h3>
                         <img class="project-card-media" src="assets/images/racegraph1.0.jpg" style="margin-top: 1rem; border-radius: 4px;">
                         <br><br><br>
-                        <p>My first attempts at creating engaging thumbnails for race highlights.</p>
+                        <p>Prvi pokušaji izrade tablica sa puno vozača. Držao sam se jednostavnosti na većini grafika.</p>
                         <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
                     </div>
                     <div class="timeline-hidden-content">
@@ -867,9 +941,9 @@
                 <div class="timeline-content">
                     <div class="timeline-content-inner">
                         <p class="timeline-item-date">Sezona 2</p>
-                        <h3>Developing a Brand</h3>
+                        <h3>08.2021. - 02.2022.</h3>
                         <img class="project-card-media" src="assets/images/racegraph2.0.jpg" style="margin-top: 1rem; border-radius: 4px;">
-                        <p>Evolved the style to be more consistent and professional.</p>
+                        <p>Osim thumbnailova za prijenos, dodani su i thumbnailovi za highlightse. Također se eksperimentiralo hoće li se krenuti u proizvodnju mercha. </p>
                         <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
                     </div>
                     <div class="timeline-hidden-content">
@@ -880,6 +954,7 @@
                             <img src="assets/images/racegraph2.3.png" alt="Gallery Image">
                             <img src="assets/images/racegraph2.4.jpg" alt="Gallery Image">
                             <img src="assets/images/racegraph2.5.jpg" alt="Gallery Image">
+                            <img src="assets/images/racegraph2.6.jpg" alt="Gallery Image">
                         </div>
                     </div>
                 </div>
@@ -888,7 +963,7 @@
                 <div class="timeline-content">
                     <div class="timeline-content-inner">
                         <p class="timeline-item-date">Sezona 3</p>
-                        <h3>Driver Points & Calendar</h3>
+                        <h3>03.2022. - 06.2022.</h3>
                         <img class="project-card-media" src="assets/images/racegraph3.0.png" style="margin-top: 1rem; border-radius: 4px;">
                         <p>Began creating data-driven graphics.</p>
                         <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
@@ -908,9 +983,9 @@
                 <div class="timeline-content">
                     <div class="timeline-content-inner">
                         <p class="timeline-item-date">Sezona 4</p>
-                        <h3>Latest Work</h3>
+                        <h3>09.2022. - 12.2022.</h3>
                         <img class="project-card-media" src="assets/images/racegraph4.0.jpg" style="margin-top: 1rem; border-radius: 4px;">
-                        <p>My current style, focusing on high-quality visuals.</p>
+                        <p>Tablice su ostale kao i prošle sezone, uz neke promjene kalendara i thumbnailova i ostalih grafika.</p>
                         <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
                     </div>
                     <div class="timeline-hidden-content">
@@ -928,9 +1003,9 @@
                 <div class="timeline-content">
                     <div class="timeline-content-inner">
                         <p class="timeline-item-date">Sezona 5 i 6</p>
-                        <h3>Driver Points & Calendar</h3>
+                        <h3>01.2023. - 05.2023. i 08.- 02.2024.</h3>
                         <img class="project-card-media" src="assets/images/racegraph5.0.png" style="margin-top: 1rem; border-radius: 4px;">
-                        <p>Began creating data-driven graphics.</p>
+                        <p>Značajan skok u kvaliteti izrade tablica, ali i analizi statistike vozača.</p>
                         <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
                     </div>
                     <div class="timeline-hidden-content">
@@ -970,8 +1045,23 @@
         <h2 class="section-title">Awarded Project</h2>
 
         <div class="awarded-project-showcase">
-            <h3>Award-Winning Game Project</h3>
-            <p>Interaktivni AR projekt web igre koji povezuje detekciju objekata putem OpenCV-a s React aplikacijom kako bi se stvorilo dinamično i responzivno okruženje za igru.</p>
+            <h3>PlatformAR</h3>
+            <div id="interactive-character">
+                <div class="character-sprite">
+                    <div class="character-part character-head">
+                        <div class="character-eye character-eye-left"></div>
+                        <div class="character-eye character-eye-right"></div>
+                    </div>
+                    <div class="character-part character-body"></div>
+                    <div class="character-part character-leg character-leg-left"></div>
+                    <div class="character-part character-leg character-leg-right"></div>
+                    <div class="character-part character-arm character-arm-left"></div>
+                    <div class="character-part character-arm character-arm-right"></div>
+                </div>
+            </div>
+            <p id="award-paragraph">Interaktivni AR projekt web igre koji povezuje detekciju objekata putem OpenCV-a s React aplikacijom kako bi se stvorilo dinamično i responzivno okruženje za igru.
+                Igra koristi kameru kako bi putem nje markere na zidu/ploči prenesla platforme u virtualnom prostoru. Igrač se zatim kreće, skače i prolazi razine koje se doslovno mijenjaju pomicanjem fizičkih naljepnica.
+            </p>
 
             <img class="awarded-project-showcase-media" src="assets/images/PlatformAR_logo.png"/ style="width: 100%;">
 
@@ -1016,6 +1106,7 @@
     <!-- VIBECODING -->
     <section class="section" id="vibecoding">
         <h2 class="section-title">Vibecoding Projects</h2>
+        <p style="text-align: center; width: 500px; margin: 0 auto;" >Vibecoding mi pruža kreativnost kroz kontinuirano traženje pravih promptova kako bi ideja koju sam zamislio došla do izražaja, tj. vizualizacije onako kako sam je zamislio.</p>
         <div class="vibecoding-project-list">
             <div class="project-card vibecoding-project" style="width: 400px; height: 530px;">
                 <div class="project-card-main-content">
@@ -1065,7 +1156,7 @@
         </div>
 
         <div class="github-promo">
-            <p>You can check out my other projects on my <a href="https://github.com/barnynho74" target="_blank" rel="noopener noreferrer">GitHub profile</a>.</p>
+            <p>Moje ostale projekte možete pogledati na <a href="https://github.com/barnynho74" target="_blank" rel="noopener noreferrer">GitHub profilu</a></p>
         </div>
     </section>
 
@@ -1402,8 +1493,105 @@
             figmaDrawer.classList.remove('active');
         });
     }
+    // --- Interactive Character ---
+    const character = document.getElementById('interactive-character');
+    if (character) {
+        const characterSprite = character.querySelector('.character-sprite');
+        const platform = document.getElementById('award-paragraph');
+        const showcase = document.querySelector('.awarded-project-showcase');
+        const state = {
+            x: 0, y: 0, vx: 1.2, vy: 0,
+            gravity: 0.5,
+            isJumping: false,
+            isFacingRight: true,
+            isRunning: false,
+            idleTimer: 0,
+            timeToNextAction: 150
+        };
+        let platformRect;
+        function updatePlatformRect() {
+            if (!platform || !showcase) return;
+            const showcaseRect = showcase.getBoundingClientRect();
+            const pRect = platform.getBoundingClientRect();
+            platformRect = {
+                top: pRect.top - showcaseRect.top,
+                left: pRect.left - showcaseRect.left,
+                right: pRect.right - showcaseRect.left
+            };
+            if (state.x === 0) {
+                state.x = platformRect.left + 50;
+                state.y = platformRect.top - character.offsetHeight;
+            }
+        }
+        function characterLoop() {
+            if (!platformRect) {
+                requestAnimationFrame(characterLoop);
+                return;
+            }
+            
+            if (state.isJumping) {
+                state.vy += state.gravity;
+                state.y += state.vy;
+            }
+            
+            const groundY = platformRect.top - character.offsetHeight;
+            if (state.y > groundY) {
+                state.y = groundY;
+                state.vy = 0;
+                if (state.isJumping) {
+                    state.isJumping = false;
+                    character.classList.remove('flipping');
+                }
+            }
+            
+            if (!state.isJumping) {
+                state.x += state.vx;
+                if (state.x < platformRect.left || state.x > platformRect.right - character.offsetWidth) {
+                    state.vx *= -1;
+                    state.isFacingRight = !state.isFacingRight;
+                    characterSprite.style.transform = state.isFacingRight ? 'scaleX(1)' : 'scaleX(-1)';
+                }
+                state.idleTimer++;
+                if (state.idleTimer > state.timeToNextAction) {
+                    state.idleTimer = 0;
+                    state.timeToNextAction = 100 + Math.random() * 150; // Randomize next action time
+                    const action = Math.random();
+                    if (action < 0.6) { // Jump
+                        state.isJumping = true;
+                        state.vy = -10;
+                    } else { // Frontflip
+                        state.isJumping = true;
+                        state.vy = -12;
+                        character.classList.add('flipping');
+                    }
+                }
+            }
+            character.style.left = `${state.x}px`;
+            character.style.top = `${state.y}px`;
+            
+            const isRunning = !state.isJumping;
+            if (isRunning !== state.isRunning) {
+                state.isRunning = isRunning;
+                character.classList.toggle('running', isRunning);
+            }
+            
+            requestAnimationFrame(characterLoop);
+        }
+        const observer = new IntersectionObserver((entries) => {
+             if (entries[0].isIntersecting) {
+                setTimeout(() => {
+                    updatePlatformRect();
+                    characterLoop();
+                    window.addEventListener('resize', updatePlatformRect);
+                }, 300); // Delay to ensure layout is final
+                observer.disconnect();
+            }
+        }, { threshold: 0.1 });
+       if (showcase) {
+            observer.observe(showcase);
+       }
+    }
 </script>
 
 </body>
 </html>
-
