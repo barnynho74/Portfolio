@@ -666,6 +666,118 @@
         }
         .figma-gallery-drawer .project-card-content {
             display: none;
+}
+        /* Photo Stack */
+        .awarded-project-gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            justify-items: center;
+        }
+        .project-card.photo-stack-container {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .photo-stack {
+            position: relative;
+            width: 250px;
+            height: 300px;
+            cursor: pointer;
+        }
+        .polaroid-card {
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            background-color: white;
+            border-radius: 4px;
+            padding: 10px 10px 40px 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
+            transform: translate(var(--dx, 0px), var(--dy, 0px));
+        }
+        .polaroid-card.is-dragging {
+            cursor: grabbing;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            transition: none !important;
+        }
+        body.is-dragging-polaroid {
+            user-select: none;
+        }
+        .polaroid-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 1px solid #eee;
+            display: block;
+        }
+        .polaroid-card figcaption {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            color: #333;
+            font-size: 14px;
+        }
+        .polaroid-card:nth-child(1) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-8deg) translateY(-10px); }
+        .polaroid-card:nth-child(2) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(5deg); }
+        .polaroid-card:nth-child(3) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(12deg) translateY(5px); }
+        .polaroid-card:nth-child(4) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-3deg) translateY(10px); }
+        .polaroid-card:nth-child(5) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(8deg) translateY(-5px); }
+        .polaroid-card:nth-child(6) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-12deg) translateY(8px); }
+        .polaroid-card:nth-child(7) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(4deg) translateY(12px); }
+        .polaroid-card:nth-child(8) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-6deg) translateY(-8px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(1) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-25deg) translate(-140px, -20px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(2) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-15deg) translate(-80px, -50px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(3) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-5deg) translate(-20px, -60px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(4) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(5deg) translate(20px, -60px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(5) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(15deg) translate(80px, -50px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(6) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(25deg) translate(140px, -20px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(7) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-10deg) translate(-50px, 60px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(8) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(10deg) translate(50px, 60px); }
+        /* Video Hover Card */
+        .video-hover-card {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            opacity: 1;
+            z-index: 2;
+        }
+        .video-hover-card:hover .video-overlay {
+            opacity: 0;
+        }
+        .play-prompt {
+            color: white;
+            text-align: center;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        .play-prompt svg {
+            display: block;
+            margin: 0 auto 0.5rem;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+        }
+        .play-prompt span {
+            font-weight: bold;
+            font-size: 1.2rem;
         }
         /* Top Navigation */
         .top-nav {
@@ -691,6 +803,95 @@
         .character-sprite {
             position: relative;
             width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        .character-part {
+            position: absolute;
+            background-color: #f0f0f0;
+            border: 2px solid black;
+            box-sizing: border-box;
+        }
+        .character-head {
+            top: 0; left: 8px; width: 24px; height: 24px; border-radius: 40%;
+        }
+        .character-eye {
+            position: absolute; width: 4px; height: 4px; background-color: black; border-radius: 50%; top: 10px; border: none;
+        }
+        .character-eye-left { left: 9px; }
+        .character-eye-right { left: 16px; }
+        .character-body {
+            top: 24px; left: 12px; width: 12px; height: 12px; border-radius: 2px;
+        }
+        .character-leg {
+            top: 36px; width: 6px; height: 4px;
+        }
+        .character-leg-left { left: 13px; }
+        .character-leg-right { left: 21px; }
+        .character-arm {
+            top: 27px; width: 4px; height: 8px; transform-origin: top center;
+        }
+        .character-arm-left { left: 10px; }
+        .character-arm-right { left: 25px; }
+        /* Animations */
+        #interactive-character.running .character-arm-left {
+            animation: arm-swing 0.4s infinite linear alternate;
+        }
+        #interactive-character.running .character-arm-right {
+            animation: arm-swing 0.4s infinite linear alternate-reverse;
+        }
+        @keyframes arm-swing {
+            from { transform: rotate(-45deg); }
+            to { transform: rotate(45deg); }
+        }
+        #interactive-character.running .character-leg-left {
+            animation: leg-run-left 0.4s infinite ease-in-out alternate;
+        }
+        #interactive-character.running .character-leg-right {
+            animation: leg-run-right 0.4s infinite ease-in-out alternate;
+        }
+        @keyframes leg-run-left {
+            from { transform: rotate(-30deg); }
+            to { transform: rotate(30deg); }
+        }
+        @keyframes leg-run-right {
+            from { transform: rotate(30deg); }
+            to { transform: rotate(-30deg); }
+        }
+        #interactive-character.flipping .character-sprite {
+            animation: frontflip 0.5s linear 1;
+        }
+        @keyframes frontflip {
+            from { transform: inherit; }
+            to { transform: rotate(360deg); }
+        }
+        .top-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-weight: 500;
+            transition: color 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+        .top-nav a:hover {
+            color: var(--primary-color);
+        }
+        .top-nav a.active {
+            color: var(--bg-color);
+        }
+        .nav-highlight {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 38px;
+            background-color: var(--primary-color);
+            border-radius: 8px;
+            z-index: 1;
+            transition: all 0.35s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+            width: 0;
+        }
+        @media (max-width: 1200px) {
             height: 100%;
             transition: transform 0.3s ease;
         }
@@ -754,16 +955,6 @@
             to { transform: rotate(360deg); }
         }
         
-        .top-nav a {
-            color: var(--text-color);
-            text-decoration: none;
-            margin: 0 1.5rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        .top-nav a:hover, .top-nav a.active {
-            color: var(--primary-color);
-        }
         @media (max-width: 1200px) {
             .gallery-drawer {
                 position: fixed;
@@ -797,7 +988,7 @@
     overflow: hidden;
     z-index: -1;
     border-radius: 8px;
-    opacity: 0.15;
+    opacity: 0.08;
 }
 
 .award-video-background video {
@@ -835,6 +1026,7 @@
 
 <body>
 <nav class="top-nav">
+    <span class="nav-highlight"></span>
     <a href="#graphic-design" class="nav-link">Graphic Design</a>
     <a href="#race-graphics" class="nav-link">Race Graphics</a>
     <a href="#awarded-project" class="nav-link">Awarded Project</a>
@@ -844,7 +1036,7 @@
 <div class="portfolio-container">
 
     <header class="portfolio-header">
-        <img id="profile-picture" src="pfppf.jpg" alt="Profile Picture" />
+        <img id="profile-picture" src="" alt="Profile Picture" />
         <h1>Bernard Strčić</h1>
         <p>Zovem se Bernard Strčić i bavim se grafičkim dizajnom i razvojem manjih programskih projekata u slobodno vrijeme. Primarno radim u Adobe Photoshopu i Premiereu, a slobodno vrijeme koristim za izradu i testiranje raznovrsnih digitalnih projekata. Svoje projekte uvijek radim s naglaskom na praktičnost i stalno usavršavanje.</p>
     </header>
@@ -1063,33 +1255,58 @@
                 <li class="award-item bronze">Brončana medalja na sajmu ARCA 2025</li>
             </ul>
 
-            <h3 class="subsection-title">Gallery</h3>
-            <div class="project-grid">
-                <div class="project-card">
-                    <img class="project-card-media" src="">
-                    <div class="project-card-content">
-                        <h3>Gameplay Screenshot</h3>
+            <h3 class="subsection-title">Behind the Scenes</h3>
+            <div class="awarded-project-gallery-grid">
+                <!-- Hover-to-Play Video -->
+                <div class="project-card video-hover-card">
+                    <div class="video-overlay">
+                        <div class="play-prompt">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            <span>Hover to Play</span>
+                        </div>
                     </div>
+                    <video class="project-card-media" playsinline="" loop="" muted="">
+                         <source src="assets/videos/platformarshowcase.mp4" type="video/mp4">
+                    </video>
                 </div>
-
-                <div class="project-card">
-                    <img class="project-card-media" src="">
-                    <div class="project-card-content">
-                        <h3>Concept Art</h3>
+                <!-- Polaroid Photo Stack -->
+                <div class="project-card photo-stack-container" style="height:520px; width: 700px;">
+                     <h3>Glimpse into Development</h3>
+                    <div class="photo-stack">
+                        <div class="polaroid-card">
+                            <img src="assets/images/racegraph3.1.png" alt="Early UI concept">
+                            <figcaption>Early UI</figcaption>
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="assets/images/figmaMM1.1.png" alt="Component design">
+                            <figcaption>Components</figcaption>
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="assets/images/PlatformAR_logo.png" alt="Final Logo">
+                            <figcaption>Final Logo</figcaption>
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="assets/images/racegraph5.1.png" alt="Data structure planning">
+                            <figcaption>Data Tables</figcaption>
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="assets/images/chessflag_1.png" alt="Game State">
+                            <figcaption>Game State</figcaption>
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="assets/images/chessflag_2.png" alt="Player View">
+                            <figcaption>Player View</figcaption>
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="assets/images/ttf1_1.png" alt="Gameplay">
+                            <figcaption>Gameplay</figcaption>
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="assets/images/ttf1_2.png" alt="UI Detail">
+                            <figcaption>UI Detail</figcaption>
+                        </div>
                     </div>
-                </div>
-
-                <div class="project-card">
-                    <img class="project-card-media" src="">
-                    <div class="project-card-content">
-                        <h3>Concept Art</h3>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img class="project-card-media" src="">
-                    <div class="project-card-content">
-                        <h3>Concept Art</h3>
-                    </div>
+                    <p style="font-size: 12px; color: #888; margin-top: 1.5rem; text-align: center;">(Povuci nas! Dupli klik za resetiranje pozicije)</p>
                 </div>
             </div>
         </div>
@@ -1223,9 +1440,17 @@
     </div>
 </div>
 <script type="module">
-    
     const navLinks = document.querySelectorAll('.top-nav .nav-link');
+    const navHighlight = document.querySelector('.nav-highlight');
     const sections = document.querySelectorAll('.section');
+    function updateHighlight(activeLink) {
+        if (!activeLink) {
+            navHighlight.style.width = '0px';
+            return;
+        }
+        navHighlight.style.width = `${activeLink.offsetWidth}px`;
+        navHighlight.style.left = `${activeLink.offsetLeft}px`;
+    }
     const navObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -1235,8 +1460,20 @@
                 });
             }
         });
+        const activeLink = document.querySelector('.top-nav a.active');
+        updateHighlight(activeLink);
     }, { rootMargin: "-50% 0px -50% 0px" });
+    
     sections.forEach(section => navObserver.observe(section));
+    window.addEventListener('resize', () => {
+        const activeLink = document.querySelector('.top-nav a.active');
+        if (activeLink) {
+            navHighlight.style.transition = 'none';
+            updateHighlight(activeLink);
+            void navHighlight.offsetWidth; 
+            navHighlight.style.transition = '';
+        }
+    });
     document.querySelectorAll('.timeline-content-inner').forEach(item => {
         item.addEventListener('click', event => {
             if (event.target.closest('.timeline-gallery img')) {
@@ -1365,7 +1602,8 @@
         '.project-card-media',
         '.timeline-gallery img',
         '.awarded-project-showcase-media',
-        '#profile-picture'
+        '#profile-picture',
+        '.polaroid-card img'
     ];
     const allClickableImages = document.querySelectorAll(imageSelectors.join(', '));
     const clickableImagesArray = Array.from(allClickableImages);
@@ -1373,7 +1611,7 @@
         if (mediaEl.tagName.toLowerCase() === 'video') return;
         mediaEl.addEventListener('click', (e) => {
             e.stopPropagation();
-            const galleryContainer = mediaEl.closest('.personal-projects-grid, .timeline-gallery, #awarded-project .project-grid, .figma-gallery-content');
+            const galleryContainer = mediaEl.closest('.personal-projects-grid, .timeline-gallery, .awarded-project-gallery-grid, .figma-gallery-content');
             
             if (galleryContainer) {
                 const galleryImages = Array.from(galleryContainer.querySelectorAll('img')).filter(img => clickableImagesArray.includes(img));
@@ -1486,6 +1724,75 @@
             figmaDrawer.classList.remove('active');
         });
     }
+    // --- Draggable Polaroids ---
+    const polaroids = document.querySelectorAll('.polaroid-card');
+    let highestZ = polaroids.length;
+    polaroids.forEach(card => {
+        let isDragging = false;
+        let hasMoved = false;
+        const startPos = { x: 0, y: 0 };
+        const dragOffset = { x: 0, y: 0 };
+        card.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            isDragging = true;
+            hasMoved = false;
+            card.classList.add('is-dragging');
+            document.body.classList.add('is-dragging-polaroid');
+            card.style.zIndex = ++highestZ;
+            startPos.x = e.clientX;
+            startPos.y = e.clientY;
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+        function onMouseMove(e) {
+            if (!isDragging) return;
+            hasMoved = true;
+            const dx = e.clientX - startPos.x;
+            const dy = e.clientY - startPos.y;
+            card.style.setProperty('--dx', `${dragOffset.x + dx}px`);
+            card.style.setProperty('--dy', `${dragOffset.y + dy}px`);
+        }
+        function onMouseUp(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            card.classList.remove('is-dragging');
+            document.body.classList.remove('is-dragging-polaroid');
+            const dx = e.clientX - startPos.x;
+            const dy = e.clientY - startPos.y;
+            dragOffset.x += dx;
+            dragOffset.y += dy;
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+        }
+        card.addEventListener('dblclick', () => {
+            dragOffset.x = 0;
+            dragOffset.y = 0;
+            const initialTransition = card.style.transition;
+            card.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+            card.style.setProperty('--dx', '0px');
+            card.style.setProperty('--dy', '0px');
+            setTimeout(() => card.style.transition = initialTransition, 400);
+        });
+        card.addEventListener('click', (e) => {
+            if (hasMoved) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, true);
+    });
+    // --- Hover-to-Play Video Cards ---
+    document.querySelectorAll('.video-hover-card').forEach(card => {
+        const video = card.querySelector('video');
+        if (video) {
+            card.addEventListener('mouseenter', () => {
+                video.play();
+            });
+            card.addEventListener('mouseleave', () => {
+                video.pause();
+                video.currentTime = 0; // Optional: reset video on mouse out
+            });
+        }
+    });
     // --- Interactive Character ---
     const character = document.getElementById('interactive-character');
     if (character) {
@@ -1494,7 +1801,7 @@
         const showcase = document.querySelector('.awarded-project-showcase');
         const state = {
             x: 0, y: 0, vx: 1.2, vy: 0,
-            gravity: 0.7,
+            gravity: 0.5,
             isJumping: false,
             isFacingRight: true,
             isRunning: false,
@@ -1547,7 +1854,7 @@
                 state.idleTimer++;
                 if (state.idleTimer > state.timeToNextAction) {
                     state.idleTimer = 0;
-                    state.timeToNextAction = 100 + Math.random() * 100; // Randomize next action time
+                    state.timeToNextAction = 100 + Math.random() * 150; // Randomize next action time
                     const action = Math.random();
                     if (action < 0.6) { // Jump
                         state.isJumping = true;
