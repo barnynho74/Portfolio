@@ -51,6 +51,7 @@
             border: 4px solid var(--primary-color);
             box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.5);
             background-color: var(--card-bg);
+            
         }
 
         .portfolio-header h1 {
@@ -680,6 +681,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
         .photo-stack {
             position: relative;
@@ -687,13 +689,24 @@
             height: 300px;
             cursor: pointer;
         }
+        .photo-stack-hint {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    z-index: 5;
+    pointer-events: none;
+}
         .polaroid-card {
             position: absolute;
-            width: 70%;
-            height: 70%;
+            width: 55%;
+            height: 55%;
             background-color: white;
             border-radius: 4px;
-            padding: 10px 10px 40px 10px;
+            padding: 10px 10px 50px 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform;
@@ -1036,9 +1049,9 @@
 <div class="portfolio-container">
 
     <header class="portfolio-header">
-        <img id="profile-picture" src="pfppf.jpg" alt="Profile Picture" />
+        <img id="profile-picture" src="assets/images/pfppf2.jpg" alt="Profile Picture" />
         <h1>Bernard Strčić</h1>
-        <p>Zovem se Bernard Strčić i bavim se grafičkim dizajnom i razvojem manjih programskih projekata u slobodno vrijeme. Primarno radim u Adobe Photoshopu i Premiereu, a slobodno vrijeme koristim za izradu i testiranje raznovrsnih digitalnih projekata. Svoje projekte uvijek radim s naglaskom na praktičnost i stalno usavršavanje.</p>
+        <p> Zovem se Bernard Strčić, diplomirani grafički inženjer s interesom za digitalne i programske projekte u slobodno vrijeme. U radu se oslanjam na Adobe Photoshop i Premiere, uz stalno istraživanje novih pristupa koji spajaju dizajn i tehnologiju. Motivira me rad u dinamičnom i poticajnom okruženju te me osebno me privlače projekti koji omogućuju  kreativnost i praktičnu primjenu ideja.</p>
     </header>
 
 
@@ -1252,13 +1265,13 @@
 
             <ul class="awards-list">
                 <li class="award-item gold"><a href="https://www.grf.unizg.hr/uspjeh-studenata-grafickog-fakulteta-na-inova-2025/">Zlatna medalja na INOVA sajmu</a></li>
-                <li class="award-item bronze">Brončana medalja na sajmu ARCA 2025</li>
+                <li class="award-item bronze"><a href="assets/images/arcaBronze.jpg" id="arca-medal-link">Brončana medalja na sajmu ARCA 2025</a></li>
             </ul>
 
-            <h3 class="subsection-title">Behind the Scenes</h3>
+            <h3 class="subsection-title">Kako igra radi?</h3>
             <div class="awarded-project-gallery-grid">
                 <!-- Hover-to-Play Video -->
-                <div class="project-card video-hover-card">
+                <div class="project-card video-hover-card" style="height:360px; width: 670px;" >
                     <div class="video-overlay">
                         <div class="play-prompt">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -1270,44 +1283,57 @@
                     </video>
                 </div>
                 <!-- Polaroid Photo Stack -->
-                <div class="project-card photo-stack-container" style="height:520px; width: 700px;">
-                     <h3>Glimpse into Development</h3>
-                    <div class="photo-stack">
-                        <div class="polaroid-card">
-                            <img src="assets/images/racegraph3.1.png" alt="Early UI concept">
-                            <figcaption>Early UI</figcaption>
-                        </div>
-                        <div class="polaroid-card">
-                            <img src="assets/images/figmaMM1.1.png" alt="Component design">
-                            <figcaption>Components</figcaption>
-                        </div>
-                        <div class="polaroid-card">
-                            <img src="assets/images/PlatformAR_logo.png" alt="Final Logo">
-                            <figcaption>Final Logo</figcaption>
-                        </div>
-                        <div class="polaroid-card">
-                            <img src="assets/images/racegraph5.1.png" alt="Data structure planning">
-                            <figcaption>Data Tables</figcaption>
-                        </div>
-                        <div class="polaroid-card">
-                            <img src="assets/images/chessflag_1.png" alt="Game State">
-                            <figcaption>Game State</figcaption>
-                        </div>
-                        <div class="polaroid-card">
-                            <img src="assets/images/chessflag_2.png" alt="Player View">
-                            <figcaption>Player View</figcaption>
-                        </div>
-                        <div class="polaroid-card">
-                            <img src="assets/images/ttf1_1.png" alt="Gameplay">
-                            <figcaption>Gameplay</figcaption>
-                        </div>
-                        <div class="polaroid-card">
-                            <img src="assets/images/ttf1_2.png" alt="UI Detail">
-                            <figcaption>UI Detail</figcaption>
-                        </div>
-                    </div>
-                    <p style="font-size: 12px; color: #888; margin-top: 1.5rem; text-align: center;">(Povuci nas! Dupli klik za resetiranje pozicije)</p>
-                </div>
+<h3 class="subsection-title">Snimke zaslona iz igre</h3>
+
+<div class="project-card photo-stack-container" style="height:490px; width:700px;">
+    <div class="photo-stack">
+        <div class="polaroid-card">
+            <img src="assets/images/plAR1.png" alt="Early UI concept">
+            <figcaption>Početni zaslon (menu)</figcaption>
+        </div>
+
+        <div class="polaroid-card">
+            <img src="assets/images/plAR2.png" alt="Component design">
+            <figcaption>Kako funkcionira</figcaption>
+        </div>
+
+        <div class="polaroid-card">
+            <img src="assets/images/plAR3.png" alt="Final Logo">
+            <figcaption>Snimka zaslona iz igre 1</figcaption>
+        </div>
+
+        <div class="polaroid-card">
+            <img src="assets/images/plAR4.png" alt="Data structure planning">
+            <figcaption>Izrada vlastitog lika</figcaption>
+        </div>
+
+        <div class="polaroid-card">
+            <img src="assets/images/plAR5.png" alt="Game State">
+            <figcaption>Snimka zaslona iz igre 2</figcaption>
+        </div>
+
+        <div class="polaroid-card">
+            <img src="assets/images/plAR6.png" alt="Player View">
+            <figcaption>Odabir lika</figcaption>
+        </div>
+
+        <div class="polaroid-card">
+            <img src="assets/images/plAR7.png" alt="Gameplay">
+            <figcaption>Upute za igru</figcaption>
+        </div>
+
+        <div class="polaroid-card">
+            <img src="assets/images/plAR8.png" alt="UI Detail">
+            <figcaption>Ljestvica top vremena</figcaption>
+        </div>
+    </div>
+
+    <!-- TEKST NA DNU -->
+    <p class="photo-stack-hint">
+        (Slike se mogu micati, probaj! Dupli klik za resetiranje pozicije)
+    </p>
+</div>
+
             </div>
         </div>
     </section>
@@ -1891,8 +1917,14 @@
             observer.observe(showcase);
        }
     }
+    const arcaMedalLink = document.getElementById('arca-medal-link');
+    if (arcaMedalLink) {
+        arcaMedalLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            openLightbox('assets/images/arcaBronze.jpg');
+        });
+    }
 </script>
 
 </body>
 </html>
-
