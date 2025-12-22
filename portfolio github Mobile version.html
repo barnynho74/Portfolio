@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px;
+        }
+        :root {
+            --bg-color: #121212;
+            --text-color: #E0E0E0;
+            --primary-color: #BB86FC;
+            --primary-color-rgb: 187, 134, 252;
+            --card-bg: #1E1E1E;
+            --border-color: #333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .portfolio-container {
+            width: 100%;
+            padding: 1rem;
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 1s ease-out;
+        }
+        #profile-picture {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            display: block;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.5);
+            background-color: var(--card-bg);
+            
+        }
+
+        .portfolio-header h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .subsection-title {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            grid-auto-rows: minmax(200px, auto);
+        }
+
+        .personal-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-auto-rows: minmax(200px, auto);
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 340px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        .project-card-media {
+            width: 100%;
+            flex-grow: 1;
+            min-height: 10px;
+            object-fit: cover;
+            display: block;
+        }
+        .project-card-wide {
+            grid-column: span 2;
+        }
+
+        .project-card-tall {
+            grid-row: span 2;
+        }
+
+        .project-card-content {
+            padding: 1rem;
+            flex-shrink: 0;
+        }
+
+        .project-card-content h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+
+        .timeline-item {
+            padding: 1rem 3rem;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--bg-color);
+            border: 4px solid var(--primary-color);
+            top: 1.5rem;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 1rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .timeline-content-inner {
+            cursor: pointer;
+        }
+
+        .timeline-hidden-content {
+            display: none;
+            margin-top: 1rem;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        .timeline-cta {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-style: normal;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none; /* Prevents text selection on click */
+        }
+        .timeline-content-inner:hover .timeline-cta {
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+        }
+        .timeline-cta .cta-arrow {
+            display: inline-block;
+        }
+        .gallery-prompt {
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+        .timeline-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .timeline-gallery img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: zoom-in;
+            transition: transform 0.3s ease, z-index 0s;
+            position: relative;
+        }
+        .timeline-gallery img:hover {
+            transform: scale(1.5);
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        /* Lightbox Navigation */
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(30, 30, 30, 0.7);
+            color: white;
+            border: none;
+            font-size: 32px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            opacity: 0.7;
+            transition: opacity 0.3s ease, background-color 0.2s;
+            display: none; /* Hidden by default */
+        }
+        .lightbox-nav:hover {
+            opacity: 1;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .lightbox-nav.prev {
+            left: 20px;
+        }
+        .lightbox-nav.next {
+            right: 20px;
+        }
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            animation: zoomIn 0.3s ease;
+            transition: transform 0.2s ease-out;
+            transform-origin: center center;
+            cursor: grab;
+        }
+        .lightbox-content.grabbing {
+            cursor: grabbing;
+            transition: none;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .lightbox-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1001;
+            background-color: rgba(30, 30, 30, 0.7);
+            border-radius: 25px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+        }
+        .lightbox-controls button {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+        }
+        .lightbox-controls button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .awarded-project-showcase {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 3rem;
+    
+}
+#awarded-project {
+    position: relative;
+    overflow: hidden; 
+    border-radius: 8px;
+    
+}
+
+
+
+        .awarded-project-showcase p {
+            max-width: 800px;
+            margin: 1rem auto;
+            font-size: 1.1rem;
+        }
+
+        .awarded-project-showcase-media {
+            margin-top: 2rem;
+            border-radius: 8px;
+            width: 100%;
+            
+        }
+
+        .awards-list {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+
+        .award-item {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        /* GOLD gradient */
+.award-item.gold {
+    background: linear-gradient(135deg, #cea55c, #f1cd89, #cea55c);
+    color: #000;
+    box-shadow: 0 0 10px rgba(255, 200, 0, 0.4);
+}
+
+/* BRONZE gradient */
+.award-item.bronze {
+    background: linear-gradient(135deg, #8C4A1F, #C67A43, #7B3F18);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(150, 75, 0, 0.4);
+}
+.award-item a {
+    color: inherit;
+    text-decoration: none;
+}
+
+        .github-promo {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+.github-promo p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+.github-promo a {
+    color: var(--primary-color);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+.github-promo a:hover {
+    color: white;
+    text-shadow: 0 0 5px rgba(255,255,255,0.7);
+}
+
+        /* Vibecoding Project Drawer Gallery */
+        .vibecoding-project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
+        .vibecoding-project {
+            position: relative;
+            /* Override default card overflow to allow drawer to be visible */
+            overflow: visible; 
+            transition: box-shadow 0.3s ease;
+            /* We don't want the resize handle on these */
+            resize: none;
+        }
+         .vibecoding-project::after {
+            display: none;
+        }
+        .vibecoding-project .project-card-main-content {
+            position: relative;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .vibecoding-project .project-card-main-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+        .gallery-drawer {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            width: 90vw;
+            height: 70vh;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            transform: translate(-50%, -50%) scale(0.9);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            overflow: hidden;
+        }
+        .vibecoding-project.gallery-open {
+            box-shadow: 0 8px 32px rgba(var(--primary-color-rgb), 0.2);
+        }
+        .vibecoding-project.gallery-open .gallery-drawer {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .gallery-close-btn {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 2.5rem;
+            font-weight: 300;
+            cursor: pointer;
+            z-index: 22;
+            line-height: 1;
+            padding: 0;
+            transition: color 0.2s;
+        }
+        .gallery-close-btn:hover {
+            color: white;
+        }
+        .gallery-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #000; /* For clean letterboxing of images */
+        }
+        .gallery-slides {
+            display: flex;
+            height: 100%;
+            transition: transform 0.4s ease-in-out;
+        }
+        .gallery-slides img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Show the whole image */
+            flex-shrink: 0;
+            cursor: zoom-in;
+        }
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(30, 30, 30, 0.7);
+            color: white;
+            border: none;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 21;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-slider:hover .gallery-nav {
+            opacity: 1;
+        }
+        .gallery-nav.prev {
+            left: 10px;
+        }
+        .gallery-nav.next {
+            right: 10px;
+        }
+        .gallery-nav:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .open-gallery-indicator {
+            position: absolute;
+            top: 30rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            background-color: #BB86FC;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 1;
+            opacity: 100;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            z-index: 5;
+            pointer-events: none; /* Don't interfere with card clicks */
+        }
+        .vibecoding-project .project-card-main-content:hover .open-gallery-indicator {
+            opacity: 1;
+            transform: scale(1);
+            background-color: rgba(243, 22, 243, 0.842);
+        }
+        .figma-project {
+            position: relative;
+            cursor: pointer;
+        }
+        .figma-project .open-gallery-indicator {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 1;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            z-index: 5;
+            pointer-events: none; /* Don't interfere with card clicks */
+        }
+        .figma-project:hover .open-gallery-indicator {
+            opacity: 1;
+            transform: scale(1);
+            background-color: rgba(243, 22, 243, 0.842);
+        }
+        .figma-project-wrapper {
+            position: relative;
+        }
+        
+        .figma-gallery-drawer {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0;
+            margin-top: 0;
+            transition: max-height 0.7s ease-in-out, padding 0.5s ease-out, margin-top 0.5s ease-out;
+            border: 0px solid var(--border-color);
+        }
+        
+        .figma-gallery-drawer.active {
+            max-height: 2000px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-width: 1px;
+        }
+        .figma-gallery-drawer .gallery-close-btn {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 2.5rem;
+            font-weight: 300;
+            cursor: pointer;
+            z-index: 22;
+            line-height: 1;
+            padding: 0;
+            transition: color 0.2s;
+        }
+        .figma-gallery-drawer .gallery-close-btn:hover {
+            color: white;
+        }
+        .figma-gallery-drawer .project-card {
+            height: auto;
+        }
+        .figma-gallery-drawer .project-card-content {
+            display: none;
+}
+        /* Photo Stack */
+        .awarded-project-gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            justify-items: center;
+        }
+        .project-card.photo-stack-container {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .photo-stack {
+            position: relative;
+            width: 250px;
+            height: 300px;
+            cursor: pointer;
+        }
+        .photo-stack-hint {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    z-index: 5;
+    pointer-events: none;
+}
+        .polaroid-card {
+            position: absolute;
+            width: 55%;
+            height: 55%;
+            background-color: white;
+            border-radius: 4px;
+            padding: 10px 10px 50px 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
+            transform: translate(var(--dx, 0px), var(--dy, 0px));
+        }
+        .polaroid-card.is-dragging {
+            cursor: grabbing;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            transition: none !important;
+        }
+        body.is-dragging-polaroid {
+            user-select: none;
+        }
+        .polaroid-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 1px solid #eee;
+            display: block;
+        }
+        .polaroid-card figcaption {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            color: #333;
+            font-size: 14px;
+        }
+        .polaroid-card:nth-child(1) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-8deg) translateY(-10px); }
+        .polaroid-card:nth-child(2) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(5deg); }
+        .polaroid-card:nth-child(3) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(12deg) translateY(5px); }
+        .polaroid-card:nth-child(4) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-3deg) translateY(10px); }
+        .polaroid-card:nth-child(5) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(8deg) translateY(-5px); }
+        .polaroid-card:nth-child(6) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-12deg) translateY(8px); }
+        .polaroid-card:nth-child(7) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(4deg) translateY(12px); }
+        .polaroid-card:nth-child(8) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-6deg) translateY(-8px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(1) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-25deg) translate(-140px, -20px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(2) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-15deg) translate(-80px, -50px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(3) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-5deg) translate(-20px, -60px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(4) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(5deg) translate(20px, -60px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(5) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(15deg) translate(80px, -50px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(6) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(25deg) translate(140px, -20px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(7) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-10deg) translate(-50px, 60px); }
+        .photo-stack-container:hover .polaroid-card:nth-child(8) { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(10deg) translate(50px, 60px); }
+        /* Video Hover Card */
+        .video-hover-card {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            opacity: 1;
+            z-index: 2;
+        }
+        .video-hover-card:hover .video-overlay {
+            opacity: 0;
+        }
+        .play-prompt {
+            color: white;
+            text-align: center;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        .play-prompt svg {
+            display: block;
+            margin: 0 auto 0.5rem;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+        }
+        .play-prompt span {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        /* Top Navigation */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 1rem;
+            z-index: 900;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.2s;
+        }
+        
+        .menu-toggle:active {
+            color: white;
+        }
+        
+        .nav-links-container {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            flex-direction: column;
+            background-color: rgba(18, 18, 18, 0.98);
+            backdrop-filter: blur(8px);
+            padding: 1rem 0;
+            display: none;
+            z-index: 899;
+        }
+        
+        .nav-links-container.mobile-open {
+            display: flex;
+        }
+        #interactive-character {
+            position: absolute;
+            width: 40px;
+            height: 42px;
+            z-index: 10;
+            will-change: top, left;
+            /* top/left set by JS */
+        }
+        .character-sprite {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        .character-part {
+            position: absolute;
+            background-color: #f0f0f0;
+            border: 2px solid black;
+            box-sizing: border-box;
+        }
+        .character-head {
+            top: 0; left: 8px; width: 24px; height: 24px; border-radius: 40%;
+        }
+        .character-eye {
+            position: absolute; width: 4px; height: 4px; background-color: black; border-radius: 50%; top: 10px; border: none;
+        }
+        .character-eye-left { left: 9px; }
+        .character-eye-right { left: 16px; }
+        .character-body {
+            top: 24px; left: 12px; width: 12px; height: 12px; border-radius: 2px;
+        }
+        .character-leg {
+            top: 36px; width: 6px; height: 4px;
+        }
+        .character-leg-left { left: 13px; }
+        .character-leg-right { left: 21px; }
+        .character-arm {
+            top: 27px; width: 4px; height: 8px; transform-origin: top center;
+        }
+        .character-arm-left { left: 10px; }
+        .character-arm-right { left: 25px; }
+        /* Animations */
+        #interactive-character.running .character-arm-left {
+            animation: arm-swing 0.4s infinite linear alternate;
+        }
+        #interactive-character.running .character-arm-right {
+            animation: arm-swing 0.4s infinite linear alternate-reverse;
+        }
+        @keyframes arm-swing {
+            from { transform: rotate(-45deg); }
+            to { transform: rotate(45deg); }
+        }
+        #interactive-character.running .character-leg-left {
+            animation: leg-run-left 0.4s infinite ease-in-out alternate;
+        }
+        #interactive-character.running .character-leg-right {
+            animation: leg-run-right 0.4s infinite ease-in-out alternate;
+        }
+        @keyframes leg-run-left {
+            from { transform: rotate(-30deg); }
+            to { transform: rotate(30deg); }
+        }
+        @keyframes leg-run-right {
+            from { transform: rotate(30deg); }
+            to { transform: rotate(-30deg); }
+        }
+        #interactive-character.flipping .character-sprite {
+            animation: frontflip 0.5s linear 1;
+        }
+        @keyframes frontflip {
+            from { transform: inherit; }
+            to { transform: rotate(360deg); }
+        }
+        .top-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+            display: block;
+            transition: color 0.2s ease;
+        }
+        
+        .top-nav a:active {
+            color: var(--primary-color);
+        }
+        
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 1rem;
+            width: 48px;
+            height: 48px;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 800;
+            box-shadow: 0 4px 12px rgba(187, 134, 252, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        #back-to-top.visible {
+            display: flex;
+        }
+        
+        #back-to-top:active {
+            transform: scale(0.95);
+        }
+        .character-part {
+            position: absolute;
+            background-color: #f0f0f0;
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+        .character-head {
+            top: 0; left: 8px; width: 24px; height: 24px; border-radius: 40%;
+        }
+        .character-eye {
+            position: absolute; width: 4px; height: 4px; background-color: black; border-radius: 50%; top: 10px; border: none;
+        }
+        .character-eye-left { left: 9px; }
+        .character-eye-right { left: 16px; }
+        .character-body {
+            top: 24px; left: 12px; width: 12px; height: 12px; border-radius: 2px;
+        }
+        .character-leg {
+            top: 36px; width: 6px; height: 4px;
+        }
+        .character-leg-left { left: 13px; }
+        .character-leg-right { left: 21px; }
+        .character-arm {
+            top: 27px; width: 4px; height: 8px; transform-origin: top center;
+        }
+        .character-arm-left { left: 10px; }
+        .character-arm-right { left: 25px; }
+        /* Animations */
+        #interactive-character.running .character-arm-left {
+            animation: arm-swing 0.4s infinite linear alternate;
+        }
+        #interactive-character.running .character-arm-right {
+            animation: arm-swing 0.4s infinite linear alternate-reverse;
+        }
+        @keyframes arm-swing {
+            from { transform: rotate(-45deg); }
+            to { transform: rotate(45deg); }
+        }
+        #interactive-character.running .character-leg-left {
+            animation: leg-run-left 0.4s infinite ease-in-out alternate;
+        }
+        #interactive-character.running .character-leg-right {
+            animation: leg-run-right 0.4s infinite ease-in-out alternate;
+        }
+        @keyframes leg-run-left {
+            from { transform: rotate(-30deg); }
+            to { transform: rotate(30deg); }
+        }
+        @keyframes leg-run-right {
+            from { transform: rotate(30deg); }
+            to { transform: rotate(-30deg); }
+        }
+        #interactive-character.flipping .character-sprite {
+            animation: frontflip 0.5s linear 1;
+        }
+        @keyframes frontflip {
+            from { transform: inherit; }
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 1200px) {
+            .gallery-drawer {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                width: 90vw;
+                height: 70vh;
+                transform: translate(-50%, -50%) scale(0.9);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+            .vibecoding-project.gallery-open .gallery-drawer {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
+        .timeline-item-date {
+           font-weight: bold;
+           color: var(--primary-color);
+           margin-bottom: 0.5rem;
+        }
+        /* Background video styling */
+.award-video-background {
+    position: absolute;
+    top: 510px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    border-radius: 8px;
+    opacity: 0.08;
+}
+
+.award-video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Mobile optimizations */
+        .portfolio-header h1 { font-size: 2rem; }
+        .portfolio-header p { font-size: 1rem; }
+        .section-title { font-size: 1.5rem; }
+        .subsection-title { font-size: 1.3rem; }
+        
+        /* Gallery drawer */
+        .gallery-drawer {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            width: 90vw;
+            height: 70vh;
+            transform: translate(-50%, -50%) scale(0.9);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .vibecoding-project.gallery-open .gallery-drawer {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        /* Timeline gallery */
+        .timeline-gallery {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .timeline-gallery img {
+            height: 100px;
+        }
+        
+        /* Figma gallery */
+        .figma-gallery-drawer .project-grid {
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        }
+        
+        /* Vibecoding projects */
+        .vibecoding-project {
+            width: 100%;
+        }
+        
+        .project-card.vibecoding-project {
+            height: auto;
+        }
+        
+        /* Personal projects grid */
+        .personal-projects-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .project-card {
+            width: 100%;
+            height: auto;
+        }
+        
+        .project-card-wide,
+        .project-card-tall {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+        
+        /* Polaroid cards */
+        .photo-stack {
+            width: 150px;
+            height: 180px;
+        }
+        
+        .polaroid-card {
+            width: 70%;
+            height: 70%;
+            padding: 8px 8px 40px 8px;
+        }
+        
+        .photo-stack-container:hover .polaroid-card {
+            transform: translate(var(--dx, 0px), var(--dy, 0px)) translateY(0);
+        }
+        
+        /* Video card */
+        .video-hover-card {
+            width: 100%;
+            height: auto;
+        }
+        
+        .play-prompt span {
+            font-size: 1rem;
+        }
+        
+        /* Award section */
+        .awards-list {
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        
+        .award-item {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+        }
+        
+        /* Interactive character */
+        #interactive-character {
+            width: 30px;
+            height: 32px;
+        }
+        
+        /* Project grid */
+        .project-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        /* Timeline */
+        .timeline::after {
+            left: 20px;
+        }
+        
+        .timeline-item {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            left: 0;
+        }
+        
+        .timeline-item::after {
+            left: 10px;
+        }
+        
+        /* Figma projects */
+        .figma-project {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="top-nav">
+    <button class="menu-toggle" id="menu-toggle">☰</button>
+    <div class="nav-links-container" id="nav-links-container">
+        <a href="#graphic-design" class="nav-link" onclick="closeMenu()">Graphic Design</a>
+        <a href="#race-graphics" class="nav-link" onclick="closeMenu()">Race Graphics</a>
+        <a href="#awarded-project" class="nav-link" onclick="closeMenu()">Awarded Project</a>
+        <a href="#vibecoding" class="nav-link" onclick="closeMenu()">Vibecoding</a>
+        <a href="#figma" class="nav-link" onclick="closeMenu()">Figma</a>
+    </div>
+</nav>
+
+<button id="back-to-top" title="Back to top">↑</button>
+<div class="portfolio-container">
+
+    <header class="portfolio-header">
+        <img id="profile-picture" src="assets/images/pfppf2.jpg" alt="Profile Picture" />
+        <h1>Bernard Strčić</h1>
+        <p> Zovem se Bernard Strčić, diplomirani grafički inženjer s interesom za digitalne i programske projekte u slobodno vrijeme. U radu se oslanjam na Adobe Photoshop i Premiere, uz stalno istraživanje novih pristupa koji spajaju dizajn i tehnologiju. Motivira me rad u dinamičnom i poticajnom okruženju te me osebno me privlače projekti koji omogućuju  kreativnost i praktičnu primjenu ideja.</p>
+    </header>
+
+
+    <!-- GRAPHIC DESIGN -->
+    <section class="section" id="graphic-design">
+        <h2 class="section-title">Graphic Design</h2>
+
+        <h3 class="subsection-title">Osobni projekti</h3>
+        <div class="personal-projects-grid">
+            <div class="project-card project-card-wide" style="width: 810px; height: 400px; object-fit: cover;">
+                <img class="project-card-media" src="assets/images/PREseason testing (1).png">
+                <div class="project-card-content">
+                    
+                </div>
+            </div>
+            <div class="project-card project-card-tall" style="width: 327px; height: 869px; object-fit: cover;">
+                <img class="project-card-media" src="assets/images/full lik.jpg">
+                <div class="project-card-content">
+                    
+                </div>
+            </div>
+            <div class="project-card" style="width: 298px; height: 398px;">
+                <img class="project-card-media" src="assets/images/baxmauro.jpg">
+                <div class="project-card-content">
+                    
+                </div>
+            </div>
+            
+            <div class="project-card" style="width: 290px; height: 402px;">
+                <img class="project-card-media" src="assets/images/TennisCat.png">
+                <div class="project-card-content">
+                    
+                </div>
+            </div>
+            
+            <div class="project-card" style="width: 400px; height: 270px;">
+                <img class="project-card-media" src="assets/images/BarnyChikita.png">
+                <div class="project-card-content">
+                    
+                </div>
+            </div>
+            <div class="project-card" style="width: 386px; height: 270px;">
+                <img class="project-card-media" src="assets/images/baxmauroAuto.jpg">
+                <div class="project-card-content">
+                    
+                </div>
+            </div>
+            <div class="project-card" style="width: 328px; height: 270px;">
+                <img class="project-card-media" src="assets/images/2-min.png">
+                <div class="project-card-content">
+                    
+                </div>
+            </div>
+        </div>
+
+        </section>
+
+    <!-- RACE GRAPHICS EVOLUTION -->
+    <section class="section" id="race-graphics">
+        <h2 class="section-title">Race Graphics Evolution</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-content-inner">
+                        <p class="timeline-item-date">Sezona 1 - Početne grafike</p>
+                        <h3>03.2021. - 07.2021.</h3>
+                        <img class="project-card-media" src="assets/images/racegraph1.0.jpg" style="margin-top: 1rem; border-radius: 4px;">
+                        <br><br><br>
+                        <p>Prvi pokušaji izrade tablica sa puno vozača. Držao sam se jednostavnosti na većini grafika.</p>
+                        <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
+                    </div>
+                    <div class="timeline-hidden-content">
+                        <p class="gallery-prompt">Gallery (Click to expand):</p>
+                        <div class="timeline-gallery">
+                            
+                            <img src="assets/images/racegraph1.1.jpg" alt="Gallery Image">
+                            <img src="assets/images/racegraph1.2.jpg" alt="Gallery Image">
+                            <img src="assets/images/racegraph1.3.jpg" alt="Gallery Image">
+                            <img src="assets/images/racegraph1.4.jpg" alt="Gallery Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-content-inner">
+                        <p class="timeline-item-date">Sezona 2</p>
+                        <h3>08.2021. - 02.2022.</h3>
+                        <img class="project-card-media" src="assets/images/racegraph2.0.jpg" style="margin-top: 1rem; border-radius: 4px;">
+                        <p>Osim thumbnailova za prijenos, dodani su i thumbnailovi za highlightse. Također se eksperimentiralo hoće li se krenuti u proizvodnju mercha. </p>
+                        <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
+                    </div>
+                    <div class="timeline-hidden-content">
+                         <p class="gallery-prompt">Gallery (Click to expand):</p>
+                         <div class="timeline-gallery">
+                            <img src="assets/images/racegraph2.1.jpg" alt="Gallery Image">
+                            <img src="assets/images/racegraph2.2.jpg" alt="Gallery Image">
+                            <img src="assets/images/racegraph2.3.png" alt="Gallery Image">
+                            <img src="assets/images/racegraph2.4.jpg" alt="Gallery Image">
+                            <img src="assets/images/racegraph2.5.jpg" alt="Gallery Image">
+                            <img src="assets/images/racegraph2.6.jpg" alt="Gallery Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-content-inner">
+                        <p class="timeline-item-date">Sezona 3</p>
+                        <h3>03.2022. - 06.2022.</h3>
+                        <img class="project-card-media" src="assets/images/racegraph3.0.png" style="margin-top: 1rem; border-radius: 4px;">
+                        <p>Began creating data-driven graphics.</p>
+                        <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
+                    </div>
+                    <div class="timeline-hidden-content">
+                        <p class="gallery-prompt">Gallery (Click to expand):</p>
+                         <div class="timeline-gallery">
+                            <img src="assets/images/racegraph3.1.png" alt="Gallery Image">
+                            <img src="assets/images/racegraph3.2.jpg" alt="Gallery Image">
+                            <img src="assets/images/racegraph3.3.png" alt="Gallery Image">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-content-inner">
+                        <p class="timeline-item-date">Sezona 4</p>
+                        <h3>09.2022. - 12.2022.</h3>
+                        <img class="project-card-media" src="assets/images/racegraph4.0.jpg" style="margin-top: 1rem; border-radius: 4px;">
+                        <p>Tablice su ostale kao i prošle sezone, uz neke promjene kalendara i thumbnailova i ostalih grafika.</p>
+                        <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
+                    </div>
+                    <div class="timeline-hidden-content">
+                        <p class="gallery-prompt">Gallery (Click to expand):</p>
+                         <div class="timeline-gallery">
+                            <img src="assets/images/racegraph4.1.png" alt="Gallery Image">
+                            <img src="assets/images/racegraph4.2.jpg" alt="Gallery Image">
+                            <img src="assets/images/racegraph4.3.jpg" alt="Gallery Image">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-content-inner">
+                        <p class="timeline-item-date">Sezona 5 i 6</p>
+                        <h3>01.2023. - 05.2023. i 08.- 02.2024.</h3>
+                        <img class="project-card-media" src="assets/images/racegraph5.0.png" style="margin-top: 1rem; border-radius: 4px;">
+                        <p>Značajan skok u kvaliteti izrade tablica, ali i analizi statistike vozača.</p>
+                        <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
+                    </div>
+                    <div class="timeline-hidden-content">
+                        <p class="gallery-prompt">Sezona 5 galerija (Click to expand):</p>
+                         <div class="timeline-gallery">
+                            <img src="assets/images/racegraph5.1.png" alt="Gallery Image">
+                            <img src="assets/images/racegraph5.2.png" alt="Gallery Image">
+                            <img src="assets/images/racegraph5.3.jpg" alt="Gallery Image">
+
+                        </div>
+                        
+                        <p class="gallery-prompt">Sezona 6 galerija (Click to expand):</p>
+                         <div class="timeline-gallery">
+                            <img src="assets/images/racegraph6.1.png" alt="Gallery Image">
+                            <img src="assets/images/racegraph6.2.png" alt="Gallery Image">
+                            <img src="assets/images/racegraph6.3.jpg" alt="Gallery Image">
+                            <img src="assets/images/racegraph6.4.png" alt="Gallery Image">
+                            <img src="assets/images/racegraph6.5.png" alt="Gallery Image">
+                            <img src="assets/images/racegraph6.6.jpg" alt="Gallery Image">
+                    </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- AWARDED PROJECT -->
+    <section class="section" id="awarded-project">
+        <div class="award-video-background">
+    <video autoplay muted loop playsinline>
+        <source src="assets/videos/platformarshowcase.mp4" type="video/mp4" />
+    </video>
+</div>
+
+        <h2 class="section-title">Awarded Project</h2>
+
+        <div class="awarded-project-showcase">
+            <h3>PlatformAR</h3>
+            <div id="interactive-character">
+                <div class="character-sprite">
+                    <div class="character-part character-head">
+                        <div class="character-eye character-eye-left"></div>
+                        <div class="character-eye character-eye-right"></div>
+                    </div>
+                    <div class="character-part character-body"></div>
+                    <div class="character-part character-leg character-leg-left"></div>
+                    <div class="character-part character-leg character-leg-right"></div>
+                    <div class="character-part character-arm character-arm-left"></div>
+                    <div class="character-part character-arm character-arm-right"></div>
+                </div>
+            </div>
+            <p id="award-paragraph">Interaktivni AR projekt web igre koji povezuje detekciju objekata putem OpenCV-a s React aplikacijom kako bi se stvorilo dinamično i responzivno okruženje za igru.
+                Igra koristi kameru kako bi putem nje markere na zidu/ploči prenesla platforme u virtualnom prostoru. Igrač se zatim kreće, skače i prolazi razine koje se doslovno mijenjaju pomicanjem fizičkih naljepnica.
+            </p>
+
+            <img class="awarded-project-showcase-media" src="assets/images/PlatformAR_logo.png"/ style="width: 100%;">
+
+            <ul class="awards-list">
+                <li class="award-item gold"><a href="https://www.grf.unizg.hr/uspjeh-studenata-grafickog-fakulteta-na-inova-2025/">Zlatna medalja na INOVA sajmu</a></li>
+                <li class="award-item bronze"><a href="assets/images/arcaBronze.jpg" id="arca-medal-link">Brončana medalja na sajmu ARCA 2025</a></li>
+            </ul>
+
+            <h3 class="subsection-title">Kako igra radi?</h3>
+            <div class="awarded-project-gallery-grid">
+                <!-- Hover-to-Play Video -->
+                <div class="project-card video-hover-card" style="height:360px; width: 670px;" >
+                    <div class="video-overlay">
+                        <div class="play-prompt">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            <span>Hover to Play</span>
+                        </div>
+                    </div>
+                    <video class="project-card-media" playsinline="" loop="" muted="">
+                         <source src="assets/videos/platformarshowcase.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- Polaroid Photo Stack -->
+<h3 class="subsection-title">Snimke zaslona iz igre</h3>
+
+<div class="project-card photo-stack-container" style="height:490px; width:700px;">
+    <div class="photo-stack">
+        <div class="polaroid-card">
+            <img src="assets/images/plAR1.png" alt="Early UI concept">
+            <figcaption>Početni zaslon (menu)</figcaption>
+        </div>
+
+        <div class="polaroid-card">
+            <img src="assets/images/plAR2.png" alt="Component design">
+            <figcaption>Kako funkcionira</figcaption>
+        </div>
+
+        <div class="polaroid-card">
+            <img src="assets/images/plAR3.png" alt="Final Logo">
+            <figcaption>Snimka zaslona iz igre 1</figcaption>
+        </div>
+
+        <div class="polaroid-card">
+            <img src="assets/images/plAR4.png" alt="Data structure planning">
+            <figcaption>Izrada vlastitog lika</figcaption>
+        </div>
+
+        <div class="polaroid-card">
+            <img src="assets/images/plAR5.png" alt="Game State">
+            <figcaption>Snimka zaslona iz igre 2</figcaption>
+        </div>
+
+        <div class="polaroid-card">
+            <img src="assets/images/plAR6.png" alt="Player View">
+            <figcaption>Odabir lika</figcaption>
+        </div>
+
+        <div class="polaroid-card">
+            <img src="assets/images/plAR7.png" alt="Gameplay">
+            <figcaption>Upute za igru</figcaption>
+        </div>
+
+        <div class="polaroid-card">
+            <img src="assets/images/plAR8.png" alt="UI Detail">
+            <figcaption>Ljestvica top vremena</figcaption>
+        </div>
+    </div>
+
+    <!-- TEKST NA DNU -->
+    <p class="photo-stack-hint">
+        (Slike se mogu micati, probaj! Dupli klik za resetiranje pozicije)
+    </p>
+</div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- VIBECODING -->
+    <section class="section" id="vibecoding">
+        <h2 class="section-title">Vibecoding Projects</h2>
+        <p style="text-align: center; width: 500px; margin: 0 auto;" >Vibecoding mi pruža kreativnost kroz kontinuirano traženje pravih promptova kako bi ideja koju sam zamislio došla do izražaja, tj. vizualizacije onako kako sam je zamislio.</p>
+        <div class="vibecoding-project-list">
+            <div class="project-card vibecoding-project" style="width: 400px; height: 530px;">
+                <div class="project-card-main-content">
+                    <span class="open-gallery-indicator">&rarr;</span>
+                    <video class="project-card-media" muted playsinline controls src="assets/videos/ttfDEMO.mp4"></video>
+                    <div class="project-card-content">
+                        <h3>Tika Taka F1</h3>
+                        <p>Igra na bazi križić-kružića, uz iznimku da se polje dobiva točnim izborom vozača kojeg se traži.</p>
+                    </div>
+                </div>
+                <div class="gallery-drawer">
+                    <button class="gallery-close-btn">&times;</button>
+                    <div class="gallery-slider">
+                        <div class="gallery-slides">
+                            <img src="assets/images/ttf1_1.png" alt="Data Visualization Screenshot 1" />
+                            <img src="assets/images/ttf1_2.png" alt="Data Visualization Screenshot 2" />
+                            <img src="assets/images/ttf1_3.png" alt="Data Visualization Screenshot 3" />
+                        </div>
+                        <button class="gallery-nav prev">&lt;</button>
+                        <button class="gallery-nav next">&gt;</button>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card vibecoding-project" style="width: 600px; height: 520px;">
+                <div class="project-card-main-content">
+                    <span class="open-gallery-indicator">&rarr;</span>
+                    <video class="project-card-media" muted playsinline controls src="assets/videos/chessflagDEMO.mp4"></video>
+                    <div class="project-card-content">
+                        <h3>Chess Flag Counter</h3>
+                        <p>Stranica za praćenje statistike šahovskih igara po ishodu partije.</p>
+                    </div>
+                </div>
+                <div class="gallery-drawer">
+                    <button class="gallery-close-btn">&times;</button>
+                    <div class="gallery-slider">
+                        <div class="gallery-slides">
+                            <img src="assets/images/chessflag_1.png" alt="Data Visualization Screenshot 1" />
+                            <img src="assets/images/chessflag_2.png" alt="Data Visualization Screenshot 2" />
+                            <img src="assets/images/chessflag_3.png" alt="Data Visualization Screenshot 3" />
+                            <img src="assets/images/chessflag_4.png" alt="Data Visualization Screenshot 4" />
+                        </div>
+                        <button class="gallery-nav prev">&lt;</button>
+                        <button class="gallery-nav next">&gt;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="github-promo">
+            <p>Moje ostale projekte možete pogledati na <a href="https://github.com/barnynho74" target="_blank" rel="noopener noreferrer">GitHub profilu</a></p>
+        </div>
+    </section>
+
+
+    <!-- FIGMA -->
+    <section class="section" id="figma">
+        <h2 class="section-title">Figma Projects</h2>
+        <div class="project-grid">
+
+            <div class="figma-project-wrapper">
+                <div class="project-card figma-project" data-gallery-target="mockup-master-gallery">
+                    <span class="open-gallery-indicator" style="top:85%;">&darr;</span>
+                    <img class="project-card-media" src="assets/images/figmaMM1.0.png">
+                    <div class="project-card-content">
+                        <h3>Mockup Master - Mockup aplikacija za dizajniranje</h3>
+                        <p>A high-fidelity mockup for a mobile application.</p>
+                    </div>
+                </div>
+                <!-- Figma Gallery Drawer -->
+                <div class="figma-gallery-drawer">
+                    <button class="gallery-close-btn">&times;</button>
+                    <div id="mockup-master-gallery" class="figma-gallery-content">
+                        <h3 class="subsection-title">Mockup Master Gallery</h3>
+                        <div class="project-grid" style="grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.75rem;">
+                            <div class="project-card"><img class="project-card-media" src="assets/images/figmaMM1.1.png"></div>
+                            <div class="project-card"><img class="project-card-media" src="assets/images/figmaMM1.2.png"></div>
+                            <div class="project-card"><img class="project-card-media" src="assets/images/figmaMM1.3.png"></div>
+                            <div class="project-card"><img class="project-card-media" src="assets/images/figmaMM1.4.png"></div>
+                            <div class="project-card"><img class="project-card-media" src="assets/images/figmaMM1.5.png"></div>
+                            <div class="project-card"><img class="project-card-media" src="assets/images/figmaMM1.6.png"></div>
+                            <div class="project-card"><img class="project-card-media" src="assets/images/figmaMM1.7.png"></div>
+                            <div class="project-card"><img class="project-card-media" src="assets/images/figmaMM1.8.png"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="figma-project-wrapper">
+                <div class="project-card figma-project" data-gallery-target="xiaomi-watch-gallery">
+                    <span class="open-gallery-indicator" style="top:85%;">&darr;</span>
+                    <img class="project-card-media" src="assets/images/figmaSHOW2.0.png">
+                    <div class="project-card-content">
+                        <h3>Xiaomi sat Showcase</h3>
+                        <p>Funkcionalan prototip infografskog prikaza sata spreman za hypebox zaslon.</p>
+                    </div>
+                </div>
+                <!-- Figma Gallery Drawer -->
+                <div class="figma-gallery-drawer">
+                    <button class="gallery-close-btn">&times;</button>
+                    <div id="xiaomi-watch-gallery" class="figma-gallery-content">
+                        <h3 class="subsection-title">Xiaomi Watch Showcase Gallery</h3>
+                        <div class="project-grid" style="grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.75rem;">
+                            <div class="project-card"><img class="project-card-media" src="assets/images/figmaSHOW2.1.png"></div>
+                            <div class="project-card"><img class="project-card-media" src="assets/images/figmaSHOW2.2.png"></div>
+                            <div class="project-card"><img class="project-card-media" src="assets/images/figmaSHOW2.3.png"></div>
+                            <div class="project-card"><img class="project-card-media" src="assets/images/figmaSHOW2.4.png"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+<!-- Lightbox HTML -->
+<div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <button id="lightbox-prev" class="lightbox-nav prev">&lt;</button>
+    <img class="lightbox-content" id="lightbox-img" src="">
+    <button id="lightbox-next" class="lightbox-nav next">&gt;</button>
+    <div class="lightbox-controls">
+        <button id="zoom-in-btn" title="Zoom In">+</button>
+        <button id="zoom-out-btn" title="Zoom Out">−</button>
+        <button id="zoom-reset-btn" title="Reset Zoom">⤧</button>
+    </div>
+</div>
+<script type="module">
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinksContainer = document.getElementById('nav-links-container');
+    
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navLinksContainer.classList.toggle('mobile-open');
+    });
+    
+    window.closeMenu = function() {
+        navLinksContainer.classList.remove('mobile-open');
+    };
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.top-nav')) {
+            navLinksContainer.classList.remove('mobile-open');
+        }
+    });
+    
+    // Back to top button
+    const backToTopBtn = document.getElementById('back-to-top');
+    let lastScrollDirection = 'down';
+    let lastScrollPos = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScrollPos = window.scrollY;
+        
+        // Determine scroll direction
+        if (currentScrollPos > lastScrollPos) {
+            lastScrollDirection = 'down';
+        } else if (currentScrollPos < lastScrollPos) {
+            lastScrollDirection = 'up';
+        }
+        
+        lastScrollPos = currentScrollPos;
+        
+        // Show button only when scrolling up AND not at top
+        if (lastScrollDirection === 'up' && currentScrollPos > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+    
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    document.querySelectorAll('.timeline-content-inner').forEach(item => {
+        item.addEventListener('click', event => {
+            if (event.target.closest('.timeline-gallery img')) {
+                return;
+            }
+            const hiddenContent = item.nextElementSibling;
+            const ctaButton = item.querySelector('.timeline-cta');
+            
+            if (hiddenContent && hiddenContent.classList.contains('timeline-hidden-content') && ctaButton) {
+                const isOpening = hiddenContent.style.display === 'none' || hiddenContent.style.display === '';
+                
+                hiddenContent.style.display = isOpening ? 'block' : 'none';
+                ctaButton.classList.toggle('is-open', isOpening);
+                if (isOpening) {
+                    ctaButton.innerHTML = 'Hide Gallery <span class="cta-arrow">▲</span>';
+                } else {
+                    ctaButton.innerHTML = 'Show Gallery <span class="cta-arrow">▼</span>';
+                }
+            }
+        });
+    });
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const lightboxPrevBtn = document.getElementById('lightbox-prev');
+    const lightboxNextBtn = document.getElementById('lightbox-next');
+    const zoomInBtn = document.getElementById('zoom-in-btn');
+    const zoomOutBtn = document.getElementById('zoom-out-btn');
+    const zoomResetBtn = document.getElementById('zoom-reset-btn');
+    let zoomLevel = 1, minZoom = 1, maxZoom = 8;
+    let isPanning = false;
+    let startPos = { x: 0, y: 0 };
+    let translatePos = { x: 0, y: 0 };
+    let currentGalleryImages = [];
+    let currentGalleryIndex = -1;
+    function updateTransform() {
+        lightboxImg.style.transform = `translate(${translatePos.x}px, ${translatePos.y}px) scale(${zoomLevel})`;
+    }
+    function resetZoomPan() {
+        zoomLevel = 1;
+        translatePos.x = 0;
+        translatePos.y = 0;
+        updateTransform();
+    }
+    function showGalleryImage(index) {
+        if (!currentGalleryImages || index < 0 || index >= currentGalleryImages.length) return;
+        currentGalleryIndex = index;
+        lightboxImg.src = currentGalleryImages[currentGalleryIndex];
+        resetZoomPan();
+    }
+    
+    function openLightbox(src, imageList = [], currentIndex = -1) {
+        lightbox.classList.add('active');
+        currentGalleryImages = imageList;
+        currentGalleryIndex = currentIndex;
+        
+        if (currentGalleryImages.length > 1) {
+            lightboxPrevBtn.style.display = 'flex';
+            lightboxNextBtn.style.display = 'flex';
+            showGalleryImage(currentIndex);
+        } else {
+            lightboxImg.src = src;
+            lightboxPrevBtn.style.display = 'none';
+            lightboxNextBtn.style.display = 'none';
+            resetZoomPan();
+        }
+    }
+    closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+    lightboxPrevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showGalleryImage((currentGalleryIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length);
+    });
+    lightboxNextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showGalleryImage((currentGalleryIndex + 1) % currentGalleryImages.length);
+    });
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) lightbox.classList.remove('active');
+    });
+    zoomInBtn.addEventListener('click', (e) => { e.stopPropagation(); zoomLevel = Math.min(maxZoom, zoomLevel * 1.5); updateTransform(); });
+    zoomOutBtn.addEventListener('click', (e) => { e.stopPropagation(); zoomLevel = Math.max(minZoom, zoomLevel / 1.5); if (zoomLevel === minZoom) resetZoomPan(); else updateTransform(); });
+    zoomResetBtn.addEventListener('click', (e) => { e.stopPropagation(); resetZoomPan(); });
+    lightbox.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? 1 / 1.2 : 1.2;
+        const newZoom = Math.max(minZoom, Math.min(maxZoom, zoomLevel * delta));
+        if (newZoom === minZoom) resetZoomPan(); else zoomLevel = newZoom;
+        updateTransform();
+    });
+    lightboxImg.addEventListener('mousedown', (e) => {
+        if (zoomLevel > minZoom) {
+            e.preventDefault();
+            isPanning = true;
+            startPos.x = e.clientX - translatePos.x;
+            startPos.y = e.clientY - translatePos.y;
+            lightboxImg.classList.add('grabbing');
+        }
+    });
+    lightbox.addEventListener('mousemove', (e) => {
+        if (isPanning) {
+            e.preventDefault();
+            translatePos.x = e.clientX - startPos.x;
+            translatePos.y = e.clientY - startPos.y;
+            updateTransform();
+        }
+    });
+    const stopPanning = () => {
+        if (isPanning) {
+            isPanning = false;
+            lightboxImg.classList.remove('grabbing');
+        }
+    };
+    lightbox.addEventListener('mouseup', stopPanning);
+    lightbox.addEventListener('mouseleave', stopPanning);
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'ArrowRight') {
+            lightboxNextBtn.click();
+        } else if (e.key === 'ArrowLeft') {
+            lightboxPrevBtn.click();
+        } else if (e.key === 'Escape') {
+            closeBtn.click();
+        }
+    });
+    const imageSelectors = [
+        '.project-card-media',
+        '.timeline-gallery img',
+        '.awarded-project-showcase-media',
+        '#profile-picture',
+        '.polaroid-card img'
+    ];
+    const allClickableImages = document.querySelectorAll(imageSelectors.join(', '));
+    const clickableImagesArray = Array.from(allClickableImages);
+    clickableImagesArray.forEach(mediaEl => {
+        if (mediaEl.tagName.toLowerCase() === 'video') return;
+        mediaEl.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const galleryContainer = mediaEl.closest('.personal-projects-grid, .timeline-gallery, .awarded-project-gallery-grid, .figma-gallery-content');
+            
+            if (galleryContainer) {
+                const galleryImages = Array.from(galleryContainer.querySelectorAll('img')).filter(img => clickableImagesArray.includes(img));
+                const imageSources = galleryImages.map(img => img.src);
+                const currentIndex = galleryImages.indexOf(mediaEl);
+                
+                if (currentIndex !== -1 && imageSources.length > 1) {
+                    openLightbox(mediaEl.src, imageSources, currentIndex);
+                } else {
+                    openLightbox(mediaEl.src);
+                }
+            } else {
+                openLightbox(mediaEl.src);
+            }
+        });
+    });
+    const vibecodingProjects = document.querySelectorAll('.vibecoding-project');
+    
+    vibecodingProjects.forEach(projectCard => {
+        const mainContent = projectCard.querySelector('.project-card-main-content');
+        const drawer = projectCard.querySelector('.gallery-drawer');
+        if (!mainContent || !drawer) return;
+        const closeBtn = drawer.querySelector('.gallery-close-btn');
+        const slidesContainer = drawer.querySelector('.gallery-slides');
+        const slides = Array.from(slidesContainer.querySelectorAll('img'));
+        const nextBtn = drawer.querySelector('.gallery-nav.next');
+        const prevBtn = drawer.querySelector('.gallery-nav.prev');
+        let currentIndex = 0;
+        let swipeStartX = 0;
+        const imageSources = slides.map(s => s.src);
+        
+        slides.forEach((slide, idx) => {
+            slide.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openLightbox(slide.src, imageSources, idx);
+            });
+        });
+        
+        if (slides.length <= 1) {
+            if (nextBtn) nextBtn.style.display = 'none';
+            if (prevBtn) prevBtn.style.display = 'none';
+        }
+        
+        function showSlide(index) {
+            if (!slidesContainer) return;
+            slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+            currentIndex = index;
+        }
+        
+        mainContent.addEventListener('click', (e) => {
+            if (e.target.closest('a, button, video')) return;
+            
+            const wasOpen = projectCard.classList.contains('gallery-open');
+            document.querySelectorAll('.vibecoding-project.gallery-open').forEach(p => {
+                p.classList.remove('gallery-open');
+            });
+            
+            if (!wasOpen) {
+                projectCard.classList.add('gallery-open');
+                showSlide(0);
+            }
+        });
+        
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                projectCard.classList.remove('gallery-open');
+            });
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showSlide((currentIndex + 1) % slides.length);
+            });
+        }
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showSlide((currentIndex - 1 + slides.length) % slides.length);
+            });
+        }
+        
+        // Swipe support for gallery
+        slidesContainer.addEventListener('touchstart', (e) => {
+            swipeStartX = e.touches[0].clientX;
+        });
+        
+        slidesContainer.addEventListener('touchend', (e) => {
+            const swipeEndX = e.changedTouches[0].clientX;
+            const diff = swipeStartX - swipeEndX;
+            
+            if (Math.abs(diff) > 30) { // Minimum swipe distance
+                if (diff > 0) {
+                    // Swiped left - next slide
+                    showSlide((currentIndex + 1) % slides.length);
+                } else {
+                    // Swiped right - prev slide
+                    showSlide((currentIndex - 1 + slides.length) % slides.length);
+                }
+            }
+        });
+    });
+    document.addEventListener('click', (e) => {
+        const openProject = document.querySelector('.vibecoding-project.gallery-open');
+        if (openProject && !openProject.contains(e.target)) {
+            openProject.classList.remove('gallery-open');
+        }
+    });
+    // Figma gallery handlers
+    const figmaCards = document.querySelectorAll('#figma .project-card.figma-project');
+    figmaCards.forEach(card => {
+        const wrapper = card.closest('.figma-project-wrapper');
+        const drawer = wrapper.querySelector('.figma-gallery-drawer');
+        const closeBtn = drawer.querySelector('.gallery-close-btn');
+        
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('a, button')) return;
+            
+            const isOpen = drawer.classList.contains('active');
+            if (!isOpen) {
+                drawer.classList.add('active');
+                setTimeout(() => {
+                    drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 50);
+            } else {
+                drawer.classList.remove('active');
+            }
+        });
+        
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            drawer.classList.remove('active');
+        });
+    });
+    // --- Draggable Polaroids ---
+    const polaroids = document.querySelectorAll('.polaroid-card');
+    let highestZ = polaroids.length;
+    polaroids.forEach(card => {
+        let isDragging = false;
+        let hasMoved = false;
+        const startPos = { x: 0, y: 0 };
+        const dragOffset = { x: 0, y: 0 };
+        
+        function startDrag(e) {
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            
+            e.preventDefault();
+            isDragging = true;
+            hasMoved = false;
+            card.classList.add('is-dragging');
+            document.body.classList.add('is-dragging-polaroid');
+            card.style.zIndex = ++highestZ;
+            startPos.x = clientX;
+            startPos.y = clientY;
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('touchmove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+            document.addEventListener('touchend', onMouseUp);
+        }
+        
+        function onMouseMove(e) {
+            if (!isDragging) return;
+            hasMoved = true;
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            const dx = clientX - startPos.x;
+            const dy = clientY - startPos.y;
+            card.style.setProperty('--dx', `${dragOffset.x + dx}px`);
+            card.style.setProperty('--dy', `${dragOffset.y + dy}px`);
+        }
+        
+        function onMouseUp(e) {
+            if (!isDragging) return;
+            const clientX = e.clientX || (e.changedTouches && e.changedTouches[0].clientX);
+            const clientY = e.clientY || (e.changedTouches && e.changedTouches[0].clientY);
+            isDragging = false;
+            card.classList.remove('is-dragging');
+            document.body.classList.remove('is-dragging-polaroid');
+            const dx = clientX - startPos.x;
+            const dy = clientY - startPos.y;
+            dragOffset.x += dx;
+            dragOffset.y += dy;
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('touchmove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+            document.removeEventListener('touchend', onMouseUp);
+        }
+        
+        card.addEventListener('mousedown', startDrag);
+        card.addEventListener('touchstart', startDrag);
+        
+        card.addEventListener('dblclick', () => {
+            dragOffset.x = 0;
+            dragOffset.y = 0;
+            const initialTransition = card.style.transition;
+            card.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+            card.style.setProperty('--dx', '0px');
+            card.style.setProperty('--dy', '0px');
+            setTimeout(() => card.style.transition = initialTransition, 400);
+        });
+        
+        card.addEventListener('click', (e) => {
+            if (hasMoved) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, true);
+    });
+    // --- Hover-to-Play Video Cards (with touch support) ---
+    document.querySelectorAll('.video-hover-card').forEach(card => {
+        const video = card.querySelector('video');
+        let touchStarted = false;
+        
+        if (video) {
+            card.addEventListener('mouseenter', () => {
+                video.play();
+            });
+            card.addEventListener('mouseleave', () => {
+                video.pause();
+                video.currentTime = 0;
+            });
+            
+            // Touch support
+            card.addEventListener('touchstart', () => {
+                touchStarted = true;
+                video.play();
+            });
+            card.addEventListener('touchend', () => {
+                touchStarted = false;
+                setTimeout(() => {
+                    if (!touchStarted) {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
+                }, 100);
+            });
+        }
+    });
+    // --- Interactive Character ---
+    const character = document.getElementById('interactive-character');
+    if (character) {
+        const characterSprite = character.querySelector('.character-sprite');
+        const platform = document.getElementById('award-paragraph');
+        const showcase = document.querySelector('.awarded-project-showcase');
+        const state = {
+            x: 0, y: 0, vx: 1.2, vy: 0,
+            gravity: 0.5,
+            isJumping: false,
+            isFacingRight: true,
+            isRunning: false,
+            idleTimer: 0,
+            timeToNextAction: 150
+        };
+        let platformRect;
+        function updatePlatformRect() {
+            if (!platform || !showcase) return;
+            const showcaseRect = showcase.getBoundingClientRect();
+            const pRect = platform.getBoundingClientRect();
+            platformRect = {
+                top: pRect.top - showcaseRect.top,
+                left: pRect.left - showcaseRect.left,
+                right: pRect.right - showcaseRect.left
+            };
+            if (state.x === 0) {
+                state.x = platformRect.left + 50;
+                state.y = platformRect.top - character.offsetHeight;
+            }
+        }
+        function characterLoop() {
+            if (!platformRect) {
+                requestAnimationFrame(characterLoop);
+                return;
+            }
+            
+            if (state.isJumping) {
+                state.vy += state.gravity;
+                state.y += state.vy;
+            }
+            
+            const groundY = platformRect.top - character.offsetHeight;
+            if (state.y > groundY) {
+                state.y = groundY;
+                state.vy = 0;
+                if (state.isJumping) {
+                    state.isJumping = false;
+                    character.classList.remove('flipping');
+                }
+            }
+            
+            if (!state.isJumping) {
+                state.x += state.vx;
+                if (state.x < platformRect.left || state.x > platformRect.right - character.offsetWidth) {
+                    state.vx *= -1;
+                    state.isFacingRight = !state.isFacingRight;
+                    characterSprite.style.transform = state.isFacingRight ? 'scaleX(1)' : 'scaleX(-1)';
+                }
+                state.idleTimer++;
+                if (state.idleTimer > state.timeToNextAction) {
+                    state.idleTimer = 0;
+                    state.timeToNextAction = 100 + Math.random() * 150; // Randomize next action time
+                    const action = Math.random();
+                    if (action < 0.6) { // Jump
+                        state.isJumping = true;
+                        state.vy = -10;
+                    } else { // Frontflip
+                        state.isJumping = true;
+                        state.vy = -12;
+                        character.classList.add('flipping');
+                    }
+                }
+            }
+            character.style.left = `${state.x}px`;
+            character.style.top = `${state.y}px`;
+            
+            const isRunning = !state.isJumping;
+            if (isRunning !== state.isRunning) {
+                state.isRunning = isRunning;
+                character.classList.toggle('running', isRunning);
+            }
+            
+            requestAnimationFrame(characterLoop);
+        }
+        const observer = new IntersectionObserver((entries) => {
+             if (entries[0].isIntersecting) {
+                setTimeout(() => {
+                    updatePlatformRect();
+                    characterLoop();
+                    window.addEventListener('resize', updatePlatformRect);
+                }, 300); // Delay to ensure layout is final
+                observer.disconnect();
+            }
+        }, { threshold: 0.1 });
+       if (showcase) {
+            observer.observe(showcase);
+       }
+    }
+    const arcaMedalLink = document.getElementById('arca-medal-link');
+    if (arcaMedalLink) {
+        arcaMedalLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            openLightbox('assets/images/arcaBronze.jpg');
+        });
+    }
+</script>
+
+</body>
+</html>
