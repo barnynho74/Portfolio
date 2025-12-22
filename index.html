@@ -1466,6 +1466,9 @@
     </div>
 </div>
 <script type="module">
+    if (window.innerWidth <= 768) {
+    window.location.href = "mobile.html";
+  }
     const navLinks = document.querySelectorAll('.top-nav .nav-link');
     const navHighlight = document.querySelector('.nav-highlight');
     const sections = document.querySelectorAll('.section');
@@ -1928,3 +1931,4 @@
 
 </body>
 </html>
+
