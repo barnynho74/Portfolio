@@ -4,8 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Portfolio</title>
+    <script>
+  if (window.innerWidth <= 768) {
+    window.location.href = "Mobile_version.html";
+  }
+</script>
 
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
@@ -1466,9 +1470,7 @@
     </div>
 </div>
 <script type="module">
-    if (window.innerWidth <= 768) {
-    window.location.href = "Mobile_version.html";
-  }
+    
     const navLinks = document.querySelectorAll('.top-nav .nav-link');
     const navHighlight = document.querySelector('.nav-highlight');
     const sections = document.querySelectorAll('.section');
@@ -1931,5 +1933,3 @@
 
 </body>
 </html>
-
-
