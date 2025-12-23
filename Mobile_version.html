@@ -156,7 +156,7 @@
             position: relative;
             width: 100%;
             box-sizing: border-box;
-            opacity: 0.6;
+            opacity: 1;
         }
 
         .timeline-content {
@@ -176,21 +176,19 @@
         }
 
         .timeline-content-inner img {
-            width: var(--image-width, 200px);
+            width: 300px;
             height: auto;
-            max-height: var(--image-height, 200px);
+            max-height: 300px;
             object-fit: cover;
             border-radius: 8px;
             margin: 1rem auto;
-            opacity: var(--image-opacity, 0.6);
+            opacity: 1;
         }
 
         .timeline-hidden-content {
-            display: none;
             margin-top: 1rem;
-            opacity: var(--gallery-opacity, 0);
-            max-height: var(--gallery-height, 0%);
             overflow: hidden;
+            transition: max-height 0.4s ease;
         }
         .timeline-cta {
             display: inline-block;
@@ -1215,7 +1213,7 @@
     <header class="portfolio-header">
         <img id="profile-picture" src="assets/images/pfppf2.jpg" alt="Profile Picture" />
         <h1>Bernard Strčić</h1>
-        <p> Zovem se Bernard Strčić, diplomirani grafički inženjer s interesom za digitalne i programske projekte u slobodno vrijeme. U radu se oslanjam na Adobe Photoshop i Premiere, uz stalno istraživanje novih pristupa koji spajaju dizajn i tehnologiju. Motivira me rad u dinamičnom i poticajnom okruženju te me osebno me privlače projekti koji omogućuju  kreativnost i praktičnu primjenu ideja.</p>
+        <p> Zovem se Bernard Strčić, diplomirani grafički inženjer s interesom za digitalne i programske projekte u slobodno vrijeme. U radu se oslanjam na Adobe Photoshop i Premiere, uz stalno istraživanje novih pristupa koji spajaju dizajn i tehnologiju. Motivira me rad u dinamičnom i poticajnom okruženju te me posebno me privlače projekti koji omogućuju  kreativnost i praktičnu primjenu ideja.</p>
     </header>
 
 
@@ -1283,8 +1281,11 @@
                         <h3>03.2021. - 07.2021.</h3>
                         <img class="project-card-media" src="assets/images/racegraph1.0.jpg">
                         <p>Prvi pokušaji izrade tablica sa puno vozača. Držao sam se jednostavnosti na većini grafika.</p>
+                        <button class="timeline-cta">
+                            View Gallery <span class="cta-arrow">→</span>
+                        </button>
                     </div>
-                    <div class="timeline-hidden-content">
+                    <div class="timeline-hidden-content" style="display: none;">
                         <p class="gallery-prompt">More images:</p>
                         <div class="timeline-gallery">
                             <img src="assets/images/racegraph1.1.jpg" alt="Gallery Image">
@@ -1302,8 +1303,11 @@
                         <h3>08.2021. - 02.2022.</h3>
                         <img class="project-card-media" src="assets/images/racegraph2.0.jpg">
                         <p>Osim thumbnailova za prijenos, dodani su i thumbnailovi za highlightse. Također se eksperimentiralo hoće li se krenuti u proizvodnju mercha.</p>
+                        <button class="timeline-cta">
+                            View Gallery <span class="cta-arrow">→</span>
+                        </button>
                     </div>
-                    <div class="timeline-hidden-content">
+                    <div class="timeline-hidden-content" style="display: none;">
                         <p class="gallery-prompt">More images:</p>
                         <div class="timeline-gallery">
                             <img src="assets/images/racegraph2.1.jpg" alt="Gallery Image">
@@ -1323,8 +1327,11 @@
                         <h3>03.2022. - 06.2022.</h3>
                         <img class="project-card-media" src="assets/images/racegraph3.0.png">
                         <p>Began creating data-driven graphics.</p>
+                        <button class="timeline-cta">
+                            View Gallery <span class="cta-arrow">→</span>
+                        </button>
                     </div>
-                    <div class="timeline-hidden-content">
+                    <div class="timeline-hidden-content" style="display: none;">
                         <p class="gallery-prompt">More images:</p>
                         <div class="timeline-gallery">
                             <img src="assets/images/racegraph3.1.png" alt="Gallery Image">
@@ -1341,8 +1348,11 @@
                         <h3>09.2022. - 12.2022.</h3>
                         <img class="project-card-media" src="assets/images/racegraph4.0.jpg">
                         <p>Tablice su ostale kao i prošle sezone, uz neke promjene kalendara i thumbnailova i ostalih grafika.</p>
+                        <button class="timeline-cta">
+                            View Gallery <span class="cta-arrow">→</span>
+                        </button>
                     </div>
-                    <div class="timeline-hidden-content">
+                    <div class="timeline-hidden-content" style="display: none;">
                         <p class="gallery-prompt">More images:</p>
                         <div class="timeline-gallery">
                             <img src="assets/images/racegraph4.1.png" alt="Gallery Image">
@@ -1359,8 +1369,11 @@
                         <h3>01.2023. - 05.2023. i 08.- 02.2024.</h3>
                         <img class="project-card-media" src="assets/images/racegraph5.0.png">
                         <p>Značajan skok u kvaliteti izrade tablica, ali i analizi statistike vozača.</p>
+                        <button class="timeline-cta">
+                            View Gallery <span class="cta-arrow">→</span>
+                        </button>
                     </div>
-                    <div class="timeline-hidden-content">
+                    <div class="timeline-hidden-content" style="display: none;">
                         <p class="gallery-prompt">Sezona 5 galerija:</p>
                         <div class="timeline-gallery">
                             <img src="assets/images/racegraph5.1.png" alt="Gallery Image">
@@ -1419,13 +1432,7 @@
             <div class="awarded-project-gallery-grid">
                 <!-- Hover-to-Play Video -->
                 <div class="project-card video-hover-card" style="height:360px; width: 670px;" >
-                    <div class="video-overlay">
-                        <div class="play-prompt">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            <span>Hover to Play</span>
-                        </div>
-                    </div>
-                    <video class="project-card-media" playsinline="" loop="" muted="">
+                    <video class="project-card-media" playsinline="" loop="" muted="" controls>
                          <source src="assets/videos/platformarshowcase.mp4" type="video/mp4">
                     </video>
                 </div>
@@ -1479,6 +1486,20 @@
     <p class="photo-stack-hint">
         (Slike se mogu micati, probaj! Dupli klik za resetiranje pozicije)
     </p>
+    
+    <!-- Gallery Button -->
+    <button id="polaroid-gallery-btn" style="
+        margin-top: 1rem;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    ">📷 View All Photos</button>
 </div>
 
             </div>
@@ -1666,56 +1687,30 @@
     backToTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    // Smooth scroll-based gallery expansion for timeline items
-    const timelineItems = document.querySelectorAll('.timeline-item');
     
-    function updateGalleryVisibility() {
-        const viewportCenter = window.innerHeight / 2;
+    // Click-to-expand timeline galleries
+    document.querySelectorAll('.timeline-content-inner').forEach(inner => {
+        const btn = inner.querySelector('.timeline-cta');
+        const hiddenContent = inner.parentElement.querySelector('.timeline-hidden-content');
         
-        timelineItems.forEach(item => {
-            const rect = item.getBoundingClientRect();
-            const itemCenter = rect.top + rect.height / 2;
-            const distanceFromCenter = Math.abs(itemCenter - viewportCenter);
-            const maxDistance = window.innerHeight * 0.5;
-            
-            // Calculate visibility ratio (0 to 1, where 1 is perfectly centered)
-            let visibility = Math.max(0, 1 - (distanceFromCenter / maxDistance));
-            
-            // Update main image size smoothly
-            const img = item.querySelector('.timeline-content-inner img');
-            if (img) {
-                const minWidth = 200;
-                const maxWidth = 100;
-                const currentWidth = minWidth + (maxWidth - minWidth) * visibility;
-                img.style.setProperty('--image-width', currentWidth + 'px');
-                img.style.setProperty('--image-height', (200 + 400 * visibility) + 'px');
-                img.style.setProperty('--image-opacity', (0.6 + 0.4 * visibility).toFixed(2));
-            }
-            
-            // Gallery only appears when image is significantly enlarged (visibility > 0.6)
-            const galleryContent = item.querySelector('.timeline-hidden-content');
-            if (galleryContent) {
-                if (visibility > 0.6) {
-                    // Smoothly reveal gallery
-                    const galleryVisibility = (visibility - 0.6) / 0.4;
-                    galleryContent.style.setProperty('--gallery-opacity', galleryVisibility.toFixed(2));
-                    galleryContent.style.setProperty('--gallery-height', (galleryVisibility * 100) + '%');
-                    galleryContent.style.display = 'block';
+        if (btn && hiddenContent) {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = hiddenContent.style.display === 'block';
+                
+                if (isOpen) {
+                    hiddenContent.style.display = 'none';
+                    btn.innerHTML = 'View Gallery <span class="cta-arrow">→</span>';
                 } else {
-                    // Smoothly hide gallery
-                    const galleryVisibility = Math.max(0, visibility / 0.6);
-                    galleryContent.style.setProperty('--gallery-opacity', galleryVisibility.toFixed(2));
-                    galleryContent.style.setProperty('--gallery-height', (galleryVisibility * 100) + '%');
-                    if (visibility < 0.05) {
-                        galleryContent.style.display = 'none';
-                    }
+                    hiddenContent.style.display = 'block';
+                    btn.innerHTML = 'Hide Gallery <span class="cta-arrow">↑</span>';
+                    setTimeout(() => {
+                        hiddenContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 100);
                 }
-            }
-        });
-    }
-    
-    window.addEventListener('scroll', updateGalleryVisibility, { passive: true });
-    updateGalleryVisibility(); // Initial call
+            });
+        }
+    });
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.lightbox-close');
@@ -1823,8 +1818,7 @@
         '.project-card-media',
         '.timeline-gallery img',
         '.awarded-project-showcase-media',
-        '#profile-picture',
-        '.polaroid-card img'
+        '#profile-picture'
     ];
     const allClickableImages = document.querySelectorAll(imageSelectors.join(', '));
     const clickableImagesArray = Array.from(allClickableImages);
@@ -2044,36 +2038,28 @@
             }
         }, true);
     });
-    // --- Hover-to-Play Video Cards (with touch support) ---
-    document.querySelectorAll('.video-hover-card').forEach(card => {
-        const video = card.querySelector('video');
-        let touchStarted = false;
+    
+    // Polaroid Gallery Button
+    const polaroidGalleryBtn = document.getElementById('polaroid-gallery-btn');
+    if (polaroidGalleryBtn) {
+        const polaroidImages = Array.from(document.querySelectorAll('.polaroid-card img')).map(img => img.src);
         
-        if (video) {
-            card.addEventListener('mouseenter', () => {
-                video.play();
-            });
-            card.addEventListener('mouseleave', () => {
-                video.pause();
-                video.currentTime = 0;
-            });
-            
-            // Touch support
-            card.addEventListener('touchstart', () => {
-                touchStarted = true;
-                video.play();
-            });
-            card.addEventListener('touchend', () => {
-                touchStarted = false;
-                setTimeout(() => {
-                    if (!touchStarted) {
-                        video.pause();
-                        video.currentTime = 0;
-                    }
-                }, 100);
-            });
-        }
-    });
+        polaroidGalleryBtn.addEventListener('click', () => {
+            if (polaroidImages.length > 0) {
+                openLightbox(polaroidImages[0], polaroidImages, 0);
+            }
+        });
+        
+        polaroidGalleryBtn.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.boxShadow = '0 4px 12px rgba(187, 134, 252, 0.4)';
+        });
+        
+        polaroidGalleryBtn.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = 'none';
+        });
+    }
     // --- Interactive Character ---
     const character = document.getElementById('interactive-character');
     if (character) {
