@@ -157,11 +157,6 @@
             width: 100%;
             box-sizing: border-box;
             opacity: 0.6;
-            transition: opacity 0.5s ease;
-        }
-
-        .timeline-item.in-view {
-            opacity: 1;
         }
 
         .timeline-content {
@@ -181,28 +176,21 @@
         }
 
         .timeline-content-inner img {
-            width: 200px;
+            width: var(--image-width, 200px);
             height: auto;
-            max-height: 200px;
+            max-height: var(--image-height, 200px);
             object-fit: cover;
             border-radius: 8px;
             margin: 1rem auto;
-            transition: width 0.5s ease, max-height 0.5s ease;
-        }
-
-        .timeline-item.in-view .timeline-content-inner img {
-            width: 100%;
-            max-height: 600px;
+            opacity: var(--image-opacity, 0.6);
         }
 
         .timeline-hidden-content {
             display: none;
             margin-top: 1rem;
-            animation: fadeInUp 0.5s ease-out;
-        }
-
-        .timeline-item.in-view .timeline-hidden-content {
-            display: block;
+            opacity: var(--gallery-opacity, 0);
+            max-height: var(--gallery-height, 0%);
+            overflow: hidden;
         }
         .timeline-cta {
             display: inline-block;
@@ -1202,11 +1190,6 @@
             max-height: 150px;
         }
         
-        .timeline-item.in-view .timeline-content-inner img {
-            width: 100%;
-            max-height: 400px;
-        }
-        
         /* Figma projects */
         .figma-project {
             width: 100%;
@@ -1232,7 +1215,7 @@
     <header class="portfolio-header">
         <img id="profile-picture" src="assets/images/pfppf2.jpg" alt="Profile Picture" />
         <h1>Bernard Strčić</h1>
-        <p> Zovem se Bernard Strčić, diplomirani grafički inženjer s interesom za digitalne i programske projekte u slobodno vrijeme. U radu se oslanjam na Adobe Photoshop i Premiere, uz stalno istraživanje novih pristupa koji spajaju dizajn i tehnologiju. Motivira me rad u dinamičnom i poticajnom okruženju te me posebno me privlače projekti koji omogućuju  kreativnost i praktičnu primjenu ideja.</p>
+        <p> Zovem se Bernard Strčić, diplomirani grafički inženjer s interesom za digitalne i programske projekte u slobodno vrijeme. U radu se oslanjam na Adobe Photoshop i Premiere, uz stalno istraživanje novih pristupa koji spajaju dizajn i tehnologiju. Motivira me rad u dinamičnom i poticajnom okruženju te me osebno me privlače projekti koji omogućuju  kreativnost i praktičnu primjenu ideja.</p>
     </header>
 
 
@@ -1402,11 +1385,7 @@
 
     <!-- AWARDED PROJECT -->
     <section class="section" id="awarded-project">
-        <div class="award-video-background">
-    <video autoplay muted loop playsinline>
-        <source src="assets/videos/platformarshowcase.mp4" type="video/mp4" />
-    </video>
-</div>
+        
 
         <h2 class="section-title">Awarded Project</h2>
 
@@ -1687,27 +1666,56 @@
     backToTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    // Scroll-based gallery expansion for timeline items
+    // Smooth scroll-based gallery expansion for timeline items
     const timelineItems = document.querySelectorAll('.timeline-item');
     
-    const observerOptions = {
-        threshold: 0.5,
-        rootMargin: '0px'
-    };
-    
-    const intersectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
-            } else {
-                entry.target.classList.remove('in-view');
+    function updateGalleryVisibility() {
+        const viewportCenter = window.innerHeight / 2;
+        
+        timelineItems.forEach(item => {
+            const rect = item.getBoundingClientRect();
+            const itemCenter = rect.top + rect.height / 2;
+            const distanceFromCenter = Math.abs(itemCenter - viewportCenter);
+            const maxDistance = window.innerHeight * 0.5;
+            
+            // Calculate visibility ratio (0 to 1, where 1 is perfectly centered)
+            let visibility = Math.max(0, 1 - (distanceFromCenter / maxDistance));
+            
+            // Update main image size smoothly
+            const img = item.querySelector('.timeline-content-inner img');
+            if (img) {
+                const minWidth = 200;
+                const maxWidth = 100;
+                const currentWidth = minWidth + (maxWidth - minWidth) * visibility;
+                img.style.setProperty('--image-width', currentWidth + 'px');
+                img.style.setProperty('--image-height', (200 + 400 * visibility) + 'px');
+                img.style.setProperty('--image-opacity', (0.6 + 0.4 * visibility).toFixed(2));
+            }
+            
+            // Gallery only appears when image is significantly enlarged (visibility > 0.6)
+            const galleryContent = item.querySelector('.timeline-hidden-content');
+            if (galleryContent) {
+                if (visibility > 0.6) {
+                    // Smoothly reveal gallery
+                    const galleryVisibility = (visibility - 0.6) / 0.4;
+                    galleryContent.style.setProperty('--gallery-opacity', galleryVisibility.toFixed(2));
+                    galleryContent.style.setProperty('--gallery-height', (galleryVisibility * 100) + '%');
+                    galleryContent.style.display = 'block';
+                } else {
+                    // Smoothly hide gallery
+                    const galleryVisibility = Math.max(0, visibility / 0.6);
+                    galleryContent.style.setProperty('--gallery-opacity', galleryVisibility.toFixed(2));
+                    galleryContent.style.setProperty('--gallery-height', (galleryVisibility * 100) + '%');
+                    if (visibility < 0.05) {
+                        galleryContent.style.display = 'none';
+                    }
+                }
             }
         });
-    }, observerOptions);
+    }
     
-    timelineItems.forEach(item => {
-        intersectionObserver.observe(item);
-    });
+    window.addEventListener('scroll', updateGalleryVisibility, { passive: true });
+    updateGalleryVisibility(); // Initial call
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.lightbox-close');
@@ -2175,4 +2183,3 @@
 
 </body>
 </html>
-
