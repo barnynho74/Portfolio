@@ -930,8 +930,8 @@
             position: fixed;
             bottom: 2rem;
             right: 1rem;
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             background-color: var(--primary-color);
             border: none;
             border-radius: 50%;
@@ -1221,7 +1221,7 @@
     <header class="portfolio-header">
         <img id="profile-picture" src="assets/images/pfppf2.jpg" alt="Profile Picture" />
         <h1>Bernard Strčić</h1>
-        <p> Zovem se Bernard Strčić, diplomirani grafički inženjer s interesom za digitalne i programske projekte u slobodno vrijeme. U radu se oslanjam na Adobe Photoshop i Premiere, uz stalno istraživanje novih pristupa koji spajaju dizajn i tehnologiju. Motivira me rad u dinamičnom i poticajnom okruženju te me osebno me privlače projekti koji omogućuju  kreativnost i praktičnu primjenu ideja.</p>
+        <p> Zovem se Bernard Strčić, diplomirani grafički inženjer s interesom za digitalne i programske projekte u slobodno vrijeme. U radu se oslanjam na Adobe Photoshop i Premiere, uz stalno istraživanje novih pristupa koji spajaju dizajn i tehnologiju. Motivira me rad u dinamičnom i poticajnom okruženju te me posebno me privlače projekti koji omogućuju  kreativnost i praktičnu primjenu ideja.</p>
     </header>
 
 
@@ -1287,7 +1287,7 @@
                     <div class="timeline-content-inner">
                         <p class="timeline-item-date">Sezona 1 - Početne grafike</p>
                         <h3>03.2021. - 07.2021.</h3>
-                        <img class="project-card-media" style="width:80%;" src="assets/images/racegraph1.0.jpg">
+                        <img class="project-card-media" style="width:85%;" src="assets/images/racegraph1.0.jpg">
                         <p style="width:80%; margin: 0 auto; text-align: center;">Prvi pokušaji izrade tablica sa puno vozača. Držao sam se jednostavnosti na većini grafika.</p>
                         <button class="timeline-cta">
                             View Gallery <span class="cta-arrow">→</span>
@@ -1309,7 +1309,7 @@
                     <div class="timeline-content-inner">
                         <p class="timeline-item-date">Sezona 2</p>
                         <h3>08.2021. - 02.2022.</h3>
-                        <img class="project-card-media" style="width:80%;" src="assets/images/racegraph2.0.jpg">
+                        <img class="project-card-media" style="width:85%;" src="assets/images/racegraph2.0.jpg">
                         <p style="width:80%; margin: 0 auto; text-align: center;">Osim thumbnailova za prijenos, dodani su i thumbnailovi za highlightse. Također se eksperimentiralo hoće li se krenuti u proizvodnju mercha.</p>
                         <button class="timeline-cta">
                             View Gallery <span class="cta-arrow">→</span>
@@ -1333,7 +1333,7 @@
                     <div class="timeline-content-inner">
                         <p class="timeline-item-date">Sezona 3</p>
                         <h3>03.2022. - 06.2022.</h3>
-                        <img class="project-card-media" style="width:80%;" src="assets/images/racegraph3.0.png">
+                        <img class="project-card-media" style="width:85%;" src="assets/images/racegraph3.0.png">
                         <p style="width:80%; margin: 0 auto; text-align: center;">Began creating data-driven graphics.</p>
                         <button class="timeline-cta">
                             View Gallery <span class="cta-arrow">→</span>
@@ -1354,7 +1354,7 @@
                     <div class="timeline-content-inner">
                         <p class="timeline-item-date">Sezona 4</p>
                         <h3>09.2022. - 12.2022.</h3>
-                        <img class="project-card-media" style="width:80%;" src="assets/images/racegraph4.0.jpg">
+                        <img class="project-card-media" style="width:85%;" src="assets/images/racegraph4.0.jpg">
                         <p style="width:80%; margin: 0 auto; text-align: center;">Tablice su ostale kao i prošle sezone, uz neke promjene kalendara i thumbnailova i ostalih grafika.</p>
                         <button class="timeline-cta">
                             View Gallery <span class="cta-arrow">→</span>
@@ -1375,7 +1375,7 @@
                     <div class="timeline-content-inner">
                         <p class="timeline-item-date">Sezona 5 i 6</p>
                         <h3>01.2023. - 05.2023. i 08.- 02.2024.</h3>
-                        <img class="project-card-media" style="width:80%;" src="assets/images/racegraph5.0.png">
+                        <img class="project-card-media" style="width:85%;" src="assets/images/racegraph5.0.png">
                         <p style="width:80%; margin: 0 auto; text-align: center;">Značajan skok u kvaliteti izrade tablica, ali i analizi statistike vozača.</p>
                         <button class="timeline-cta">
                             View Gallery <span class="cta-arrow">→</span>
@@ -1491,13 +1491,15 @@
     </div>
 
     <!-- TEKST NA DNU -->
-    <p class="photo-stack-hint">
-        (Slike se mogu micati, probaj! Dupli klik za resetiranje pozicije)
+    <p class="photo-stack-hint" style="position: absolute; top:0px;">
+        (Slike se mogu micati, probaj!)
     </p>
     
     <!-- Gallery Button -->
     <button id="polaroid-gallery-btn" style="
         margin-top: 1rem;
+        position: relative;
+        top: 110px;
         padding: 0.75rem 1.5rem;
         background-color: var(--primary-color);
         color: var(--bg-color);
@@ -1505,7 +1507,6 @@
         border-radius: 25px;
         font-size: 1rem;
         font-weight: bold;
-        cursor: pointer;
         transition: all 0.3s ease;
     ">📷 View All Photos</button>
 </div>
@@ -1579,8 +1580,9 @@
 
             <div class="figma-project-wrapper">
                 <div class="project-card figma-project" data-gallery-target="mockup-master-gallery">
-                    <span class="open-gallery-indicator" style="top:85%;">&darr;</span>
+                    
                     <img class="project-card-media" src="assets/images/figmaMM1.0.png">
+                    <span class="open-gallery-indicator" style="top:83%; left:91%;">&darr;</span>
                     <div class="project-card-content">
                         <h3>Mockup Master - Mockup aplikacija za dizajniranje</h3>
                         <p>A high-fidelity mockup for a mobile application.</p>
@@ -1588,7 +1590,7 @@
                 </div>
                 <!-- Figma Gallery Drawer -->
                 <div class="figma-gallery-drawer">
-                    <button class="gallery-close-btn">&times;</button>
+                    <button class="gallery-close-btn" >&times;</button>
                     <div id="mockup-master-gallery" class="figma-gallery-content">
                         <h3 class="subsection-title">Mockup Master Gallery</h3>
                         <div class="project-grid" style="grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.75rem;">
@@ -1607,7 +1609,7 @@
 
             <div class="figma-project-wrapper">
                 <div class="project-card figma-project" data-gallery-target="xiaomi-watch-gallery">
-                    <span class="open-gallery-indicator" style="top:85%;">&darr;</span>
+                    <span class="open-gallery-indicator" style="top:87%; left:87%;">&darr;</span>
                     <img class="project-card-media" src="assets/images/figmaSHOW2.0.png">
                     <div class="project-card-content">
                         <h3>Xiaomi sat Showcase</h3>
