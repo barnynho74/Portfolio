@@ -176,9 +176,9 @@
         }
 
         .timeline-content-inner img {
-            width: 300px;
+            width: 600px;
             height: auto;
-            max-height: 300px;
+            max-height: 600px;
             object-fit: cover;
             border-radius: 8px;
             margin: 1rem auto;
@@ -846,6 +846,8 @@
             width: 100%;
             height: 100%;
             transition: transform 0.3s ease;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
         .character-part {
             position: absolute;
@@ -901,9 +903,10 @@
         }
         #interactive-character.flipping .character-sprite {
             animation: frontflip 0.5s linear 1;
+            will-change: transform;
         }
         @keyframes frontflip {
-            from { transform: inherit; }
+            from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
         .top-nav a {
@@ -1001,9 +1004,10 @@
         }
         #interactive-character.flipping .character-sprite {
             animation: frontflip 0.5s linear 1;
+            will-change: transform;
         }
         @keyframes frontflip {
-            from { transform: inherit; }
+            from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
         
@@ -1185,8 +1189,8 @@
         }
         
         .timeline-content-inner img {
-            width: 150px;
-            max-height: 150px;
+            width: 250px;
+            max-height: 250px;
         }
         
         /* Figma projects */
@@ -1430,10 +1434,10 @@
             </ul>
 
             <h3 class="subsection-title">Kako igra radi?</h3>
-            <div class="awarded-project-gallery-grid">
-                <!-- Hover-to-Play Video -->
-                <div class="project-card video-hover-card" style="height:360px; width: 670px;" >
-                    <video class="project-card-media" playsinline="" loop="" muted="" controls>
+            <div class="personal-projects-grid" style="margin-top: 2rem;">
+                <!-- Video Card -->
+                <div class="project-card" style="width: 600px; height: auto;">
+                    <video class="project-card-media" playsinline="" loop="" muted="" controls style="width: 100%; height: auto;">
                          <source src="assets/videos/platformarshowcase.mp4" type="video/mp4">
                     </video>
                 </div>
@@ -1502,7 +1506,6 @@
         transition: all 0.3s ease;
     ">📷 View All Photos</button>
 </div>
-
             </div>
         </div>
     </section>
