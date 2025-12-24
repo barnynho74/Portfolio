@@ -837,8 +837,9 @@
             width: 40px;
             height: 42px;
             z-index: 10;
-            will-change: top, left;
-            /* top/left set by JS */
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
+            /* Position set by JS via transform */
         }
         .character-sprite {
             position: relative;
@@ -1213,7 +1214,7 @@
     <header class="portfolio-header">
         <img id="profile-picture" src="assets/images/pfppf2.jpg" alt="Profile Picture" />
         <h1>Bernard Strčić</h1>
-        <p> Zovem se Bernard Strčić, diplomirani grafički inženjer s interesom za digitalne i programske projekte u slobodno vrijeme. U radu se oslanjam na Adobe Photoshop i Premiere, uz stalno istraživanje novih pristupa koji spajaju dizajn i tehnologiju. Motivira me rad u dinamičnom i poticajnom okruženju te me posebno me privlače projekti koji omogućuju  kreativnost i praktičnu primjenu ideja.</p>
+        <p> Zovem se Bernard Strčić, diplomirani grafički inženjer s interesom za digitalne i programske projekte u slobodno vrijeme. U radu se oslanjam na Adobe Photoshop i Premiere, uz stalno istraživanje novih pristupa koji spajaju dizajn i tehnologiju. Motivira me rad u dinamičnom i poticajnom okruženju te me osebno me privlače projekti koji omogućuju  kreativnost i praktičnu primjenu ideja.</p>
     </header>
 
 
@@ -2060,7 +2061,7 @@
             this.style.boxShadow = 'none';
         });
     }
-    // --- Interactive Character ---
+    // --- Interactive Character (Optimized) ---
     const character = document.getElementById('interactive-character');
     if (character) {
         const characterSprite = character.querySelector('.character-sprite');
@@ -2076,6 +2077,9 @@
             timeToNextAction: 150
         };
         let platformRect;
+        let animationId = null;
+        let isAnimating = false;
+        
         function updatePlatformRect() {
             if (!platform || !showcase) return;
             const showcaseRect = showcase.getBoundingClientRect();
@@ -2090,9 +2094,12 @@
                 state.y = platformRect.top - character.offsetHeight;
             }
         }
+        
         function characterLoop() {
+            if (!isAnimating) return;
+            
             if (!platformRect) {
-                requestAnimationFrame(characterLoop);
+                animationId = requestAnimationFrame(characterLoop);
                 return;
             }
             
@@ -2121,20 +2128,21 @@
                 state.idleTimer++;
                 if (state.idleTimer > state.timeToNextAction) {
                     state.idleTimer = 0;
-                    state.timeToNextAction = 100 + Math.random() * 150; // Randomize next action time
+                    state.timeToNextAction = 100 + Math.random() * 150;
                     const action = Math.random();
-                    if (action < 0.6) { // Jump
+                    if (action < 0.6) {
                         state.isJumping = true;
                         state.vy = -10;
-                    } else { // Frontflip
+                    } else {
                         state.isJumping = true;
                         state.vy = -12;
                         character.classList.add('flipping');
                     }
                 }
             }
-            character.style.left = `${state.x}px`;
-            character.style.top = `${state.y}px`;
+            
+            // Use transform instead of left/top for GPU acceleration
+            character.style.transform = `translate3d(${state.x}px, ${state.y}px, 0)`;
             
             const isRunning = !state.isJumping;
             if (isRunning !== state.isRunning) {
@@ -2142,21 +2150,47 @@
                 character.classList.toggle('running', isRunning);
             }
             
-            requestAnimationFrame(characterLoop);
+            animationId = requestAnimationFrame(characterLoop);
         }
-        const observer = new IntersectionObserver((entries) => {
-             if (entries[0].isIntersecting) {
-                setTimeout(() => {
-                    updatePlatformRect();
-                    characterLoop();
-                    window.addEventListener('resize', updatePlatformRect);
-                }, 300); // Delay to ensure layout is final
-                observer.disconnect();
+        
+        function startAnimation() {
+            if (!isAnimating) {
+                isAnimating = true;
+                updatePlatformRect();
+                characterLoop();
             }
-        }, { threshold: 0.1 });
-       if (showcase) {
-            observer.observe(showcase);
-       }
+        }
+        
+        function stopAnimation() {
+            isAnimating = false;
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+        }
+        
+        // Use IntersectionObserver to start/stop animation based on visibility
+        const visibilityObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startAnimation();
+                } else {
+                    stopAnimation();
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: '50px' // Start slightly before entering viewport
+        });
+        
+        if (showcase) {
+            // Initial setup with delay
+            setTimeout(() => {
+                updatePlatformRect();
+                visibilityObserver.observe(showcase);
+                window.addEventListener('resize', updatePlatformRect);
+            }, 300);
+        }
     }
     const arcaMedalLink = document.getElementById('arca-medal-link');
     if (arcaMedalLink) {
