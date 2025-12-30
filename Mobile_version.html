@@ -708,6 +708,12 @@
             will-change: transform;
             transform: translate(var(--dx, 0px), var(--dy, 0px));
         }
+        @media (max-width: 768px) {
+    .photo-stack {
+        pointer-events: none;
+    }
+}
+
         .polaroid-card.is-dragging {
             cursor: grabbing;
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
@@ -1049,6 +1055,12 @@
     border-radius: 8px;
     opacity: 0.08;
 }
+@media (max-width: 768px) {
+    .award-video-background {
+        display: none;
+    }
+}
+
 
 .award-video-background video {
     width: 100%;
@@ -1429,7 +1441,7 @@
                 Igra koristi kameru kako bi putem nje markere na zidu/ploči prenesla platforme u virtualnom prostoru. Igrač se zatim kreće, skače i prolazi razine koje se doslovno mijenjaju pomicanjem fizičkih naljepnica.
             </p>
 
-            <img class="awarded-project-showcase-media" src="assets/images/PlatformAR_logo.png"/ style="width: 100%;">
+            <img class="awarded-project-showcase-media" src="assets/images/PlatformAR_logo.png"/ style="width: 100%;" loading="lazy">
 
             <ul class="awards-list">
                 <li class="award-item gold"><a href="https://www.grf.unizg.hr/uspjeh-studenata-grafickog-fakulteta-na-inova-2025/">Zlatna medalja na INOVA sajmu</a></li>
@@ -1440,9 +1452,14 @@
             <div class="personal-projects-grid" style="margin-top: 2rem;">
                 <!-- Video Card -->
                 <div class="project-card" style="width: 400px; height: auto;">
-                    <video class="project-card-media" playsinline="" loop="" muted="" controls style="width: 100%; height: auto;">
-                         <source src="assets/videos/platformarshowcase.mp4" type="video/mp4">
-                    </video>
+                    <video class="project-card-media"
+       playsinline
+       muted
+       controls
+       preload="none"
+       poster="assets/images/platformar_poster.jpg"
+       style="width: 100%; height: auto;">
+
                 </div>
                 <!-- Polaroid Photo Stack -->
 <h3 class="subsection-title">Snimke zaslona iz igre</h3>
@@ -1450,42 +1467,42 @@
 <div class="project-card photo-stack-container" style="height:450px; width:400px;">
     <div class="photo-stack">
         <div class="polaroid-card">
-            <img src="assets/images/plAR1.png" alt="Early UI concept">
+            <img src="assets/images/plAR1.png" loading="lazy">
             <figcaption>Početni zaslon (menu)</figcaption>
         </div>
 
         <div class="polaroid-card">
-            <img src="assets/images/plAR2.png" alt="Component design">
+            <img src="assets/images/plAR2.png" loading="lazy">
             <figcaption>Kako funkcionira</figcaption>
         </div>
 
         <div class="polaroid-card">
-            <img src="assets/images/plAR3.png" alt="Final Logo">
+            <img src="assets/images/plAR3.png" loading="lazy">
             <figcaption>Snimka zaslona iz igre 1</figcaption>
         </div>
 
         <div class="polaroid-card">
-            <img src="assets/images/plAR4.png" alt="Data structure planning">
+            <img src="assets/images/plAR4.png" loading="lazy">
             <figcaption>Izrada vlastitog lika</figcaption>
         </div>
 
         <div class="polaroid-card">
-            <img src="assets/images/plAR5.png" alt="Game State">
+            <img src="assets/images/plAR5.png" loading="lazy">
             <figcaption>Snimka zaslona iz igre 2</figcaption>
         </div>
 
         <div class="polaroid-card">
-            <img src="assets/images/plAR6.png" alt="Player View">
+            <img src="assets/images/plAR6.png" loading="lazy">
             <figcaption>Odabir lika</figcaption>
         </div>
 
         <div class="polaroid-card">
-            <img src="assets/images/plAR7.png" alt="Gameplay">
+            <img src="assets/images/plAR7.png" loading="lazy">
             <figcaption>Upute za igru</figcaption>
         </div>
 
         <div class="polaroid-card">
-            <img src="assets/images/plAR8.png" alt="UI Detail">
+            <img src="assets/images/plAR8.png" loading="lazy">
             <figcaption>Ljestvica top vremena</figcaption>
         </div>
     </div>
