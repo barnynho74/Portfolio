@@ -707,12 +707,20 @@
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform;
             transform: translate(var(--dx, 0px), var(--dy, 0px));
+            will-change: transform;
+            transform: translateZ(0);
+
         }
         @media (max-width: 768px) {
     .photo-stack {
-        pointer-events: none;
+        pointer-events: auto;
+    }
+
+    .polaroid-card {
+        touch-action: none;
     }
 }
+
 
         .polaroid-card.is-dragging {
             cursor: grabbing;
@@ -1458,7 +1466,9 @@
        controls
        preload="none"
        poster="assets/images/platformar_poster.jpg"
+       onclick="this.play()"
        style="width: 100%; height: auto;">
+
 
                 </div>
                 <!-- Polaroid Photo Stack -->
