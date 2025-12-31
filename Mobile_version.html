@@ -672,7 +672,6 @@
         }
         .project-card.photo-stack-container {
             padding: 2rem;
-            top: -150px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -707,21 +706,7 @@
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform;
             transform: translate(var(--dx, 0px), var(--dy, 0px));
-            will-change: transform;
-            transform: translateZ(0);
-
         }
-        @media (max-width: 768px) {
-    .photo-stack {
-        pointer-events: auto;
-    }
-
-    .polaroid-card {
-        touch-action: none;
-    }
-}
-
-
         .polaroid-card.is-dragging {
             cursor: grabbing;
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
@@ -833,7 +818,6 @@
         
         .nav-links-container {
             position: fixed;
-            align-items:center;
             top: 60px;
             left: 0;
             width: 100%;
@@ -850,7 +834,6 @@
         }
         #interactive-character {
             position: absolute;
-            top: -50px;
             width: 40px;
             height: 42px;
             z-index: 10;
@@ -944,8 +927,8 @@
             position: fixed;
             bottom: 2rem;
             right: 1rem;
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             background-color: var(--primary-color);
             border: none;
             border-radius: 50%;
@@ -1063,12 +1046,6 @@
     border-radius: 8px;
     opacity: 0.08;
 }
-@media (max-width: 768px) {
-    .award-video-background {
-        display: none;
-    }
-}
-
 
 .award-video-background video {
     width: 100%;
@@ -1241,7 +1218,7 @@
     <header class="portfolio-header">
         <img id="profile-picture" src="assets/images/pfppf2.jpg" alt="Profile Picture" />
         <h1>Bernard Strčić</h1>
-        <p> Zovem se Bernard Strčić, diplomirani grafički inženjer s interesom za digitalne i programske projekte u slobodno vrijeme. U radu se oslanjam na Adobe Photoshop i Premiere, uz stalno istraživanje novih pristupa koji spajaju dizajn i tehnologiju. Motivira me rad u dinamičnom i poticajnom okruženju te me posebno me privlače projekti koji omogućuju  kreativnost i praktičnu primjenu ideja.</p>
+        <p> Zovem se Bernard Strčić, diplomirani grafički inženjer s interesom za digitalne i programske projekte u slobodno vrijeme. U radu se oslanjam na Adobe Photoshop i Premiere, uz stalno istraživanje novih pristupa koji spajaju dizajn i tehnologiju. Motivira me rad u dinamičnom i poticajnom okruženju te me osebno me privlače projekti koji omogućuju  kreativnost i praktičnu primjenu ideja.</p>
     </header>
 
 
@@ -1307,8 +1284,8 @@
                     <div class="timeline-content-inner">
                         <p class="timeline-item-date">Sezona 1 - Početne grafike</p>
                         <h3>03.2021. - 07.2021.</h3>
-                        <img class="project-card-media" style="width:85%;" src="assets/images/racegraph1.0.jpg">
-                        <p style="width:80%; margin: 0 auto; text-align: center;">Prvi pokušaji izrade tablica sa puno vozača. Držao sam se jednostavnosti na većini grafika.</p>
+                        <img class="project-card-media" src="assets/images/racegraph1.0.jpg">
+                        <p>Prvi pokušaji izrade tablica sa puno vozača. Držao sam se jednostavnosti na većini grafika.</p>
                         <button class="timeline-cta">
                             View Gallery <span class="cta-arrow">→</span>
                         </button>
@@ -1329,8 +1306,8 @@
                     <div class="timeline-content-inner">
                         <p class="timeline-item-date">Sezona 2</p>
                         <h3>08.2021. - 02.2022.</h3>
-                        <img class="project-card-media" style="width:85%;" src="assets/images/racegraph2.0.jpg">
-                        <p style="width:80%; margin: 0 auto; text-align: center;">Osim thumbnailova za prijenos, dodani su i thumbnailovi za highlightse. Također se eksperimentiralo hoće li se krenuti u proizvodnju mercha.</p>
+                        <img class="project-card-media" src="assets/images/racegraph2.0.jpg">
+                        <p>Osim thumbnailova za prijenos, dodani su i thumbnailovi za highlightse. Također se eksperimentiralo hoće li se krenuti u proizvodnju mercha.</p>
                         <button class="timeline-cta">
                             View Gallery <span class="cta-arrow">→</span>
                         </button>
@@ -1353,8 +1330,8 @@
                     <div class="timeline-content-inner">
                         <p class="timeline-item-date">Sezona 3</p>
                         <h3>03.2022. - 06.2022.</h3>
-                        <img class="project-card-media" style="width:85%;" src="assets/images/racegraph3.0.png">
-                        <p style="width:80%; margin: 0 auto; text-align: center;">Began creating data-driven graphics.</p>
+                        <img class="project-card-media" src="assets/images/racegraph3.0.png">
+                        <p>Began creating data-driven graphics.</p>
                         <button class="timeline-cta">
                             View Gallery <span class="cta-arrow">→</span>
                         </button>
@@ -1374,8 +1351,8 @@
                     <div class="timeline-content-inner">
                         <p class="timeline-item-date">Sezona 4</p>
                         <h3>09.2022. - 12.2022.</h3>
-                        <img class="project-card-media" style="width:85%;" src="assets/images/racegraph4.0.jpg">
-                        <p style="width:80%; margin: 0 auto; text-align: center;">Tablice su ostale kao i prošle sezone, uz neke promjene kalendara i thumbnailova i ostalih grafika.</p>
+                        <img class="project-card-media" src="assets/images/racegraph4.0.jpg">
+                        <p>Tablice su ostale kao i prošle sezone, uz neke promjene kalendara i thumbnailova i ostalih grafika.</p>
                         <button class="timeline-cta">
                             View Gallery <span class="cta-arrow">→</span>
                         </button>
@@ -1395,8 +1372,8 @@
                     <div class="timeline-content-inner">
                         <p class="timeline-item-date">Sezona 5 i 6</p>
                         <h3>01.2023. - 05.2023. i 08.- 02.2024.</h3>
-                        <img class="project-card-media" style="width:85%;" src="assets/images/racegraph5.0.png">
-                        <p style="width:80%; margin: 0 auto; text-align: center;">Značajan skok u kvaliteti izrade tablica, ali i analizi statistike vozača.</p>
+                        <img class="project-card-media" src="assets/images/racegraph5.0.png">
+                        <p>Značajan skok u kvaliteti izrade tablica, ali i analizi statistike vozača.</p>
                         <button class="timeline-cta">
                             View Gallery <span class="cta-arrow">→</span>
                         </button>
@@ -1449,7 +1426,7 @@
                 Igra koristi kameru kako bi putem nje markere na zidu/ploči prenesla platforme u virtualnom prostoru. Igrač se zatim kreće, skače i prolazi razine koje se doslovno mijenjaju pomicanjem fizičkih naljepnica.
             </p>
 
-            <img class="awarded-project-showcase-media" src="assets/images/PlatformAR_logo.png"/ style="width: 100%;" loading="lazy">
+            <img class="awarded-project-showcase-media" src="assets/images/PlatformAR_logo.png"/ style="width: 100%;">
 
             <ul class="awards-list">
                 <li class="award-item gold"><a href="https://www.grf.unizg.hr/uspjeh-studenata-grafickog-fakulteta-na-inova-2025/">Zlatna medalja na INOVA sajmu</a></li>
@@ -1459,78 +1436,74 @@
             <h3 class="subsection-title">Kako igra radi?</h3>
             <div class="personal-projects-grid" style="margin-top: 2rem;">
                 <!-- Video Card -->
-                <div class="project-card" style="width: 400px; height: auto;">
-                    <div class="project-card" style="width: 400px; height: auto;">
-    <video class="project-card-media"
-           playsinline
-           muted
-           controls
-           preload="none"
-           poster="assets/images/platformar_poster.jpg"
-           style="width: 100%; height: auto;">
-         <source src="assets/videos/platformarshowcase.mp4" type="video/mp4">
-    </video>
-</div>
-
-
-
+                <div class="project-card video-container" style="width: 600px; height: auto;">
+                    <video 
+                        class="project-card-media lazy-video" 
+                        playsinline 
+                        loop 
+                        muted 
+                        controls 
+                        preload="none"
+                        style="width: 100%; height: auto;"
+                        data-src="assets/videos/platformarshowcase.mp4"
+                    >
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
                 <!-- Polaroid Photo Stack -->
 <h3 class="subsection-title">Snimke zaslona iz igre</h3>
 
-<div class="project-card photo-stack-container" style="height:450px; width:400px;">
+<div class="project-card photo-stack-container" style="height:490px; width:700px;">
     <div class="photo-stack">
         <div class="polaroid-card">
-            <img src="assets/images/plAR1.png" loading="lazy">
+            <img src="assets/images/plAR1.png" alt="Early UI concept">
             <figcaption>Početni zaslon (menu)</figcaption>
         </div>
 
         <div class="polaroid-card">
-            <img src="assets/images/plAR2.png" loading="lazy">
+            <img src="assets/images/plAR2.png" alt="Component design">
             <figcaption>Kako funkcionira</figcaption>
         </div>
 
         <div class="polaroid-card">
-            <img src="assets/images/plAR3.png" loading="lazy">
+            <img src="assets/images/plAR3.png" alt="Final Logo">
             <figcaption>Snimka zaslona iz igre 1</figcaption>
         </div>
 
         <div class="polaroid-card">
-            <img src="assets/images/plAR4.png" loading="lazy">
+            <img src="assets/images/plAR4.png" alt="Data structure planning">
             <figcaption>Izrada vlastitog lika</figcaption>
         </div>
 
         <div class="polaroid-card">
-            <img src="assets/images/plAR5.png" loading="lazy">
+            <img src="assets/images/plAR5.png" alt="Game State">
             <figcaption>Snimka zaslona iz igre 2</figcaption>
         </div>
 
         <div class="polaroid-card">
-            <img src="assets/images/plAR6.png" loading="lazy">
+            <img src="assets/images/plAR6.png" alt="Player View">
             <figcaption>Odabir lika</figcaption>
         </div>
 
         <div class="polaroid-card">
-            <img src="assets/images/plAR7.png" loading="lazy">
+            <img src="assets/images/plAR7.png" alt="Gameplay">
             <figcaption>Upute za igru</figcaption>
         </div>
 
         <div class="polaroid-card">
-            <img src="assets/images/plAR8.png" loading="lazy">
+            <img src="assets/images/plAR8.png" alt="UI Detail">
             <figcaption>Ljestvica top vremena</figcaption>
         </div>
     </div>
 
     <!-- TEKST NA DNU -->
-    <p class="photo-stack-hint" style="position: absolute; top:0px;">
-        (Slike se mogu micati, probaj!)
+    <p class="photo-stack-hint">
+        (Slike se mogu micati, probaj! Dupli klik za resetiranje pozicije)
     </p>
     
     <!-- Gallery Button -->
     <button id="polaroid-gallery-btn" style="
         margin-top: 1rem;
-        position: relative;
-        top: 110px;
         padding: 0.75rem 1.5rem;
         background-color: var(--primary-color);
         color: var(--bg-color);
@@ -1538,8 +1511,9 @@
         border-radius: 25px;
         font-size: 1rem;
         font-weight: bold;
+        cursor: pointer;
         transition: all 0.3s ease;
-    ">📷 Pregledaj sve slike</button>
+    ">📷 View All Photos</button>
 </div>
             </div>
         </div>
@@ -1549,12 +1523,19 @@
     <!-- VIBECODING -->
     <section class="section" id="vibecoding">
         <h2 class="section-title">Vibecoding Projects</h2>
-        <p style="text-align: center; margin: 0 auto;" >Vibecoding mi pruža kreativnost kroz kontinuirano traženje pravih promptova kako bi ideja koju sam zamislio došla do izražaja, tj. vizualizacije onako kako sam je zamislio.</p>
+        <p style="text-align: center; width: 500px; margin: 0 auto;" >Vibecoding mi pruža kreativnost kroz kontinuirano traženje pravih promptova kako bi ideja koju sam zamislio došla do izražaja, tj. vizualizacije onako kako sam je zamislio.</p>
         <div class="vibecoding-project-list">
             <div class="project-card vibecoding-project" style="width: 400px; height: 530px;">
                 <div class="project-card-main-content">
                     <span class="open-gallery-indicator">&rarr;</span>
-                    <video class="project-card-media" muted playsinline controls src="assets/videos/ttfDEMO.mp4"></video>
+                    <video 
+                        class="project-card-media lazy-video" 
+                        muted 
+                        playsinline 
+                        controls 
+                        preload="none"
+                        data-src="assets/videos/ttfDEMO.mp4"
+                    ></video>
                     <div class="project-card-content">
                         <h3>Tika Taka F1</h3>
                         <p>Igra na bazi križić-kružića, uz iznimku da se polje dobiva točnim izborom vozača kojeg se traži.</p>
@@ -1573,10 +1554,17 @@
                     </div>
                 </div>
             </div>
-            <div class="project-card vibecoding-project" style="width: 400px; height: 520px;">
+            <div class="project-card vibecoding-project" style="width: 600px; height: 520px;">
                 <div class="project-card-main-content">
                     <span class="open-gallery-indicator">&rarr;</span>
-                    <video class="project-card-media" muted playsinline controls src="assets/videos/chessflagDEMO.mp4"></video>
+                    <video 
+                        class="project-card-media lazy-video" 
+                        muted 
+                        playsinline 
+                        controls 
+                        preload="none"
+                        data-src="assets/videos/chessflagDEMO.mp4"
+                    ></video>
                     <div class="project-card-content">
                         <h3>Chess Flag Counter</h3>
                         <p>Stranica za praćenje statistike šahovskih igara po ishodu partije.</p>
@@ -1611,9 +1599,8 @@
 
             <div class="figma-project-wrapper">
                 <div class="project-card figma-project" data-gallery-target="mockup-master-gallery">
-                    
+                    <span class="open-gallery-indicator" style="top:85%;">&darr;</span>
                     <img class="project-card-media" src="assets/images/figmaMM1.0.png">
-                    <span class="open-gallery-indicator" style="top:83%; left:91%;">&darr;</span>
                     <div class="project-card-content">
                         <h3>Mockup Master - Mockup aplikacija za dizajniranje</h3>
                         <p>A high-fidelity mockup for a mobile application.</p>
@@ -1621,7 +1608,7 @@
                 </div>
                 <!-- Figma Gallery Drawer -->
                 <div class="figma-gallery-drawer">
-                    <button class="gallery-close-btn" >&times;</button>
+                    <button class="gallery-close-btn">&times;</button>
                     <div id="mockup-master-gallery" class="figma-gallery-content">
                         <h3 class="subsection-title">Mockup Master Gallery</h3>
                         <div class="project-grid" style="grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.75rem;">
@@ -1640,7 +1627,7 @@
 
             <div class="figma-project-wrapper">
                 <div class="project-card figma-project" data-gallery-target="xiaomi-watch-gallery">
-                    <span class="open-gallery-indicator" style="top:87%; left:87%;">&darr;</span>
+                    <span class="open-gallery-indicator" style="top:85%;">&darr;</span>
                     <img class="project-card-media" src="assets/images/figmaSHOW2.0.png">
                     <div class="project-card-content">
                         <h3>Xiaomi sat Showcase</h3>
@@ -2238,6 +2225,44 @@
             openLightbox('assets/images/arcaBronze.jpg');
         });
     }
+    
+    // --- Lazy Video Loading (Performance Optimization) ---
+    const lazyVideos = document.querySelectorAll('video.lazy-video[data-src]');
+    
+    const videoObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const video = entry.target;
+                const src = video.getAttribute('data-src');
+                
+                if (src && !video.src) {
+                    // Create source element
+                    const source = document.createElement('source');
+                    source.src = src;
+                    source.type = 'video/mp4';
+                    video.appendChild(source);
+                    
+                    // Load the video
+                    video.load();
+                    
+                    // Remove data-src to prevent reloading
+                    video.removeAttribute('data-src');
+                    video.classList.remove('lazy-video');
+                    
+                    // Stop observing this video
+                    observer.unobserve(video);
+                }
+            }
+        });
+    }, {
+        rootMargin: '200px', // Start loading 200px before video enters viewport
+        threshold: 0.01
+    });
+    
+    // Observe all lazy videos
+    lazyVideos.forEach(video => {
+        videoObserver.observe(video);
+    });
 </script>
 
 </body>
