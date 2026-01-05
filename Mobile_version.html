@@ -1461,11 +1461,14 @@
                 <!-- Video Card -->
                 <div class="project-card" style="width: 400px; height: auto;">
                     <div class="project-card" style="width: 400px; height: auto;">
-    <iframe class="project-card-media lazy-iframe"
-            data-src="https://drive.google.com/file/d/1V39WdGNUrtIXYbqlnsiGBeGBNWJqblW0/preview"
-            style="width: 100%; height: 450px; border: none;"
-            allow="autoplay">
-    </iframe>
+    <video class="project-card-media lazy-video"
+           playsinline
+           muted
+           controls
+           preload="none"
+           data-src="assets/videos/platformarshowcase.mp4"
+           style="width: 100%; height: auto;">
+    </video>
 </div>
                 </div>
                 <!-- Polaroid Photo Stack -->
@@ -1547,7 +1550,7 @@
             <div class="project-card vibecoding-project" style="width: 400px; height: 530px;">
                 <div class="project-card-main-content">
                     <span class="open-gallery-indicator">&rarr;</span>
-                    <iframe class="project-card-media lazy-iframe" data-src="https://drive.google.com/file/d/1ea7WrdMyO09sxAlZ7mJxR3XznroGgZ3w/preview" style="width: 100%; height: 100%; border: none;" allow="autoplay"></iframe>
+                    <video class="project-card-media lazy-video" muted playsinline controls preload="none" data-src="assets/videos/ttfDEMO.mp4" style="width: 100%; height: 100%;"></video>
                     <div class="project-card-content">
                         <h3>Tika Taka F1</h3>
                         <p>Igra na bazi križić-kružića, uz iznimku da se polje dobiva točnim izborom vozača kojeg se traži.</p>
@@ -1569,7 +1572,7 @@
             <div class="project-card vibecoding-project" style="width: 400px; height: 520px;">
                 <div class="project-card-main-content">
                     <span class="open-gallery-indicator">&rarr;</span>
-                    <iframe class="project-card-media lazy-iframe" data-src="https://drive.google.com/file/d/1FPewMoBkbjTAkU0cb7TyFT7FXuyS73F_/preview" style="width: 100%; height: 100%; border: none;" allow="autoplay"></iframe>
+                    <video class="project-card-media lazy-video" muted playsinline controls preload="none" data-src="assets/videos/chessflagDEMO.mp4" style="width: 100%; height: 100%;"></video>
                     <div class="project-card-content">
                         <h3>Chess Flag Counter</h3>
                         <p>Stranica za praćenje statistike šahovskih igara po ishodu partije.</p>
@@ -1914,7 +1917,7 @@
         }
         
         mainContent.addEventListener('click', (e) => {
-        if (e.target.closest('a, button, iframe')) return;
+        if (e.target.closest('a, button, video')) return;
             
             const wasOpen = projectCard.classList.contains('gallery-open');
             document.querySelectorAll('.vibecoding-project.gallery-open').forEach(p => {
@@ -2236,30 +2239,34 @@
         });
     }
     
-    // --- Lazy Load Iframes (Optimized for Google Drive) ---
-    const lazyIframes = document.querySelectorAll('iframe.lazy-iframe');
+    // --- Lazy Load Videos (Optimized) ---
+    const lazyVideos = document.querySelectorAll('video.lazy-video');
     
-    const iframeObserver = new IntersectionObserver((entries) => {
+    const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const iframe = entry.target;
-                const iframeSrc = iframe.getAttribute('data-src');
+                const video = entry.target;
+                const videoSrc = video.getAttribute('data-src');
                 
-                if (iframeSrc && !iframe.src) {
-                    iframe.src = iframeSrc;
-                    iframe.classList.remove('lazy-iframe');
-                    iframeObserver.unobserve(iframe);
+                if (videoSrc && !video.src) {
+                    const source = document.createElement('source');
+                    source.src = videoSrc;
+                    source.type = 'video/mp4';
+                    video.appendChild(source);
+                    video.load();
+                    video.classList.remove('lazy-video');
+                    videoObserver.unobserve(video);
                 }
             }
         });
     }, {
-        rootMargin: '100px',
+        rootMargin: '200px',
         threshold: 0.1
     });
     
-    // Observe all lazy iframes
-    lazyIframes.forEach(iframe => {
-        iframeObserver.observe(iframe);
+    // Observe all lazy videos
+    lazyVideos.forEach(video => {
+        videoObserver.observe(video);
     });
 </script>
 
