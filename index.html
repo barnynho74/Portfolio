@@ -480,6 +480,42 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        .play-game-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 40%;
+            background: linear-gradient(135deg, #BB86FC 0%, #BB86FC 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-style: italic;
+            font-size: 13px;
+            text-transform: uppercase;
+            z-index: 15;
+            box-shadow: 0 2px 12px rgba(255, 255, 255, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+        .play-game-btn:hover {
+            transform: scale(1.1) translateX(2px);
+            box-shadow: 0 5px 17px rgba(255, 255, 255, 0.6);
+            background: linear-gradient(135deg, #a509c4 0%, #b521da 100%);
+        }
+        .play-game-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+        .vibecoding-project.gallery-open .play-game-btn {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.8) translateX(-20px);
+        }
         .vibecoding-project .project-card-main-content:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0,0,0,0.3);
@@ -1275,7 +1311,7 @@
             <h3 class="subsection-title">Kako igra radi?</h3>
             <div class="awarded-project-gallery-grid">
                 <!-- Hover-to-Play Video -->
-                <div class="project-card video-hover-card" style="height:370px; width: 670px;" >
+                <div class="project-card video-hover-card" style="height:360px; width: 670px;" >
                     <div class="video-overlay">
                         <div class="play-prompt">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -1289,7 +1325,7 @@
                 <!-- Polaroid Photo Stack -->
 <h3 class="subsection-title">Snimke zaslona iz igre</h3>
 
-<div class="project-card photo-stack-container" style="border:1px solid rgb(99, 99, 99); height:390px; width:850px;">
+<div class="project-card photo-stack-container" style="height:490px; width:700px;">
     <div class="photo-stack">
         <div class="polaroid-card">
             <img src="assets/images/plAR1.png" alt="Early UI concept">
@@ -1333,8 +1369,8 @@
     </div>
 
     <!-- TEKST NA DNU -->
-    <p class="photo-stack-hint" style="font-size: 15px;">
-        (Slike se mogu micati, a sa duplim klikom se resetira pozicija)
+    <p class="photo-stack-hint">
+        (Slike se mogu micati, probaj! Dupli klik za resetiranje pozicije)
     </p>
 </div>
 
@@ -1346,17 +1382,21 @@
     <!-- VIBECODING -->
     <section class="section" id="vibecoding">
         <h2 class="section-title">Vibecoding Projects</h2>
-        <p style="text-align: center; width: 500px; margin: 0 auto;" >Vibecoding mi pruža kreativnost kroz kontinuirano traženje pravih promptova kako bi ideja koju sam zamislio došla do izražaja, tj. vizualizacije onako kako sam je zamislio. <br><br><br></p>
+        <p style="text-align: center; width: 500px; margin: 0 auto;" >Vibecoding mi pruža kreativnost kroz kontinuirano traženje pravih promptova kako bi ideja koju sam zamislio došla do izražaja, tj. vizualizacije onako kako sam je zamislio.</p>
         <div class="vibecoding-project-list">
             <div class="project-card vibecoding-project" style="width: 400px; height: 530px;">
                 <div class="project-card-main-content">
                     <span class="open-gallery-indicator">&rarr;</span>
                     <video class="project-card-media" muted playsinline controls src="assets/videos/ttfDEMO.mp4"></video>
-                    <div class="project-card-content">
+                    <div class="project-card-content" style="height: 160px;">
                         <h3>Tika Taka F1</h3>
                         <p>Igra na bazi križić-kružića, uz iznimku da se polje dobiva točnim izborom vozača kojeg se traži.</p>
                     </div>
                 </div>
+                <a href="https://barnynho74.github.io/Tic-Tac-F1/" target="_blank" class="play-game-btn" title="Play Tika Taka F1">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    ISPROBAJ
+                </a>
                 <div class="gallery-drawer">
                     <button class="gallery-close-btn">&times;</button>
                     <div class="gallery-slider">
@@ -1374,11 +1414,15 @@
                 <div class="project-card-main-content">
                     <span class="open-gallery-indicator">&rarr;</span>
                     <video class="project-card-media" muted playsinline controls src="assets/videos/chessflagDEMO.mp4"></video>
-                    <div class="project-card-content">
+                    <div class="project-card-content" style="height: 120px;">
                         <h3>Chess Flag Counter</h3>
                         <p>Stranica za praćenje statistike šahovskih igara po ishodu partije.</p>
                     </div>
                 </div>
+                <a href="https://barnynho74.github.io/Chess-Flags/" target="_blank" class="play-game-btn"  title="Chess Flags">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    ISPROBAJ
+                </a>
                 <div class="gallery-drawer">
                     <button class="gallery-close-btn">&times;</button>
                     <div class="gallery-slider">
@@ -1411,7 +1455,7 @@
                 <img class="project-card-media" src="assets/images/figmaMM1.0.png">
                 <div class="project-card-content">
                     <h3>Mockup Master - Mockup aplikacija za dizajniranje</h3>
-                    <p>Projekt u Figmi koji bi simulirao e-trgovinu gdje korisnik može naraviti svoje dizajnove na različite stvari te ih sačuvati i podjeliti sa zajednicom ili naručiti.</p>
+                    <p>A high-fidelity mockup for a mobile application.</p>
                 </div>
             </div>
 
