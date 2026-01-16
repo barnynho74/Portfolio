@@ -37,7 +37,7 @@
         .portfolio-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 40px 20px;
         }
 
         .portfolio-header {
@@ -74,6 +74,18 @@
             margin-bottom: 4rem;
             animation: fadeInUp 1s ease-out;
         }
+        section {
+            margin-bottom: 80px;
+        }
+        h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
         .section-title {
             font-size: 2.5rem;
@@ -93,8 +105,7 @@
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            grid-auto-rows: minmax(200px, auto);
+            gap: 30px;
         }
 
         .personal-projects-grid {
@@ -117,7 +128,158 @@
 
         .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        .project-info {
+            padding: 20px;
+        }
+        .project-info h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        /* Unity Section Specific Styling */
+        .unity-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* Spiky Backplate Logic */
+        .video-stage {
+            position: relative;
+            padding: 40px; /* Space for spikes to show around the video */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .spiky-backplate {
+            position: absolute;
+            inset: 0;
+            background: var(--primary-color);
+            z-index: 2;
+            clip-path: path("M 594 29 L 713 74 L 876 47 L 937 79 L 1035 16 L 980 149.5 L 1042 182 L 944 250 L 931 337 L 972 437 L 870 407 L 802 438 L 746 450 L 737 404 L 655 434 L 593 479 L 626 418 L 579 445 L 563 415 L 242 436 L 279 359 L 216 334 L 271 238 L 234 227 L 269 172 L 216 127 L 195 85 L 252 69 L 290 5 L 349 54 L 378 -1 L 416 48 L 484 62 Z");
+            filter: drop-shadow(0 0 15px rgba(var(--primary-color-rgb), 0.5));
+            
+        }
+
+
+        .video-container {
+            position: relative;
+            clip-path: url(#spikyMask);
+            width: 100%;
+            max-width: 697px; 
+            padding-bottom: 35%;
+            height: 0px;
+            overflow: hidden;
+            background: #000;
+            z-index: 2; 
+            border-radius: 4px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+        }
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border: none;
+        }
+
+        /* Scrolling Gallery Styles */
+.scrolling-gallery-container {
+    overflow: hidden;
+    padding: 20px 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    position: relative;
+    width: 100%;
+}
+
+.gallery-track {
+    display: flex;
+    width: 90%;
+    animation: scroll 20s linear infinite; /* Scroll Speed */
+}
+
+/* Stops the entire track when any part of the gallery is hovered */
+.scrolling-gallery-container:hover .gallery-track {
+    animation-play-state: paused;
+}
+
+.gallery-item {
+    flex: 0 0 auto;
+    width: 250px; 
+    height: 150px;
+    margin: 0 15px;
+    border-radius: 6px;
+    cursor: zoom-in;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+}
+
+
+.gallery-item:hover {
+    transform: scale(1.15);
+    z-index: 10;
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 20px rgba(var(--primary-color-rgb), 0.4);
+}
+
+/* Infinite Loop Logic:*/
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+
+        .unity-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--primary-color);
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.4);
+            margin-top: 20px;
+            text-align: center;
+            align-self: center;
+            border: 2px solid transparent;
+        }
+
+        .unity-btn:hover {
+            background: transparent;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 30px rgba(var(--primary-color-rgb), 0.6);
+            transform: scale(1.05);
+        }
+
+        .pulse {
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0px rgba(var(--primary-color-rgb), 0.7); }
+            100% { box-shadow: 0 0 0 20px rgba(var(--primary-color-rgb), 0); }
+        }
+
+        .character-showcase {
+            height: 200px;
+            background: #1a1a1a;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-top: 50px;
         }
 
         .project-card-media {
@@ -1074,6 +1236,7 @@
             .timeline-item:nth-child(even) { left: 0; }
             .timeline-item::after { left: 10px; }
         }
+        
     </style>
 </head>
 
@@ -1085,6 +1248,8 @@
     <a href="#awarded-project" class="nav-link">Awarded Project</a>
     <a href="#vibecoding" class="nav-link">Vibecoding</a>
     <a href="#figma" class="nav-link">Figma</a>
+    <a href="#unity" class="nav-link">Unity</a>
+
 </nav>
 <div class="portfolio-container">
 
@@ -1500,6 +1665,57 @@
         </div>
     </section>
 
+    <!-- UNITY SECTION -->
+
+    <section class="section unity-section" id="unity">
+        <h2>Unity</h2>
+        <div class="unity-showcase">
+            <div class="unity-content">
+
+                <p style="margin-bottom: 25px; font-size: 1.1rem; line-height: 1.6;">
+                    Ovaj projekt sam si zadao kao izazov gdje sam koristio isključivo ChatGPT kao osnovu za 
+                    izradu skripti. U projekt je utrošeno puno vremena, izmjena skripti, testiranja i ostalih stvari,
+                    međutim igra u potpunosti funckionira. 
+                </p>
+                <!-- Video Stage with Backplate Spikes -->
+                <svg width="0" height="0">
+  <defs>
+    <clipPath id="spikyMask" clipPathUnits="objectBoundingBox">
+      <path d="M 0.458 0 L 0.672 0.065 L 0.902 0.022 L 1.019 0.095 L 1.1878 -0.0127 L 1.097 0.2986 L 1.1993 0.3744 L 1.0376 0.533 L 1 0.729 L 1.081 0.991 L 0.916 0.94 L 0.821 0.983 L 0.7109 0.9994 L 0.672 0.918 L 0.5608 0.9621 L 0.4585 1.067 L 0.5129 0.9248 L 0.4354 0.9877 L 0.179 0.945 L -0.1 1.027 L -0.078 0.788 L -0.2 0.704 L -0.0729 0.505 L -0.1339 0.4794 L -0.0762 0.3511 L -0.1636 0.2462 L -0.1982 0.1482 L -0.1042 0.1109 L -0.0415 -0.0383 L 0.036 0.033 L 0.1037 -0.0523 L 0.168 0.046 L 0.279 0.036 Z" />
+    </clipPath>
+  </defs>
+</svg>
+
+                <div class="video-stage">
+                    <div class="spiky-backplate"></div>
+                    <div class="video-container">
+                        <video controls playsinline preload="metadata">
+                            <source src="assets/videos/AimGPTdemo.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+            </div>
+            
+            <div class="scrolling-gallery-container" id="galleryContainer">
+    <div class="gallery-track" id="galleryTrack">
+        <img class="gallery-item" src="assets/images/aimgpt1menu.png" onclick="handleImgClick(event, 'assets/images/aimgpt1menu.png')" alt="Unity 1">
+        <img class="gallery-item" src="assets/images/aimgpt2normal.png" onclick="handleImgClick(event, 'assets/images/aimgpt2normal.png')" alt="Unity 2">
+        <img class="gallery-item" src="assets/images/aimgpt3normal.png" onclick="handleImgClick(event, 'assets/images/aimgpt3normal.png')" alt="Unity 3">
+        <img class="gallery-item" src="assets/images/aimgpt4normal.png" onclick="handleImgClick(event, 'assets/images/aimgpt4normal.png')" alt="Unity 4">
+        <img class="gallery-item" src="assets/videos/AimGPT_HARD MODE_demo.gif" onclick="handleImgClick(event, 'assets/videos/AimGPT_HARD MODE_demo.gif')" alt="Unity 5">
+        <img class="gallery-item" src="assets/videos/AimGPT_TLM_demo.gif" onclick="handleImgClick(event, 'assets/videos/AimGPT_TLM_demo.gif')" alt="Unity 6">
+    </div>
+</div>
+
+
+
+            <a href="https://play.unity.com/en/games/cd06bfd0-e855-4268-b35c-5b4dfc6b1914/webgl-builds" class="unity-btn pulse" target="_blank" rel="noopener noreferrer">Isprobaj igru u pregledniku</a>
+            </div>
+
+    </section>
+    </div>
+
 </div>
 <!-- Lightbox HTML -->
 <div id="lightbox" class="lightbox">
@@ -1514,7 +1730,21 @@
     </div>
 </div>
 <script type="module">
-    
+    // LIGHTBOX – podrška i za Unity gallery-item
+document.querySelectorAll('.timeline-gallery img, .gallery-item').forEach((img, index, allImgs) => {
+    img.addEventListener('click', () => {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+
+        // spremi galeriju za next/prev
+        window.currentGallery = Array.from(allImgs);
+        window.currentIndex = index;
+    });
+});
+
     const navLinks = document.querySelectorAll('.top-nav .nav-link');
     const navHighlight = document.querySelector('.nav-highlight');
     const sections = document.querySelectorAll('.section');
