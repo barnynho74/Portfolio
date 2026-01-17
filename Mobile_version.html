@@ -1220,6 +1220,94 @@
         .figma-project {
             width: 100%;
         }
+        /* Notice Overlay Styles */
+.notice-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Higher than nav and lightboxes */
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.notice-content {
+    background-color: var(--card-bg);
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    max-width: 90%;
+    width: 400px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(var(--primary-color-rgb), 0.2);
+    animation: modalSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalSlideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.notice-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.notice-content p {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+.notice-close-x {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.notice-close-x:hover {
+    opacity: 1;
+    color: var(--primary-color);
+}
+
+.notice-ok-btn {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border: none;
+    padding: 0.8rem 2.5rem;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.notice-ok-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.4);
+}
+
+.notice-ok-btn:active {
+    transform: scale(0.98);
+}
     </style>
 </head>
 
@@ -1234,6 +1322,15 @@
         <a href="#figma" class="nav-link" onclick="closeMenu()">Figma</a>
     </div>
 </nav>
+
+<div id="desktop-notice-overlay" class="notice-overlay">
+    <div class="notice-content">
+        <button class="notice-close-x" id="close-x" aria-label="Close">&times;</button>
+        <div class="notice-icon">🖥️</div>
+        <p>Pregled stranice se preporučuje na računalu, jer je korisničko iskustvo značajno bolje nego na mobilnim uređajima.</p>
+        <button class="notice-ok-btn" id="close-ok">OK</button>
+    </div>
+</div>
 
 <button id="back-to-top" title="Back to top">↑</button>
 <div class="portfolio-container">
@@ -1354,7 +1451,7 @@
                         <p class="timeline-item-date">Sezona 3</p>
                         <h3>03.2022. - 06.2022.</h3>
                         <img class="project-card-media" style="width:85%;" src="assets/images/racegraph3.0.png">
-                        <p style="width:80%; margin: 0 auto; text-align: center;">Began creating data-driven graphics.</p>
+                        <p style="width:80%; margin: 0 auto; text-align: center;">Sezona 3 je donijela malo profesionalniji izgled tablica sa sobom.</p>
                         <button class="timeline-cta">
                             View Gallery <span class="cta-arrow">→</span>
                         </button>
@@ -1679,6 +1776,26 @@
     </div>
 </div>
 <script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+        const overlay = document.getElementById('desktop-notice-overlay');
+        const closeX = document.getElementById('close-x');
+        const closeOk = document.getElementById('close-ok');
+
+        const closeOverlay = () => {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 300);
+        };
+
+        closeX.addEventListener('click', closeOverlay);
+        closeOk.addEventListener('click', closeOverlay);
+        
+        // Optional: Close when clicking outside the box
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeOverlay();
+        });
+    });
     // Mobile Menu Toggle
     const menuToggle = document.getElementById('menu-toggle');
     const navLinksContainer = document.getElementById('nav-links-container');
