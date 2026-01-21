@@ -1080,7 +1080,17 @@
             from { transform: inherit; }
             to { transform: rotate(360deg); }
         }
+        .nav-icon {
+           width: 22px;
+           height: 22px;
+           object-fit: contain;
+           opacity: 0.9;
+           transition: transform 0.3s ease, opacity 0.3s ease;
+        }
         .top-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px; /* space between icon and text */
             color: var(--text-color);
             text-decoration: none;
             margin: 0 1.5rem;
@@ -1243,12 +1253,13 @@
 <body>
 <nav class="top-nav">
     <span class="nav-highlight"></span>
-    <a href="#graphic-design" class="nav-link">Graphic Design</a>
-    <a href="#race-graphics" class="nav-link">Race Graphics</a>
-    <a href="#awarded-project" class="nav-link">Awarded Project</a>
-    <a href="#vibecoding" class="nav-link">Vibecoding</a>
-    <a href="#figma" class="nav-link">Figma</a>
-    <a href="#unity" class="nav-link">Unity</a>
+    <a href="#graphic-design" class="nav-link"> <img src="assets/images/topnav_gd_icon.png"  class="nav-icon"><span>Graphic Design</span></a>
+    <a href="#race-graphics" class="nav-link"><img src="assets/images/topnav_rg_icon.png" class="nav-icon"><span>Race Graphics</span></a>
+    <a href="#awarded-project" class="nav-link"><img src="assets/images/topnav_medal_icon.png" class="nav-icon"><span>Awarded Project</span></a>
+    <a href="#vibecoding" class="nav-link"><img src="assets/images/topnav_vc_icon.png" class="nav-icon"><span>Vibecoding</span></a>
+    <a href="#figma" class="nav-link"><img src="assets/images/topnav_figma_icon.png" class="nav-icon"><span>Figma</span></a>
+    <a href="#unity" class="nav-link"><img src="assets/images/topnav_unity_icon.png" class="nav-icon"><span>Unity</span></a>
+
 
 </nav>
 <div class="portfolio-container">
@@ -1368,7 +1379,7 @@
                         <p class="timeline-item-date">Sezona 3</p>
                         <h3>03.2022. - 06.2022.</h3>
                         <img class="project-card-media" src="assets/images/racegraph3.0.png" style="margin-top: 1rem; border-radius: 4px;">
-                        <p>Sezona 3 je donijela malo profesionalniji izgled tablica sa sobom</p>
+                        <p>Began creating data-driven graphics.</p>
                         <div class="timeline-cta">Show Gallery <span class="cta-arrow">▼</span></div>
                     </div>
                     <div class="timeline-hidden-content">
@@ -1704,7 +1715,7 @@
         <img class="gallery-item" src="assets/images/aimgpt3normal.png" onclick="handleImgClick(event, 'assets/images/aimgpt3normal.png')" alt="Unity 3">
         <img class="gallery-item" src="assets/images/aimgpt4normal.png" onclick="handleImgClick(event, 'assets/images/aimgpt4normal.png')" alt="Unity 4">
         <img class="gallery-item" src="assets/videos/AimGPT_HARD MODE_demo.gif" onclick="handleImgClick(event, 'assets/videos/AimGPT_HARD MODE_demo.gif')" alt="Unity 5">
-        <img class="gallery-item" src="assets/videos/AimGPTTLMdemo.gif" onclick="handleImgClick(event, 'assets/videos/AimGPTTLMdemo.gif')" alt="Unity 6">
+        <img class="gallery-item" src="assets/videos/AimGPT_TLM_demo.gif" onclick="handleImgClick(event, 'assets/videos/AimGPT_TLM_demo.gif')" alt="Unity 6">
     </div>
 </div>
 
@@ -2207,6 +2218,3 @@ document.querySelectorAll('.timeline-gallery img, .gallery-item').forEach((img, 
 
 </body>
 </html>
-
-
-
