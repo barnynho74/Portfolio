@@ -555,13 +555,69 @@
             
         }
 
+.awards-drawer-container {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .awards-toggle-btn {
+            background-color: var(--card-bg);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(var(--primary-color-rgb), 0.2);
+        }
+
+        .awards-toggle-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            box-shadow: 0 6px 20px rgba(var(--primary-color-rgb), 0.4);
+            transform: translateY(-2px);
+        }
+
+        .awards-toggle-btn .toggle-arrow {
+            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .awards-toggle-btn.active .toggle-arrow {
+            transform: rotate(180deg);
+        }
+
+        .awards-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, margin-top 0.3s ease;
+            opacity: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .awards-content.active {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 1.5rem;
+        }
+
         .awards-list {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 1rem;
             list-style: none;
-            padding: 0;
-            margin-top: 2rem;
+            padding: 1rem;
+            margin: 0;
         }
 
         .award-item {
@@ -1479,10 +1535,19 @@
 
             <img class="awarded-project-showcase-media" src="assets/images/PlatformAR_logo.webp"/ style="width: 100%;">
 
-            <ul class="awards-list">
-                <li class="award-item gold"><a href="https://www.grf.unizg.hr/uspjeh-studenata-grafickog-fakulteta-na-inova-2025/">Zlatna medalja na INOVA sajmu</a></li>
-                <li class="award-item bronze"><a href="assets/images/arcaBronze.webp" id="arca-medal-link">Brončana medalja na sajmu ARCA 2025</a></li>
-            </ul>
+            <div class="awards-drawer-container">
+                <button id="awards-toggle-btn" class="awards-toggle-btn">
+                    🏆 View Awards (4) <span class="toggle-arrow">▼</span>
+                </button>
+                <div id="awards-content" class="awards-content">
+                    <ul class="awards-list">
+                        <li class="award-item gold"><a href="https://www.grf.unizg.hr/uspjeh-studenata-grafickog-fakulteta-na-inova-2025/">Zlatna medalja na INOVA sajmu</a></li>
+                        <li class="award-item bronze"><a href="assets/images/arcaBronze.jpg" id="arca-medal-link">Brončana medalja na sajmu ARCA 2025</a></li>
+                        <li class="award-item gold"><a href="https://www.grf.unizg.hr/dvije-zlatne-medalje-za-inovaciju-interactive-2d-game-with-augmented-reality-and-real-time-object-recognition/">Kaohsiung International Invention & Design EXPO</a></li>
+                        <li class="award-item gold"><a href="https://www.grf.unizg.hr/dvije-zlatne-medalje-za-inovaciju-interactive-2d-game-with-augmented-reality-and-real-time-object-recognition/">Zlatna medalja na IPITEx (Bangkok, Thailand) sajmu</a></li>
+                    </ul>
+                </div>
+            </div>
 
             <h3 class="subsection-title">Kako igra radi?</h3>
             <div class="awarded-project-gallery-grid">
@@ -2214,8 +2279,21 @@ document.querySelectorAll('.timeline-gallery img, .gallery-item').forEach((img, 
             openLightbox('assets/images/arcaBronze.jpg');
         });
     }
+    // Awards Drawer Toggle
+    const awardsToggleBtn = document.getElementById('awards-toggle-btn');
+    const awardsContent = document.getElementById('awards-content');
+    if (awardsToggleBtn && awardsContent) {
+        awardsToggleBtn.addEventListener('click', () => {
+            const isActive = awardsToggleBtn.classList.toggle('active');
+            awardsContent.classList.toggle('active');
+            awardsToggleBtn.innerHTML = isActive ? 
+                `🏆 Hide Awards (4) <span class="toggle-arrow">▲</span>` : 
+                `🏆 View Awards (4) <span class="toggle-arrow">▼</span>`;
+        });
+    }
 </script>
 
 </body>
 </html>
+
 
